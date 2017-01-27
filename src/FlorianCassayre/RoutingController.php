@@ -17,6 +17,9 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->get('/donation', 'FlorianCassayre\\Controllers\\MainPagesController::donation')->bind('donation');
 
+        $controllers->get('/contact', 'FlorianCassayre\\Controllers\\MainPagesController::contact')->bind('contact');
+        $controllers->post('/contact', 'FlorianCassayre\\Controllers\\MainPagesController::contact_submit')->bind('contact.submit');
+
         $controllers->get('/tools/minecraft/uuid', 'FlorianCassayre\\Controllers\\Tools\\MCUUIDController::uuid_home')->bind('tools.minecraft.uuid');
         $controllers->get('/tools/minecraft/uuid/{input}', 'FlorianCassayre\\Controllers\\Tools\\MCUUIDController::uuid')->bind('tools.minecraft.uuid.result');
 

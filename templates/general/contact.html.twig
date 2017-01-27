@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Contact{% endblock %}
+
+{% block content %}
+
+    <h2>Contact</h2>
+    Vous souhaiteriez me contacter ? N'hésitez pas à remplir ce formulaire, je vous répondrai rapidement !
+    <hr>
+
+    <div class="row">
+        {% if submit %}
+            {% if success %}
+                <div class="alert alert-success" role="alert">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                    Votre message a été envoyé.
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                    <strong>Erreur : </strong>vous devez remplir tous les champs !
+                </div>
+            {% endif %}
+        {% endif %}
+        <form method="post">
+            <fieldset class="form-group">
+                <label for="name">Prénom et/ou nom</label>
+                <input type="text" required="required" class="form-control" id="name" name="name" placeholder="Votre nom..." value="{% if submit and not success %}{{ name }}{% endif %}">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" required="required" class="form-control" id="email" name="email" placeholder="Votre adresse mail..." value="{% if submit and not success %}{{ email }}{% endif %}">
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="message">Message</label>
+                <textarea required="required" class="form-control" id="message" name="message" rows="8" placeholder="Votre message...">{% if submit and not success %}{{ message }}{% endif %}</textarea>
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary pull-right">Envoyer le message</button>
+        </form>
+    </div>
+
+{% endblock%}
