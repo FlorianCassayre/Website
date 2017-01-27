@@ -10,4 +10,9 @@ class MainPagesController
     {
         return $app['twig']->render('homepage.html.twig', array());
     }
+
+    public function donation(Application $app)
+    {
+        return $app['twig']->render('general/donation.html.twig', array());
+    }
 }

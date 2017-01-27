@@ -15,6 +15,8 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->get('/', 'FlorianCassayre\\Controllers\\MainPagesController::homepage')->bind('homepage');
 
+        $controllers->get('/donation', 'FlorianCassayre\\Controllers\\MainPagesController::donation')->bind('donation');
+
         $controllers->get('/tools/minecraft/uuid', 'FlorianCassayre\\Controllers\\Tools\\MCUUIDController::uuid_home')->bind('tools.minecraft.uuid');
         $controllers->get('/tools/minecraft/uuid/{input}', 'FlorianCassayre\\Controllers\\Tools\\MCUUIDController::uuid')->bind('tools.minecraft.uuid.result');
 
@@ -27,7 +29,7 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}/{known_enchantment}/{known_enchantment_level}', 'FlorianCassayre\\Controllers\\Tools\\MCEnchantingController::enchanting_conditional')->bind('tools.minecraft.enchanting.result.conditional');
 
 
-        $controllers->get('/screenshots/{id}', 'FlorianCassayre\\Controllers\\ScreenshotsController::screenshot')->bind('screenshots');
+        // $controllers->get('/screenshots/{id}', 'FlorianCassayre\\Controllers\\ScreenshotsController::screenshot')->bind('screenshots');
 
         return $controllers;
     }

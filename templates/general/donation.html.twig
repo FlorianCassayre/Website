@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Accueil{% endblock %}
+
+{% block content %}
+
+    <h2>Dons</h2>
+
+    Votre support me fait chaud au coeur !
+
+    <hr>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6 text-center">
+            <h3>Via PayPal</h3>
+            Un moyen sûr et efficace, ma page PayPal se trouve <a href="https://www.paypal.me/Cassayre">ici</a>.
+            <a href="https://www.paypal.me/Cassayre">
+                <img class="img-responsive center-block" src="{{ basepath }}/img/qr-paypal.png" />
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-md-6 text-center">
+            <h3>En Bitcoins</h3>
+            Plus exotique, mais tout aussi efficace ; une de mes adresses Bitcoin est la suivante :
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><span class="fa fa-btc"></span></span>
+                <input type="text" class="form-control" value="1J4jAXfpUEbRG4he9QZzYvvMUPtGDf4Q8Z" onClick="this.select();" readonly>
+            </div>
+            <img class="img-responsive center-block" src="{{ basepath }}/img/qr-bitcoin.png" />
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <em>L'argent ne fait certes pas le bonheur, mais le bonheur ne fait pas forcément l'argent !</em>
+        </div>
+    </div>
+
+{% endblock%}
