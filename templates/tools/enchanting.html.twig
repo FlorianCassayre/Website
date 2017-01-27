@@ -1,0 +1,244 @@
+{% extends '/base.html.twig' %}
+
+{% import "/tools/macros.html.twig" as macros %}
+
+{% block page_title %}Enchantements{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ basepath }}/css/bs-callout.css">
+
+    <style>
+        .table > tbody > tr > th, .table > thead > tr > th {
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Guide d'Enchantement Minecraft</h2>
+    <p>
+        Visualisez toutes les combinaisons d'enchantements possibles pour un outil, une arme ou une armure en fonction du nombre de niveaux que vous souhaitez dépenser.
+        Si vous connaissez le premier enchantement qui se trouvera sur votre objet, indiquez le dans les options supplémentaires ; nous nous occupons du reste.
+    </p>
+    <hr>
+
+    {% if not is_empty and not success %}
+        <div class="alert alert-danger" role="alert">
+            <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+            <strong>{% if error == 'invalid_item' %}Objet inconnu : {% elseif error == 'invalid_levels' %}Niveaux hors des limites : {% elseif error == 'invalid_enchantment' %}Enchantement inconnu : {% elseif error == 'invalid_enchantment_level' %}Niveaux hors des limites : {% elseif error == 'invalid_combination' %}Combinaison improbable : {% endif %}</strong>
+            {% if error == 'invalid_item' %}l'objet recherché n'a pas été trouvé.{% elseif error == 'invalid_levels' %}la valeur doit être comprise entre 1 et 30.{% elseif error == 'invalid_enchantment' %}l'enchantement recherché n'a pas été trouvé.{% elseif error == 'invalid_enchantment_level' %}la valeur doit être comprise entre 1 et le niveau maximal de cet echantement.{% elseif error == 'invalid_combination' %}aucune combinaison respectant ces critères n'a été trouvée. Cela arrive lorsque vous choisissez un niveau d'enchantement irréaliste par rapport au nombre de niveaux à dépenser.{% endif %}
+        </div>
+    {% endif %}
+
+    <div class="row text-center">
+        <form id="enchanting-form" class="form-inline" action="/tools/minecraft/enchanting">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        Enchantement d'un(e)
+                    </div>
+                    <label class="sr-only" for="type">Choix de l'outil</label>
+                    <select class="form-control" id="type" name="type">
+                        {% for item_type in items_select.types %}
+                            <option value="{{ item_type.code }}"{% if not is_empty and success and item_type.code == selected_type %} selected{% endif %}>{{ item_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-addon">
+                        en
+                    </div>
+                    <label class="sr-only" for="material">Choix du matériau</label>
+                    <select class="form-control" id="material" name="material">
+                        {% for item_material in items_select.materials %}
+                            <option value="{{ item_material.code }}" class="{{ item_material.used_by|join(' ') }}"{% if not is_empty and success and item_material.code == selected_material %} selected{% endif %}>{{ item_material.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-addon">
+                        avec
+                    </div>
+
+                    <label class="sr-only" for="levels">Niveaux</label>
+                    <input class="form-control" type="number" value="{% if not is_empty and success %}{{ selected_levels }}{% else %}30{% endif %}" min="1" max="30" id="levels" name="levels">
+                    <div class="input-group-addon">
+                        niveaux
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Calculer</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#options').toggle();">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 16px; margin-left: 0; margin-right: 0;{% if is_empty or not is_known_enchantment %} display: none;{% endif %}" id="options">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            Connaissant
+                        </div>
+                        <label class="sr-only" for="known_enchantment">Sachant</label>
+                        <select class="form-control" id="known_enchantment" name="known_enchantment">
+                            {% set no_enchantments = [] %}
+                            {% for item_type in items_select.types %}
+                                {% set no_enchantments = no_enchantments|merge([item_type.code]) %}
+                            {% endfor %}
+                            <option value="" class="{{ no_enchantments|join(' ') }}">-</option>
+                            {% for enchantment in enchantments_select %}
+                                <option value="{{ enchantment.code }}" class="{{ enchantment.items|join(' ') }}"{% if not is_empty and is_known_enchantment and selected_known_enchantment == enchantment.code %} selected{% endif %}>{{ enchantment.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="input-group-addon">
+                            niveau
+                        </div>
+                        <label class="sr-only" for="known_enchantment_level">Niveau</label>
+                        <select class="form-control" id="known_enchantment_level" name="known_enchantment_level">
+                            {% set max_level = 1 %}
+                            {% for enchantment in enchantments_select %}
+                                {% if enchantment.max_level > max_level %}
+                                    {% set max_level = enchantment.max_level %}
+                                {% endif %}
+                            {% endfor %}
+                            {% for i in 0..max_level %}
+                                {% set available_enchantments = [] %}
+                                {% for enchantment in enchantments_select %}
+                                    {% if enchantment.max_level >= i %}
+                                        {% set available_enchantments = available_enchantments|merge([enchantment.code]) %}
+                                    {% endif %}
+                                {% endfor %}
+                                <option value="{% if i == 0 %}any{% else %}{{ i }}{% endif %}" class="{{ available_enchantments|join(' ') }}"{% if not is_empty and is_known_enchantment and (selected_known_enchantment_level == i or selected_known_enchantment_level == 'any' and i == 0) %} selected{% endif %}>{% if i == 0 %}Quelconque{% else %}{{ macros.enchantment_level(i) }}{% endif %}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if is_empty or not is_empty and not success %}
+        <div class="row" style="height: 36px;"></div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <div class="bs-callout bs-callout-primary">
+                    <h4>Le saviez-vous ?</h4>
+                    <p>
+                        {{ quote }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if not is_empty and success %}
+        {% set max_enchantments = 0 %}
+        {% for combination in combinations %}
+            {% if combination.enchantments|length > max_enchantments %}
+                {% set max_enchantments = combination.enchantments|length %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="row" style="height: 36px;"></div>
+
+        {% if is_known_enchantment %}
+            <p class="lead">L'enchantement connu a une fréquence d'apparition de <strong>{{ macros.percentage(total_frequency) }}</strong>.</p>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <h3>Niveaux des enchantements</h3>
+                <p>La fréquence de chaque niveau d'enchantement obtenable.</p>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Fréquence</th>
+                            <th>Enchantement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enchantment in enchantments_data %}
+                            {% for level in enchantment.levels %}
+                                <tr>
+                                    <td>{{ macros.percentage(level.frequency) }}</td>
+                                    <td>{{ level.name }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <h3>Nombre d'enchantements</h3>
+                <p>La fréquence du nombre d'enchantements possibles.</p>
+
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Fréquence</th>
+                            <th>Nombre d'enchantements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enchantment_count in enchantments_count %}
+                            <tr>
+                                <td>{{ macros.percentage(enchantment_count.frequency) }}</td>
+                                <td>{{ enchantment_count.count }} enchantement{% if enchantment_count.count > 1 %}s{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <h3>Combinaisons possibles</h3>
+        <p>Toutes les combinaisons possibles d'enchantements ainsi que leur fréquence. À noter que l'ordre des enchantements n'est pas pris en compte dans le calcul.</p>
+
+        <table class="table table-bordered text-center table-striped">
+            <thead>
+                <tr>
+                    <th>Fréquence</th>
+                    {% for i in 1..max_enchantments %}
+                        <th>Enchantement {{ i }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for combination in combinations %}
+                    <tr>
+                        <td>{{ macros.percentage(combination.frequency) }}</td>
+                        {% for i in 1..max_enchantments %}
+                            <td>
+                                {% if i <= combination.enchantments|length %}
+                                    {{ combination.enchantments[i - 1].name_full }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center"><em>Chaque cas a été testé 10 millions de fois pour garantir la précision affichée</em>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/js/jquery.chained.min.js"></script>
+    <script>
+        $("#material").chained("#type");
+        $("#known_enchantment").chained("#type");
+        $("#known_enchantment_level").chained("#known_enchantment");
+    </script>
+{% endblock %}

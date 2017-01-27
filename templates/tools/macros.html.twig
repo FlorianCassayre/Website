@@ -1,0 +1,7 @@
+{% macro percentage(frequency) %}{% spaceless %}
+    {% if frequency >= 0.001 %}{{ (frequency * 100)|number_format(1) }}{% else %}< 0.1{% endif %}%
+{% endspaceless %}{% endmacro %}
+
+{% macro enchantment_level(level) %}{% spaceless %}
+    {% if level == 1 %}I{% elseif level == 2 %}II{% elseif level == 3 %}III{% elseif level == 4 %}IV{% elseif level == 5 %}V{% else %}{{ level }}{% endif %}
+{% endspaceless %}{% endmacro %}

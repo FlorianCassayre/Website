@@ -1,0 +1,120 @@
+{% extends '/base.html.twig' %}
+
+{% block page_title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table > tbody > tr > th, .table > thead > tr > th {
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h2>UUID Minecraft</h2>
+    <p>Obtenir des informations sur un joueur Minecraft à partir de son pseudo ou de son UUID.</p>
+    <hr>
+
+    {% if not is_empty and not success %}
+        <div class="alert alert-danger" role="alert">
+            <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+            <strong>{% if error == 'invalid_input' %}Entrée invalide : {% elseif error == 'unknown_input' %}Joueur non trouvé : {% elseif error == 'rate_limit' %}Limitation de requêtes : {% elseif error == 'error' %}Problème de contact du serveur : {% endif %}</strong>
+            {% if error == 'invalid_input' %}pseudo ou UUID incorrect.{% elseif error == 'unknown_input' %}pseudo ou UUID inexistant.{% elseif error == 'rate_limit' %}veuillez réessayer dans quelques instants.{% elseif error == 'error' %}les serveurs de Mojang n'ont pas répondu à la requête.{% endif %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <form id="uuid-form" action="/tools/minecraft/uuid">
+            <div class="form-group">
+                <div class="col-xs-10 col-lg-6 col-lg-offset-2">
+                    <label class="sr-only" for="input">UUID ou pseudo</label>
+                    <input class="form-control" id="input" name="input" value="{% if not is_empty %}{{ input }}{% endif %}" type="text" placeholder="UUID ou pseudo">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary col-xs-2 col-lg-2">Traduire</button>
+        </form>
+    </div>
+
+    {% if not is_empty and success %}
+
+        <div class="row" style="height: 36px;"></div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-6">
+                <h3>Informations générales</h3>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th colspan="2">Pseudo actuel</th>
+                            <td>{{ result.name }}</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="3">UUID</th>
+                            <td>Normal</td>
+                            <td><code>{{ result.uuid[0:8] }}-{{ result.uuid[8:4] }}-{{ result.uuid[12:4] }}-{{ result.uuid[16:4] }}-{{ result.uuid[20:] }}</code></td>
+                        </tr>
+                        <tr>
+                            <td>Sans tirets</td>
+                            <td><code>{{ result.uuid }}</code></td>
+                        </tr>
+                        <tr>
+                            <td>Hexadecimal</td>
+                            <td><code>0x{{ result.uuid|upper }}</code></td>
+                        </tr>
+                        {% if not result.is_paid %}
+                            <tr>
+                                <th colspan="2">Compte payé</th>
+                                <td>Non</td>
+                            </tr>
+                        {% endif %}
+                        {% if not result.is_migrated %}
+                        <tr>
+                            <th colspan="2">Compte migré</th>
+                            <td>Non</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-xs-12 col-lg-6">
+                <h3>Changements de pseudo</h3>
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Pseudo</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if result.changes|length == 1 %}
+                        <tr>
+                            <td colspan="2" class="text-center"><em>Ce joueur n'a pas changé de pseudo.</em></td>
+                        </tr>
+                    {% else %}
+                        {% for change in result.changes %}
+                            <tr>
+                                <td><a href="/tools/minecraft/uuid/{{ change.name }}">{{ change.name }}</a></td>
+                                {% if attribute(change, 'timestamp') is defined %}
+                                    <td>{{ change.timestamp[0:change.timestamp|length - 3]|date("d/m/Y à H:i:s", "Europe/Paris") }}</td>
+                                {% else %}
+                                    <td><em>Pseudo initial</em></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ basepath }}/js/tools/uuid.js"></script>
+{% endblock %}

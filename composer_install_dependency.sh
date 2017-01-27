@@ -1,0 +1,1 @@
+php composer.phar require "csanquer/pdo-service-provider=~1.0"

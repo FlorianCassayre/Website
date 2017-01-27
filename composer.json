@@ -1,0 +1,25 @@
+{
+  "name": "cassayre.me/site",
+  "description": "description",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Florian Cassayre"
+    }
+  ],
+  "config": {
+    "disable-tls": true,
+    "secure-http": false
+  },
+  "require": {
+    "twig/twig": "1.6.5",
+    "silex/silex": "v2.0.4",
+    "csanquer/pdo-service-provider": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "FlorianCassayre\\": "src/FlorianCassayre/"
+    }
+  }
+}

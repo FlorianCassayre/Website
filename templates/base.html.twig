@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block page_title %}{% endblock %}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ basepath }}/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="{{ basepath }}/css/font-awesome.min.css">
+
+        <style>
+            body {
+                background-image: url('{{ basepath }}/img/background-triangles.png');
+                background-repeat: no-repeat;
+                background-size: 100%;
+
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            .content {
+                font-size: 16px;
+                border-radius: 10px;
+                background-color: #fdfdfd;
+                padding: 25px 30px;
+                margin-bottom: 20px;
+                border: 1px solid lightgray;
+            }
+
+            .content {
+                opacity: 0.9;
+                box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+            }
+        </style>
+
+        {% block stylesheets %}{% endblock %}
+
+    </head>
+    <body>
+        <div id="content" class="container col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10 col-lg-offset-2 col-lg-8">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            Menu <span class="caret"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Florian Cassayre</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Accueil</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Projets</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">À propos</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+
+                {% block content %}{% endblock %}
+
+            </div>
+
+            <hr>
+
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-xs-5">
+                    &copy; Florian Cassayre 2016
+                </div>
+                <div class="col-xs-2 text-center text-bold">
+                    ∞
+                </div>
+                <div class="col-xs-5 text-right">
+
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ basepath }}/js/jquery.min.js"></script>
+
+        <script src="{{ basepath }}/js/bootstrap.min.js"></script>
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html>
