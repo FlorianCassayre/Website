@@ -4,7 +4,6 @@ namespace FlorianCassayre;
 
 use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
-use Silex\ControllerCollection;
 
 class RoutingController implements ControllerProviderInterface
 {
@@ -30,7 +29,6 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/tools/minecraft/enchanting', 'FlorianCassayre\\Controllers\\Tools\\MCEnchantingController::enchanting_home')->bind('tools.minecraft.enchanting');
         $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}', 'FlorianCassayre\\Controllers\\Tools\\MCEnchantingController::enchanting')->bind('tools.minecraft.enchanting.result');
         $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}/{known_enchantment}/{known_enchantment_level}', 'FlorianCassayre\\Controllers\\Tools\\MCEnchantingController::enchanting_conditional')->bind('tools.minecraft.enchanting.result.conditional');
-
 
         // $controllers->get('/screenshots/{id}', 'FlorianCassayre\\Controllers\\ScreenshotsController::screenshot')->bind('screenshots');
 

@@ -5,7 +5,9 @@
  */
 
 use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
+use FlorianCassayre\ErrorsHandlerController;
 use FlorianCassayre\MySQLCredentials;
+use Symfony\Component\HttpFoundation\Request;
 
 require_once __DIR__ . '/../vendor/autoload.php'; // Loading composer libraries (Silex & Twig)
 
@@ -43,14 +45,28 @@ $app->register(
 
 
 // Globals
-$app['twig']->addGlobal('basepath', 'http://cassayre'); // FIXME for production
+if(!$app['debug'])
+{
+    $app['twig']->addGlobal('basepath', 'http://florian.cassayre.me'); // Production Website
+}
+else
+{
+    $app['twig']->addGlobal('basepath', 'http://cassayre'); // Wamp server
+}
+
 
 // == Begin routing ==
 
 $app->mount('/', new FlorianCassayre\RoutingController());
 
 
-
+if(!$app['debug'])
+{
+    $app->error(function (\Exception $e, Request $request, $code) use ($app)
+    {
+        return (new ErrorsHandlerController())->handle($e, $app, $request, $code);
+    });
+}
 
 
 // == End routing ==
