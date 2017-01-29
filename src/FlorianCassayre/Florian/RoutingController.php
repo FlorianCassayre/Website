@@ -12,7 +12,7 @@ class RoutingController implements ControllerProviderInterface
     {
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::homepage')->bind('homepage');
+        $controllers->get('', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::homepage')->bind('homepage');
 
         $controllers->get('/donation', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::donation')->bind('donation');
 
