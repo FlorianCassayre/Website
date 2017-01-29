@@ -10,6 +10,11 @@ class AccessLogger
 {
     public static function log_request(Request $request, Response $response, Application $app)
     {
+        if(isset($app['website']) && !empty($app['website']))
+            $site = $app['website'];
+        else
+            $site = '?';
+
         $method = $_SERVER['REQUEST_METHOD'];
         $url = $request->getPathInfo();
         $code = $response->getStatusCode();
@@ -29,9 +34,10 @@ class AccessLogger
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        $sql = 'INSERT INTO log_access (method, url, code, ipv4, session, user_agent) VALUES (:method, :url, :code, :ipv4, :session, :user_agent)';
+        $sql = 'INSERT INTO log_access (site, method, url, code, ipv4, session, user_agent) VALUES (:site, :method, :url, :code, :ipv4, :session, :user_agent)';
 
         $sth = $app['pdo']->prepare($sql);
+        $sth->bindParam(':site', $site);
         $sth->bindParam(':method', $method);
         $sth->bindParam(':url', $url);
         $sth->bindParam(':code', $code);

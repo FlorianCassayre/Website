@@ -6,20 +6,23 @@
 
 use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 use FlorianCassayre\Util\MySQLCredentials;
+use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
 
-require_once __DIR__ . '/../vendor/autoload.php'; // Loading composer libraries (Silex & Twig)
+require_once __DIR__ . '/../../vendor/autoload.php'; // Loading composer libraries (Silex & Twig)
 
 session_start(); // Sessions manager
 date_default_timezone_set('Europe/Paris'); // Timezone
 
 $app = new Silex\Application();
 
+$app['website'] = WebsiteType::WEBSITE;
+
 $app['debug'] = true; // TODO remove this line for production
 
 // Twig templates folder
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path'    => __DIR__ . '/../templates'));
+    'twig.path'    => __DIR__ . '/../../templates'));
 
 
 // MySQL PDO
@@ -57,7 +60,7 @@ else
 
 // == Begin routing ==
 
-$app->mount('/', new FlorianCassayre\RoutingController());
+$app->mount('/', new FlorianCassayre\Florian\RoutingController());
 
 
 if(!$app['debug'])

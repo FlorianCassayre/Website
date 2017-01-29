@@ -1,6 +1,6 @@
 <?php
 
-namespace FlorianCassayre\Controllers\Tools;
+namespace FlorianCassayre\Florian\Controllers\Tools;
 
 use FlorianCassayre\Api\Minecraft\MinecraftEnchanting;
 use FlorianCassayre\Api\Minecraft\MinecraftHeads;

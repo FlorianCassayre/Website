@@ -1,6 +1,6 @@
 <?php
 
-namespace FlorianCassayre\Controllers;
+namespace FlorianCassayre\Florian\Controllers;
 
 use Silex\Application;
 

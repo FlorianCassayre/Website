@@ -6,7 +6,7 @@
  * Time: 22:41
  */
 
-namespace FlorianCassayre\Controllers\Tools;
+namespace FlorianCassayre\Florian\Controllers\Tools;
 
 use Silex\Application;
 use FlorianCassayre\Api\Minecraft\MinecraftEnchanting;
