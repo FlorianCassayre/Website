@@ -60,15 +60,19 @@ class TestToolController
         */
 
         $uuid = MinecraftUsernames::getByName('amaurypi')->uuid;
-        $skin = MinecraftHeads::getSkinImage($uuid);
-echo ' --- ';
+        //$skin = MinecraftHeads::getSkinImage($uuid);
+        $v = MinecraftHeads::getHeadAndHatHex($uuid);
+        $without = MinecraftHeads::mergeHatToHead($v[0], $v[1]);
+        //echo MinecraftHeads::convertHeadOrHatHexToImage($without);
+
+//echo ' --- ';
         //$hat_head = MinecraftHeads::getHeadAndHatHex(MinecraftUsernames::getByName('amaurypi')->uuid);
-        echo MinecraftHeads::getTransparencySquareCropToHex($skin, MinecraftHeads::HAT_X, MinecraftHeads::HAT_Y);
+        //echo MinecraftHeads::getTransparencySquareCropToHex($skin, MinecraftHeads::HAT_X, MinecraftHeads::HAT_Y);
         //$textures = MinecraftHeads::mergeHatToHead($hat_head[0], $hat_head[1], 0);
         //echo $textures;
         //$img = MinecraftHeads::convertHeadOrHatHexToImage($textures[1], 8);
-        //imagepng($img);
-        //return new Response('', 200, array('Content-Type' => 'image/png'));
+        imagepng(MinecraftHeads::convertHeadOrHatHexToImage($without, 8));
+        return new Response('', 200, array('Content-Type' => 'image/png')); ///
     }
 
 

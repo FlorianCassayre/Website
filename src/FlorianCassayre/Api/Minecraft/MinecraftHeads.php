@@ -95,7 +95,7 @@ class MinecraftHeads
 
         return $bytes;
     }
-// FIXME
+
     public static function getTransparencySquareCropToHex($skin, $start_x, $start_y)
     {
         $bytes = '';
@@ -105,7 +105,6 @@ class MinecraftHeads
             for($x = 0; $x < self::SIZE; $x++) {
                 $argb = imagecolorat($skin, $x + $start_x * self::SIZE, $y + $start_y * self::SIZE);
                 $a = ($argb >> 24) & 0xff;
-                echo $a . ' ';
 
                 $temp |= (($a == 0xff ? 1 : 0) << $x);
             }
@@ -116,20 +115,21 @@ class MinecraftHeads
         return $bytes;
     }
 
-    public static function mergeHatToHead($head_hex, $hat_hex, $hat_transparency)
+    public static function mergeHatToHead($head_hex, $hat_hex)
     {
         $bytes = '';
         $i = 0;
 
         for($y = 0; $y < self::SIZE; $y++) {
-            $line = hexdec(substr($hat_transparency, $y, 2));
             for($x = 0; $x < self::SIZE; $x++) {
-                $flag = (($line >> $x) & 1) == 1;
+                $flag = substr($hat_hex, $i * 2 * 3, 2 * 3) === '000000';
 
                 if($flag)
-                    $bytes .= substr($hat_hex, $i * 2, 2);
+                    $texture = $head_hex;
                 else
-                    $bytes .= substr($head_hex, $i * 2, 2);
+                    $texture = $hat_hex;
+
+                $bytes .= substr($texture, $i * 2 * 3, 2 * 3);
 
                 $i++;
             }
@@ -174,7 +174,7 @@ class MinecraftHeads
 
     private static function byteToHex($byte)
     {
-        return self::HEX[$byte >> 4] . self::HEX[$byte & 0xf];
+        return substr(self::HEX, $byte >> 4, 1) . substr(self::HEX, $byte & 0xf, 1);
     }
 
     public static function hex2String($hex)
