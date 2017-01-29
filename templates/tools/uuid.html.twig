@@ -42,6 +42,15 @@
 
         <div class="row" style="height: 36px;"></div>
 
+        <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 text-center">
+            <img src="http://api/minecraft/helmet/{{ result.uuid }}" class="image-responsive">
+            <h4>{{ result.name }}</h4>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
+                <input type="text" class="form-control" value="http://api/minecraft/helmet/{{ result.uuid }}" onClick="this.select();" readonly>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-12 col-lg-6">
                 <h3>Informations générales</h3>
@@ -57,7 +66,7 @@
                             <td><code>{{ result.uuid[0:8] }}-{{ result.uuid[8:4] }}-{{ result.uuid[12:4] }}-{{ result.uuid[16:4] }}-{{ result.uuid[20:] }}</code></td>
                         </tr>
                         <tr>
-                            <td>Sans tirets</td>
+                            <td>Condensé</td>
                             <td><code>{{ result.uuid }}</code></td>
                         </tr>
                         <tr>
