@@ -45,7 +45,7 @@ $app->register(
 
 // == Begin routing ==
 
-
+$app->mount('/', new FlorianCassayre\Api\RoutingController());
 
 // == End routing ==
 

@@ -8,6 +8,7 @@ use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 use FlorianCassayre\Util\MySQLCredentials;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 
 require_once __DIR__ . '/../../vendor/autoload.php'; // Loading composer libraries (Silex & Twig)
 
@@ -65,7 +66,11 @@ $app->mount('/', new FlorianCassayre\Florian\RoutingController());
 
 if(!$app['debug'])
 {
-    $app->error('FlorianCassayre\\Util\\ErrorsHandlerController::handle');
+    // Somehow the string callback doesn't work with `error($callback)`; this is a workaround
+    $app->error(function (\Exception $e, Request $request, $code) use ($app)
+    {
+        return (new FlorianCassayre\Florian\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
+    });
 }
 
 // == End routing ==
