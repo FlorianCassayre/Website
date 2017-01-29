@@ -5,19 +5,19 @@
  */
 
 use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
-use FlorianCassayre\ErrorsHandlerController;
-use FlorianCassayre\MySQLCredentials;
-use Symfony\Component\HttpFoundation\Request;
+use FlorianCassayre\Util\MySQLCredentials;
+use Silex\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php'; // Loading composer libraries (Silex & Twig)
+
+session_start(); // Sessions manager
+date_default_timezone_set('Europe/Paris'); // Timezone
 
 $app = new Silex\Application();
 
 $app['debug'] = true; // TODO remove this line for production
 
 // Twig templates folder
-//$twig_loader = new Twig_Loader_Filesystem('../templates');
-
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path'    => __DIR__ . '/../templates'));
 
@@ -62,17 +62,16 @@ $app->mount('/', new FlorianCassayre\RoutingController());
 
 if(!$app['debug'])
 {
-    $app->error(function (\Exception $e, Request $request, $code) use ($app)
-    {
-        return (new ErrorsHandlerController())->handle($e, $app, $request, $code);
-    });
+    $app->error('FlorianCassayre\\Util\\ErrorsHandlerController::handle');
 }
-
 
 // == End routing ==
 
+
+// Logs
+$app->after('FlorianCassayre\\Util\\AccessLogger::log_request');
+
+
 $app->run(); // Run the Silex application
-
-
 
 ?>
