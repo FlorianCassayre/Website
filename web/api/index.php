@@ -8,6 +8,7 @@ use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 use FlorianCassayre\Util\MySQLCredentials;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 
 require_once __DIR__ . '/../../vendor/autoload.php'; // Loading composer libraries (Silex & Twig)
 
@@ -46,6 +47,14 @@ $app->register(
 // == Begin routing ==
 
 $app->mount('/', new FlorianCassayre\Api\RoutingController());
+
+if(!$app['debug'])
+{
+    $app->error(function (\Exception $e, Request $request, $code) use ($app)
+    {
+        return (new FlorianCassayre\Api\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
+    });
+}
 
 // == End routing ==
 
