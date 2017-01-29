@@ -4,7 +4,6 @@
  Routing file, every access passes by this pages which routes to the correct resource.
  */
 
-use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 use FlorianCassayre\Util\MySQLCredentials;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
@@ -23,25 +22,7 @@ $app['debug'] = FlorianCassayre\Util\Settings::DEBUG;
 
 
 // MySQL PDO
-$app->register(
-    new PDOServiceProvider('pdo'),
-    array(
-        'pdo.server'   => array(
-            'driver'   => 'mysql',
-            'host'     => MySQLCredentials::MYSQL_ADDRESS,
-            'dbname'   => MySQLCredentials::MYSQL_DB,
-            'port'     => MySQLCredentials::MYSQL_PORT,
-            'user'     => MySQLCredentials::MYSQL_USER,
-            'password' => MySQLCredentials::MYSQL_PASSWORD,
-        ),
-        'pdo.options' => array(
-            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
-        ),
-        'pdo.attributes' => array(
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-        ),
-    )
-);
+MySQLCredentials::setup($app);
 
 
 // == Begin routing ==

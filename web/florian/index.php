@@ -4,7 +4,6 @@
  Routing file, every access passes by this pages which routes to the correct resource.
  */
 
-use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 use FlorianCassayre\Util\MySQLCredentials;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
@@ -19,7 +18,7 @@ $app = new Silex\Application();
 
 $app['website'] = WebsiteType::WEBSITE;
 
-$app['debug'] = FlorianCassayre\Util\Settings::DEBUG; // TODO remove this line for production
+$app['debug'] = FlorianCassayre\Util\Settings::DEBUG;
 
 // Twig templates folder
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -27,25 +26,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 
 // MySQL PDO
-$app->register(
-    new PDOServiceProvider('pdo'),
-    array(
-        'pdo.server'   => array(
-            'driver'   => 'mysql',
-            'host'     => MySQLCredentials::MYSQL_ADDRESS,
-            'dbname'   => MySQLCredentials::MYSQL_DB,
-            'port'     => MySQLCredentials::MYSQL_PORT,
-            'user'     => MySQLCredentials::MYSQL_USER,
-            'password' => MySQLCredentials::MYSQL_PASSWORD,
-        ),
-        'pdo.options' => array(
-            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
-        ),
-        'pdo.attributes' => array(
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-        ),
-    )
-);
+MySQLCredentials::setup($app);
+
 
 
 // Globals
