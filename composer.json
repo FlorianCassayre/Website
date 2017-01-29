@@ -13,8 +13,9 @@
     "secure-http": false
   },
   "require": {
-    "twig/twig": "1.6.5",
-    "silex/silex": "v2.0.4",
+    "silex/silex": "~2.0",
+    "twig/twig": "~1.0",
+    "symfony/twig-bridge": "^2.0",
     "csanquer/pdo-service-provider": "~1.0"
   },
   "autoload": {

@@ -14,4 +14,9 @@ class WebsiteType
      * The API (api.cassayre.me)
      */
     const API = 'api';
+
+    /**
+     * The images hoster service
+     */
+    const IMAGES = 'images';
 }

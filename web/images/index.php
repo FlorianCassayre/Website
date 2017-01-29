@@ -17,13 +17,9 @@ date_default_timezone_set('Europe/Paris'); // Timezone
 
 $app = new Silex\Application();
 
-$app['website'] = WebsiteType::WEBSITE;
+$app['website'] = WebsiteType::IMAGES;
 
-$app['debug'] = FlorianCassayre\Util\Settings::DEBUG; // TODO remove this line for production
-
-// Twig templates folder
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path'    => __DIR__ . '/../../templates'));
+$app['debug'] = FlorianCassayre\Util\Settings::DEBUG;
 
 
 // MySQL PDO
@@ -48,28 +44,18 @@ $app->register(
 );
 
 
-// Globals
-if(!$app['debug'])
-{
-    $app['twig']->addGlobal('basepath', 'http://florian.cassayre.me'); // Production Website
-}
-else
-{
-    $app['twig']->addGlobal('basepath', 'http://cassayre'); // Wamp server
-}
-
-
 // == Begin routing ==
 
-$app->mount('/', new FlorianCassayre\Florian\RoutingController());
-
+$app->get('/{id}', 'FlorianCassayre\\Images\\ScreenshotsController::screenshot')->bind('screenshots');
 
 if(!$app['debug'])
 {
-    // Somehow the string callback doesn't work with `error($callback)`; this is a workaround
     $app->error(function (\Exception $e, Request $request, $code) use ($app)
     {
-        return (new FlorianCassayre\Florian\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
+        if($code == 404)
+            return 'Capture introuvable.';
+        else
+            return 'Erreur interne';
     });
 }
 

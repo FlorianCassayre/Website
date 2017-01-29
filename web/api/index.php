@@ -19,7 +19,7 @@ $app = new Silex\Application();
 
 $app['website'] = WebsiteType::API;
 
-$app['debug'] = true; // TODO remove this line for production
+$app['debug'] = FlorianCassayre\Util\Settings::DEBUG;
 
 
 // MySQL PDO
