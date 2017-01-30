@@ -16,7 +16,7 @@ class Logger
             $site = '?';
 
         $method = $_SERVER['REQUEST_METHOD'];
-        $url = $request->getPathInfo();
+        $url = $_SERVER['REQUEST_URI'];
         $code = $response->getStatusCode();
         $session = session_id();
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -55,7 +55,7 @@ class Logger
             $site = '?';
 
         $method = $_SERVER['REQUEST_METHOD'];
-        $url = $request->getPathInfo();
+        $url = $_SERVER['REQUEST_URI'];
         $stacktrace = self::jTraceEx($exception);
 
         $sql = 'INSERT INTO log_errors (site, method, url, code, stacktrace) VALUES (:site, :method, :url, :code, :stacktrace)';
