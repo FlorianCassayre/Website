@@ -29,19 +29,18 @@ MySQLCredentials::setup($app);
 
 $app->mount('/', new FlorianCassayre\Api\RoutingController());
 
-if(!$app['debug'])
+
+$app->error(function (\Exception $e, Request $request, $code) use ($app)
 {
-    $app->error(function (\Exception $e, Request $request, $code) use ($app)
-    {
-        return (new FlorianCassayre\Api\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
-    });
-}
+    return (new FlorianCassayre\Api\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
+});
+
 
 // == End routing ==
 
 
 // Logs
-$app->after('FlorianCassayre\\Util\\AccessLogger::log_request');
+$app->after('FlorianCassayre\\Util\\Logger::log_request');
 
 
 $app->run(); // Run the Silex application

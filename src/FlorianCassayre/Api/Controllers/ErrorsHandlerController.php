@@ -2,6 +2,7 @@
 
 namespace FlorianCassayre\Api\Controllers;
 
+use FlorianCassayre\Util\Logger;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,7 +15,14 @@ class ErrorsHandlerController
             case 404:
                 return $app->json((object) array('error' => 'route_not_found'));
             default:
-                return $app->json((object) array('error' => 'internal_error'));
+            {
+                Logger::log_error($app, $e, $request, $code);
+
+                if(!$app['debug'])
+                    return $app->json((object) array('error' => 'internal_error'));
+                else
+                    return null;
+            }
         }
     }
 }

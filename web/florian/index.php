@@ -46,20 +46,18 @@ else
 $app->mount('/', new FlorianCassayre\Florian\RoutingController());
 
 
-if(!$app['debug'])
+// Somehow the string callback doesn't work with `error($callback)`; this is a workaround
+$app->error(function (\Exception $e, Request $request, $code) use ($app)
 {
-    // Somehow the string callback doesn't work with `error($callback)`; this is a workaround
-    $app->error(function (\Exception $e, Request $request, $code) use ($app)
-    {
-        return (new FlorianCassayre\Florian\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
-    });
-}
+    return (new FlorianCassayre\Florian\Controllers\ErrorsHandlerController())->handle($app, $e, $request, $code);
+});
+
 
 // == End routing ==
 
 
 // Logs
-$app->after('FlorianCassayre\\Util\\AccessLogger::log_request');
+$app->after('FlorianCassayre\\Util\\Logger::log_request');
 
 
 $app->run(); // Run the Silex application

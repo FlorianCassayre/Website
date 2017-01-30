@@ -44,7 +44,7 @@ if(!$app['debug'])
 
 
 // Logs
-$app->after('FlorianCassayre\\Util\\AccessLogger::log_request');
+$app->after('FlorianCassayre\\Util\\Logger::log_request');
 
 
 $app->run(); // Run the Silex application
