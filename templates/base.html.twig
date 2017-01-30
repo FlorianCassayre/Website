@@ -46,39 +46,37 @@
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             Menu <span class="caret"></span>
                         </button>
-                        <a class="navbar-brand" href="{{ basepath }}">Florian Cassayre</a>
+                        <a class="navbar-brand" href="{{ url('homepage') }}">Florian Cassayre</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{ basepath }}">Accueil</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Minecraft</li>
-                                    <li><a href="{{ basepath }}/tools/minecraft/uuid">Résolveur d'UUID</a></li>
-                                    <li><a href="#">Ping de Serveur</a></li>
-                                    <li><a href="#">Récupération de Skins</a></li>
-                                    <li><a href="{{ basepath }}/tools/minecraft/enchanting">Calculateur d'enchantements</a></li>
+                                    <li><a href="{{ url('tools.minecraft.uuid') }}">Résolveur d'UUID</a></li>
+                                    <li><a href="{{ url('tools.minecraft.ping') }}">Ping de Serveur</a></li>
+                                    <li><a href="{{ url('tools.minecraft.enchanting') }}">Calculateur d'enchantements</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Minecraft</li>
-                                    <li><a href="#">ZéPS</a></li>
-                                    <li><a href="#">Serveurs visités</a></li>
-                                    <li><a href="#">Cache de skins</a></li>
+                                    <li><a href="{{ url('api') }}#zeps">ZéPS</a></li>
+                                    <li><a href="{{ url('api') }}#visited">Serveurs visités</a></li>
+                                    <li><a href="{{ url('api') }}#skins">Cache de skins</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">Autre</li>
-                                    <li><a href="#">Professeurs absents</a></li>
+                                    <li><a href="{{ url('api') }}#teachers">Professeurs absents</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Réalisations</a></li>
-                            <li><a href="#">Articles</a></li>
+                            <li><a href="{{ url('projects') }}">Réalisations</a></li>
+                            <li><a href="{{ url('articles') }}">Articles</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ basepath }}">À propos</a></li>
-                            <li><a href="{{ basepath }}/contact">Contact</a></li>
+                            <li><a href="{{ url('homepage') }}">À propos</a></li>
+                            <li><a href="{{ url('contact') }}">Contact</a></li>
                         </ul>
                     </div>
                 </div>
