@@ -53,4 +53,9 @@ class MainPagesController
             'message' => $message
         ));
     }
+
+    public function api(Application $app)
+    {
+        return $app['twig']->render('general/api.html.twig');
+    }
 }

@@ -23,7 +23,7 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->get('/realisations', 'FlorianCassayre\\Florian\\Controllers\\NotYetAvailableController::not_yet')->bind('projects'); // TODO
 
-        $controllers->get('/api', 'FlorianCassayre\\Florian\\Controllers\\NotYetAvailableController::not_yet')->bind('api'); // TODO
+        $controllers->get('/api', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::api')->bind('api');
 
         $controllers->get('/tools/minecraft/uuid', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCUUIDController::uuid_home')->bind('tools.minecraft.uuid');
         $controllers->get('/tools/minecraft/uuid/{input}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCUUIDController::uuid')->bind('tools.minecraft.uuid.result');

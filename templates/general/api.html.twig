@@ -1,0 +1,103 @@
+{% macro api_url(url) %}
+    <a href="http://api{{ url }}"><code>{{ url }}</code></a>
+{% endmacro %}
+
+{% import "general/api.html.twig" as macro %}
+
+{% extends 'base.html.twig' %}
+
+{% block page_title %}APIs{% endblock %}
+
+{% block content %}
+
+    <h2>APIs</h2>
+
+    Documentation des APIs mises à disposition sur <a href="http://api.cassayre.me">api.cassayre.me</a>.
+
+    <hr>
+
+    <div class="row">
+        <div id="zeps" class="col-xs-12 col-md-6">
+            <h3>ZéPS</h3>
+
+            Le ZéPS est un outil de calcul d'itinéraire réalisé pour le serveur <a href="https://zcraft.fr">Zcraft</a>.
+            Une implémentation complète de l'API a été <a href="https://github.com/zDevelopers/ZePS-GUI/">réalisée</a> par Amaury Carrade et est accessible sur <a href="https://zeps.carrade.eu">zeps.carrade.eu</a>.
+
+            <h4>Liste des stations</h4>
+            <ul>
+                <li>
+                    {{ macro.api_url('/minecraft/zeps/list') }} – Liste toutes les stations du réseau ainsi que les connexions entres elles.
+                </li>
+                <li>
+                    {{ macro.api_url('/minecraft/zeps/list/network') }} – Similaire mais retourne informations supplémentaires.
+                </li>
+            </ul>
+
+            <h4>Calcul d'un itinéraire</h4>
+            <ul>
+                <li>
+                    {{ macro.api_url('/minecraft/zeps/path/{from}/{to}') }} – Calcule l'itinéraire entre deux stations. Les paramètres sont des nombres entiers correspondant aux identifiants des stations.
+                </li>
+                <li>
+                    {{ macro.api_url('/minecraft/zeps/path/{from}/{to}/parameters?official&accessible') }} – Permet de spécifier des paramètres de recherche supplémentaires. Sont valables, <code>official</code> et <code>accessible</code> uniquement.
+                </li>
+            </ul>
+
+            <h4>Couleurs des lignes</h4>
+            <ul>
+                <li>
+                    {{ macro.api_url('/minecraft/zeps/colors') }} – Retourne les couleurs correspondant à chaque ligne.
+                </li>
+            </ul>
+
+            <h4>Version</h4>
+            <ul>
+                <li>
+                    {{ macro.api_url('/minecraft/zeps/version') }} – Donne des informations sur la version du logiciel actuellement utilisée. Peut s'avérer utile lors de l'utilisation d'un cache de données.
+                </li>
+            </ul>
+        </div>
+        <div id="skins" class="col-xs-12 col-md-6">
+            <h3>Avatars Minecraft</h3>
+
+            Cet outil met en cache les avatars des joueurs et offre certains paramètres utilisateur quant à l'image retournée.
+            L'image est au format <a href="https://fr.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>.
+            Le paramètre <code>{input}</code> peut être un pseudo ou un UUID (peu importe le format).
+
+            <h4>Tête normale</h4>
+            <ul>
+                <li>
+                    {{ macro.api_url('/minecraft/head/{input}') }} – Retourne l'image de la tête du joueur sans la couche supérieure.
+                </li>
+                <li>
+                    {{ macro.api_url('/minecraft/head/{input}.png') }} – Pour assurer la compatibilité avec certains navigateurs, la ressource est également obtenable en précisant l'extension.
+                </li>
+                <li>
+                    {{ macro.api_url('/minecraft/head/{size}/{input}') }} – Il est possible de spécifier la taille des pixels (la taille par défaut est de 8).
+                </li>
+            </ul>
+            <h4>Tête avec couche supérieure</h4>
+            <ul>
+                <li>
+                    {{ macro.api_url('/minecraft/helmet/{input}') }} – Retourne l'image de la tête du joueur avec la couche supérieure. Les méthodes décrites plus haut s'appliquent de la même façon.
+                </li>
+            </ul>
+        </div>
+        <div id="visited" class="col-xs-12 col-md-6">
+            <h3>Serveurs Minecraft visités</h3>
+
+            <em>Prochainement.</em>
+        </div>
+        <div id="ping" class="col-xs-12 col-md-6">
+            <h3>Ping de Serveur Minecraft</h3>
+
+            <em>Prochainement.</em>
+        </div>
+        <div id="teachers" class="col-xs-12 col-md-6">
+            <h3>Professeurs absents</h3>
+
+            <em>Prochainement.</em>
+        </div>
+    </div>
+
+{% endblock%}
