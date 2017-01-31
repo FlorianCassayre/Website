@@ -19,7 +19,7 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/contact', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::contact')->bind('contact');
         $controllers->post('/contact', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::contact_submit')->bind('contact.submit');
 
-        $controllers->get('/articles', 'FlorianCassayre\\Florian\\Controllers\\NotYetAvailableController::not_yet')->bind('articles'); // TODO
+        $controllers->get('/articles', 'FlorianCassayre\\Florian\\Controllers\\ArticlesController::articles')->bind('articles');
 
         $controllers->get('/realisations', 'FlorianCassayre\\Florian\\Controllers\\NotYetAvailableController::not_yet')->bind('projects'); // TODO
 
