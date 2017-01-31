@@ -40,6 +40,8 @@ else
     $app['twig']->addGlobal('basepath', 'http://cassayre'); // Wamp server
 }
 
+// Redirections
+$app->before('FlorianCassayre\\Florian\\RedirectionMiddleware::handle', Application::EARLY_EVENT);
 
 // == Begin routing ==
 
