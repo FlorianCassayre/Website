@@ -18,7 +18,7 @@ $app = new Silex\Application();
 
 $app['website'] = WebsiteType::API;
 
-$app['debug'] = FlorianCassayre\Util\Settings::DEBUG;
+$app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
 
 
 // MySQL PDO

@@ -27,4 +27,12 @@ class HttpUtils
 
         return (object) array('success' => !($content === false), 'content' => $content, 'code' => $code);
     }
+
+    /**
+     * @return bool
+     */
+    public static function isLocalhost()
+    {
+        return isset($_SERVER['REMOTE_ADDR']) && in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'));
+    }
 }

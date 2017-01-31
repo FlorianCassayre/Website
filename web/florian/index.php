@@ -18,7 +18,7 @@ $app = new Silex\Application();
 
 $app['website'] = WebsiteType::WEBSITE;
 
-$app['debug'] = FlorianCassayre\Util\Settings::DEBUG;
+$app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
 
 // Twig templates folder
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
