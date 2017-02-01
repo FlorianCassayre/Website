@@ -32,20 +32,10 @@ class ZePSController
 
     public function path(Application $app, $from, $to)
     {
-        return self::path_internal($app, $from, $to, true, true);
-    }
-
-    public function path_with_parameters(Application $app, $from, $to)
-    {
-        return self::path_internal($app, $from, $to, isset($_GET['official']), isset($_GET['accessible']));
-    }
-
-    private function path_internal(Application $app, $from, $to, $official, $accessible)
-    {
         $from_int = intval($from);
         $to_int = intval($to);
-        $official_bool = self::str_boolean($official);
-        $accessible_bool = self::str_boolean($accessible);
+        $official_bool = self::str_boolean(isset($_GET['official']));
+        $accessible_bool = self::str_boolean(isset($_GET['accessible']));
 
         if(is_numeric($from) && is_numeric($to) && $from_int >= 0 && $to_int >= 0)
         {

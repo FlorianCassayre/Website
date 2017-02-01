@@ -23,7 +23,6 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/minecraft/zeps/list/network', 'FlorianCassayre\\Api\\Controllers\\ZePSController::list_stations_with_network');
         $controllers->get('/minecraft/zeps/colors', 'FlorianCassayre\\Api\\Controllers\\ZePSController::colors');
         $controllers->get('/minecraft/zeps/path/{from}/{to}', 'FlorianCassayre\\Api\\Controllers\\ZePSController::path');
-        $controllers->get('/minecraft/zeps/path/{from}/{to}/parameters', 'FlorianCassayre\\Api\\Controllers\\ZePSController::path_with_parameters');
         $controllers->get('/minecraft/zeps/version', 'FlorianCassayre\\Api\\Controllers\\ZePSController::version');
 
         return $controllers;
