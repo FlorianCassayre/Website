@@ -15,11 +15,11 @@ class Logger
         else
             $site = '?';
 
-        $method = $_SERVER['REQUEST_METHOD'];
-        $url = $_SERVER['REQUEST_URI'];
+        $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+        $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
         $code = $response->getStatusCode();
         $session = session_id();
-        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 
         if(!empty($_SERVER['HTTP_CLIENT_IP']))
         {
@@ -31,7 +31,7 @@ class Logger
         }
         else
         {
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
         }
 
         $sql = 'INSERT INTO log_access (site, method, url, code, ipv4, session, user_agent) VALUES (:site, :method, :url, :code, :ipv4, :session, :user_agent)';
@@ -54,8 +54,8 @@ class Logger
         else
             $site = '?';
 
-        $method = $_SERVER['REQUEST_METHOD'];
-        $url = $_SERVER['REQUEST_URI'];
+        $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
+        $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
         $stacktrace = self::jTraceEx($exception);
 
         $sql = 'INSERT INTO log_errors (site, method, url, code, stacktrace) VALUES (:site, :method, :url, :code, :stacktrace)';
