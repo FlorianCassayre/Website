@@ -21,24 +21,31 @@ $app['website'] = WebsiteType::IMAGES;
 $app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
 
 
+// Twig templates folder
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path'    => __DIR__ . '/../../templates'));
+
+
 // MySQL PDO
 MySQLCredentials::setup($app);
 
 
 // == Begin routing ==
 
-$app->get('/{id}', 'FlorianCassayre\\Images\\ScreenshotsController::screenshot')->bind('screenshots');
+$app->get('/{id}', 'FlorianCassayre\\Images\\ScreenshotsController::screenshot')->bind('screenshot');
+$app->get('/{id}/raw', 'FlorianCassayre\\Images\\ScreenshotsController::screenshot_raw')->bind('screenshot.raw');
 
-if(!$app['debug'])
+
+$app->error(function (\Exception $e, Request $request, $code) use ($app)
 {
-    $app->error(function (\Exception $e, Request $request, $code) use ($app)
-    {
-        if($code == 404)
-            return 'Capture introuvable.';
-        else
+    if($code == 404)
+        return 'Capture introuvable.';
+    else
+        if(!$app['debug'])
             return 'Erreur interne';
-    });
-}
+        else
+            return null;
+});
 
 // == End routing ==
 

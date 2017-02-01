@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Capture d'écran</title>
+        <meta name="description" content="Prise le {{ date }}" />
+
+        {% if network == 'twitter' %}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@flomine68" />
+            <meta name="twitter:title" content="Capture d'écran" />
+            <meta name="twitter:description" content="Prise le {{ date }}" />
+            <meta name="twitter:image" content="{{ url('screenshot.raw', {'id': id}) }}" />
+        {% elseif network == 'facebook' %}
+            <meta property="og:title" content="Capture d'écran" />
+            <meta property="og:description" content="Prise le {{ date }}" />
+            <meta property="og:image" content="{{ url('screenshot.raw', {'id': id}) }}" />
+        {% endif %}
+    </head>
+    <body>
+    </body>
+</html>
