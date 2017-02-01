@@ -22,12 +22,12 @@ class ZePSController
     private function internal_list(Application $app, $with_network)
     {
         $bool = self::str_boolean($with_network);
-        return $app->json(json_decode(self::request('list' . ' ' . $bool)));
+        return $app->json(json_decode(self::request($app, 'list' . ' ' . $bool)));
     }
 
     public function colors(Application $app)
     {
-        return $app->json(json_decode(self::request('colors')));
+        return $app->json(json_decode(self::request($app, 'colors')));
     }
 
     public function path(Application $app, $from, $to)
@@ -39,7 +39,7 @@ class ZePSController
 
         if(is_numeric($from) && is_numeric($to) && $from_int >= 0 && $to_int >= 0)
         {
-            return $app->json(json_decode(self::request('pathfinder' . ' ' . $from_int . ' ' . $to_int . ' ' . $official_bool . ' ' . $accessible_bool)));
+            return $app->json(json_decode(self::request($app, 'pathfinder' . ' ' . $from_int . ' ' . $to_int . ' ' . $official_bool . ' ' . $accessible_bool)));
         }
         else
         {
@@ -59,17 +59,20 @@ class ZePSController
         return $bool ? 'true' : 'false';
     }
 
-    private function request($parameters)
+    private function request(Application $app, $parameters)
     {
         $locale = 'fr_FR.utf-8';
         setlocale(LC_ALL, $locale);
-        putenv('LC_ALL='.$locale);
+        putenv('LC_ALL=' . $locale);
 
         if(preg_match('/^[A-z0-9 ]*$/', $parameters))
         {
             $cmd = 'java -jar ' . Settings::ZEPS_JAR_FILE . ' ' . $parameters;
 
-            return utf8_encode(exec($cmd));
+            if(!$app['debug'])
+                return exec($cmd);
+            else
+                return utf8_encode(exec($cmd));
         }
         else
         {

@@ -7,6 +7,7 @@
 use FlorianCassayre\Util\MySQLCredentials;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,6 +33,11 @@ $app->after(
             'Content-Type',
             $response->headers->get('Content-Type') . '; charset=utf-8'
         );
+
+        if ($response instanceof JsonResponse)
+        {
+            $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+        }
 
         return $response;
     }
