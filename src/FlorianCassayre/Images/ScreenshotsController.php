@@ -14,11 +14,11 @@ class ScreenshotsController
     {
         if(self::imageExist($id))
         {
-            if(strpos($_SERVER['HTTP_USER_AGENT'], 'Twitterbot') !== false || ($app['debug'] && isset($_GET['twitter']))) // Twitter cards
+            if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Twitterbot') === 0 || ($app['debug'] && isset($_GET['twitter']))) // Twitter cards
             {
                 $network = 'twitter';
             }
-            else if (strpos($_SERVER["HTTP_USER_AGENT"], "facebookexternalhit/") !== false || strpos($_SERVER["HTTP_USER_AGENT"], "Facebot") !== false || ($app['debug'] && isset($_GET['facebook']))) // Facebook cards
+            else if(isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit/') === 0 || strpos($_SERVER['HTTP_USER_AGENT'], 'Facebot') === 0) || ($app['debug'] && isset($_GET['facebook']))) // Facebook cards
             {
                 $network = 'facebook';
             }
