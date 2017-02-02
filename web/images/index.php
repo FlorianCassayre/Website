@@ -30,17 +30,6 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 // MySQL PDO
 MySQLCredentials::setup($app);
 
-$app->after(
-    function (Request $request, Response $response)
-    {
-        $response->headers->set(
-            'Content-Type',
-            $response->headers->get('Content-Type') . '; charset=utf-8'
-        );
-
-        return $response;
-    }
-);
 
 // == Begin routing ==
 
