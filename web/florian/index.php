@@ -44,7 +44,7 @@ $app->after(
 // Globals
 if(!$app['debug'])
 {
-    $app['twig']->addGlobal('basepath', 'http://florian.cassayre.me'); // Production Website
+    $app['twig']->addGlobal('basepath', 'https://florian.cassayre.me'); // Production Website
 }
 else
 {
