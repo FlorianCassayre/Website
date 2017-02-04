@@ -17,6 +17,8 @@ class MinecraftHeadsController
     const ERROR_RATE_LIMIT = 'mojang_rate_limit';
     const ERROR_INTERNAL = 'error_internal';
 
+    const DEFAULT_UUID = '8667ba71b85a4004af54457a9734eed7';
+
     const DEFAULT_SIZE = 8;
 
     public function head(Application $app, $input, $size = self::DEFAULT_SIZE)
@@ -59,6 +61,11 @@ class MinecraftHeadsController
             else // Texture not yet cached, caching it right away
             {
                 $array = MinecraftHeads::getHeadAndHatHex($uuid_without);
+
+                if($array == null)
+                {
+                    $array = MinecraftHeads::getHeadAndHatHex(self::DEFAULT_UUID);
+                }
 
                 $sql = 'INSERT INTO minecraft_heads (uuid, layer_head, layer_hat) VALUES (UNHEX(:uuid), UNHEX(:layer_head), UNHEX(:layer_hat))';
 

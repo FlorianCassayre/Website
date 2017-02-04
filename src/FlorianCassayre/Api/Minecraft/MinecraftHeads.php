@@ -56,6 +56,11 @@ class MinecraftHeads
 
         $object = json_decode(base64_decode($obj->properties[0]->value));
 
+        if(!isset($object->textures->SKIN)) // Might happen if the player doesn't have a skin
+        {
+            return null;
+        }
+
         $textures_url = $object->textures->SKIN->url;
 
         $skin_result = HttpUtils::requestHttp($textures_url);
@@ -141,6 +146,9 @@ class MinecraftHeads
     public static function getHeadAndHatHex($uuid)
     {
         $skin = self::getSkinImage($uuid);
+
+        if($skin == null)
+            return null;
 
         $head_hex = self::getSquareCropToHex($skin, self::HEAD_X, self::HEAD_Y);
         $hat_hex = self::getSquareCropToHex($skin, self::HAT_X, self::HAT_Y);
