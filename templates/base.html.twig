@@ -1,42 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block page_title %}{% endblock %} &sdot; Florian Cassayre</title>
-
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="language" content="fr-FR">
+        <meta http-equiv="content-language" content="fr">
+
+        <title>{% block page_title %}{% endblock %} &sdot; Florian Cassayre</title>
+
+        <meta name="author" content="Florian Cassayre">
+
+        <meta name="robots" content="index, follow">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
         <link rel="stylesheet" href="{{ basepath }}/css/bootstrap.min.css">
 
         <link rel="stylesheet" href="{{ basepath }}/css/font-awesome.min.css">
 
-        <style>
-            body {
-                background-image: url('{{ basepath }}/img/background-triangles.png');
-                background-repeat: no-repeat;
-                background-size: 100%;
-
-                padding-top: 20px;
-                padding-bottom: 20px;
-            }
-
-            .content {
-                font-size: 16px;
-                border-radius: 10px;
-                background-color: #fdfdfd;
-                padding: 25px 30px;
-                margin-bottom: 20px;
-                border: 1px solid lightgray;
-            }
-
-            .content {
-                opacity: 0.9;
-                box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
-            }
-        </style>
+        <link rel="stylesheet" href="{{ basepath }}/css/main-theme.css">
 
         {% block stylesheets %}{% endblock %}
-
     </head>
     <body>
         <div id="content" class="container col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10 col-lg-offset-2 col-lg-8">
