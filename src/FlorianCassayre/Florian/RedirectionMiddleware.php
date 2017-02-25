@@ -13,9 +13,10 @@ class RedirectionMiddleware
         '/uuid' => '/tools/minecraft/uuid',
         '/enchanting' => '/tools/minecraft/enchanting',
         '/ping' => '/tools/minecraft/ping',
+        '/projects' => '/realisations',
 
         // Old URLs
-        '/netherrail' => 'https://zeps.carrade.eu'
+        '/netherrail' => 'https://zeps.carrade.eu',
 
     );
 
