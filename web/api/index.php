@@ -43,6 +43,16 @@ $app->after(
     }
 );
 
+$app->register(new Silex\Provider\SwiftmailerServiceProvider());
+
+$app['swiftmailer.options'] = array(
+    'host' => 'mx.zoho.eu',
+    'port' => '25',
+    'username' => 'florian@cassayre.me',
+    'password' => 'Fl31361335Ca',
+    'encryption' => 'tls',
+    'auth_mode' => 'login' // DL5QTjnhse5YuLEr
+);
 
 // == Begin routing ==
 

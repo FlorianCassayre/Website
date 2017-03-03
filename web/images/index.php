@@ -39,7 +39,7 @@ $app->get('/{id}/raw', 'FlorianCassayre\\Images\\ScreenshotsController::screensh
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app)
 {
-    if($code == 404)
+    if($code == 404 || $code == 405)
         return 'Capture introuvable.';
     else
         if(!$app['debug'])

@@ -12,8 +12,9 @@ class ErrorsHandlerController
     {
         switch($code)
         {
-            case 404:
             case 403:
+            case 404:
+            case 405:
                 return $app['twig']->render('errors/' . $code . '.html.twig');
             default:
             {
