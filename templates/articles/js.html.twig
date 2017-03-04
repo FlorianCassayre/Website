@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Page sans nom{% endblock %}
+
+{% block content %}
+
+    <h2>JavaScript est à Java ce qu'une voiture est à un tapis</h2>
+
+    <hr>
+
+    <h3>Pourtant dans le mot JavaScript il y a Java</h3>
+    <p>
+        Sauf que la comparaison s'arrête ici, JavaScript n'a rien à voir avec Java.
+    </p>
+    <p>
+        Remettons les choses dans le contexte ; <strong>JavaScript</strong> et <strong>Java</strong> sont deux <strong>langages informatiques</strong>.
+        Grâce à des instructions définies par chacun des langages, le <strong>développeur</strong> peut communiquer à la machine ce qu'il souhaite qu'elle fasse.
+    </p>
+    <ul>
+        <li>
+            <p>
+                <strong>JavaScript</strong> (ou <strong>JS</strong>), est un langage exécuté par votre navigateur pour modifier dynamiquement le contenu d'une page web.
+                Le fait de cliquer sur une photo sur facebook pour qu'elle s'affiche en plus grand est géré par ce langage, ou plutôt de l'interprétation faite votre navigateur de ce langage.
+                Les jeux en ligne sur navigateur sont généralement écrits en JavaScript.
+                C'est un langage de type <strong>script</strong> (comme son nom l'indique), cela signifie qu'il est interprété sans avoir été préalablement compilé.
+                JavaScript ne possède pas d'implémentation unique, par ailleurs sa norme fait partie du domaine public.
+            </p>
+        </li>
+        <li>
+            <p>
+                <strong>Java</strong>, est un langage exécuté par une machine virtuelle installée sur votre ordinateur. Il s'agit d'un langage propriétaire possédé par la société <strong>Oracle</strong>. Java ne peut pas être interprété par votre navigateur.
+                Contrairement à JavaScript, Java est un langage à <strong>compiler</strong> avant d'être exécuté. Le compileur va traduire un programme en une séquence d'octets lisible par la machine.
+                La compilation est réalisée une seule fois, ensuite c'est le fichier généré qui va être utilisé pour exécuter le programme qu'il représente.
+                Contrairement à JavaScript, Java est utilisé à la fois pour des logiciels côté client et également des applications côté serveur.
+                Les téléphones Android ont un système d'exploitation développé en Java.
+            </p>
+        </li>
+    </ul>
+
+    <h3>Quelques similarités tout de même</h3>
+    <p>
+        Ce serait mentir que de dire qu'ils sont totalement différents.
+        En revanche il faut noter que les différences sont plus nombreuses qu'entre la plupart des autres langages.
+    </p>
+    <p>
+        Les deux se basent sur le paradigme de la <strong>programmation orientée objet</strong> (<a href="https://fr.wikipedia.org/wiki/Programmation_orient%C3%A9e_objet">POO</a>), comme la grande majorité des langages actuels.
+        Leur syntaxe ressemble à celle utilisée par <a href="https://fr.wikipedia.org/wiki/C%2B%2B">C++</a>, donc par transitivité elle est similaire chez les deux.
+    </p>
+    <p>
+        Aussi, j'ai fait un raccourci en disant que JavaScript n'était utilisé que dans les navigateurs. Ce n'est <em>plus</em> vrai depuis l'arrivée et la popularisation de <a href="https://fr.wikipedia.org/wiki/Node.js">NodeJS</a>.
+    </p>
+
+    <hr>
+
+    <h3>Références</h3>
+    <ul>
+        <li><a href="https://fr.wikipedia.org/wiki/JavaScript">Page Wikipédia de JavaScript</a></li>
+        <li><a href="https://fr.wikipedia.org/wiki/Java_(langage)">Page Wikipédia de Java</a></li>
+        <li><a href="http://stackoverflow.com/questions/245062/whats-the-difference-between-javascript-and-java">Titre traduit de la première réponse</a></li>
+    </ul>
+
+{% endblock%}

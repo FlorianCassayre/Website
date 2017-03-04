@@ -8,7 +8,8 @@ use Silex\Application;
 class ArticlesController
 {
     private static $articles = array(
-        'crypto'
+        'crypto',
+        'js'
     );
 
     public function article(Application $app, $id)
@@ -19,7 +20,8 @@ class ArticlesController
         }
         else
         {
-            return $app->abort(404);
+            $app->abort(404);
+            return null;
         }
     }
 }
