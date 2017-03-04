@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Imprécision des nombres à virgule flottante{% endblock %}
+
+{% block content %}
+
+    <h2>Pourquoi 0.1 + 0.2 != 0.3 ?</h2>
+
+    <hr>
+
+    <h3>Une histoire de changement de base</h3>
+    <p>
+        Si vous avez déjà un peu programmé, quel que soit le langage que vous ayez utilisé vous avez sûrement dû vous heurter à ce problème.
+        À titre d'exemple, l'opération <code>0.1 + 0.2</code> ne retourne <strong>pas exactement</strong> <code>0.3</code> comme attendu mais plutôt <code>0.30000000000000004</code>.
+    </p>
+    <p>
+        Mais que se passe-t-il donc ?
+    </p>
+    <p>
+        Pour ce faire, il faut tout d'abord comprendre comment les nombres à virgule flottante sont représentés par votre ordinateur.
+        La norme utilisée par quasiment tous les matériels est l'<strong>IEEE-754</strong>. Elle définit deux codages ; un sur 4 octets (32 bits) et un autre sur 8 octets (64 bits) mais l'implémentation reste globalement la même pour les deux.
+        Les valeurs que je vais donner correspondent au codage sur 8 octets car étant le plus utilisé.
+    </p>
+    <p>
+        Vous connaissez très certainement la notation scientifique d'un nombre ; au lieu d'écrire <code>c = 300 000 000 m/s</code> on préfère utiliser <code>c = 3*10^8 m/s</code> ou <code>c = 3E8 m/s</code>.
+        Cela permet d'écrire de grands nombres sans utiliser trop de caractères. Figurez-vous que c'est exactement la même chose pour l'ordinateur.
+    </p>
+    <p>
+        Sur les 64 bits de codage :
+    </p>
+    <ul>
+        <li>1 bit est utilisé pour coder <strong>le signe</strong></li>
+        <li>11 bits sont utilisés pour coder <strong>l'exposant</strong></li>
+        <li>52 bits sont utilisés pour coder <strong>la mantisse</strong></li>
+    </ul>
+    <p>
+        L'exposant représente la puissance de 10 et ma mantisse un nombre entre 0 inclu et 10 exclu.
+        Sauf qu'ils sont tous deux stockés en binaire ce qui pose un problème car nous comptons en base 10 !
+        Pour résoudre ce problème, votre ordinateur va procéder à un changement de base et c'est justement ce changement de base qui est la source de cette particularité.
+    </p>
+    <p>
+        Il se trouve que <code>0.1</code> est représenté comme valant légèrement plus, mais cette imprécision est corrigée par votre ordinateur en tronquant les décimales trop imprécises (lorsque supérieures à 16).
+        De la même façon, <code>0.2</code> vaut lui aussi légèrement plus et encore une fois l'erreur est corrigée.
+        Mais lorsqu'il s'agit de les additionner, les erreurs se cumulent et l'arrondi le plus proche est tranché : c'est <code>0.30000000000000004</code> qui est choisi à la place de <code>0.3</code>.
+    </p>
+
+    <h3>Comment y remédier</h3>
+    <p>
+        Les moyens pour contourner ce problème sont variables suivant les langages. Mais certaines choses restent valables quelque soit la plateforme utilisée :
+    </p>
+    <ul>
+        <li>N'affichez pas directement les nombres à virgule flottante, utilisez plutôt un <strong>formateur</strong>.</li>
+        <li>Lorsque vous effectuez une comparaison, assurez vous de toujours définir un seuil de précision (<strong>threshold</strong>). Pour tester si un nombre est égal à zéro, il faudra par exemple procéder de la manière suivante <code>abs(value) < threshold</code> à la place de <code>value == 0.0</code>.</li>
+        <li>Si vous avez la possibilité de travailler avec des <strong>entiers</strong> à la place de nombres à virgule flottante (en vous assurant que les valeurs ne soient pas trop grande), faites le.</li>
+    </ul>
+
+    <hr>
+
+    <h3>Références</h3>
+    <ul>
+        <li><a href="https://fr.wikipedia.org/wiki/Virgule_flottante">Page Wikipédia de l'encodage à virgule flottante</a></li>
+        <li><a href="http://0.30000000000000004.com/">0.30000000000000004.com</a></li>
+        <li><a href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">Outil de conversion 32 bits IEEE-754</a></li>
+    </ul>
+
+{% endblock%}

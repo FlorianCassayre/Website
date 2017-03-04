@@ -9,7 +9,8 @@ class ArticlesController
 {
     private static $articles = array(
         'crypto',
-        'js'
+        'js',
+        'float'
     );
 
     public function article(Application $app, $id)
