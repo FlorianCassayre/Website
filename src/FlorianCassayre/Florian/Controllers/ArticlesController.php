@@ -10,7 +10,8 @@ class ArticlesController
     private static $articles = array(
         'crypto',
         'js',
-        'float'
+        'float',
+        'random'
     );
 
     public function article(Application $app, $id)

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Le hasard et l'informatique{% endblock %}
+
+{% block content %}
+
+    <h2>Comment un ordinateur peut-il générer du hasard ?</h2>
+
+    <hr>
+
+    <h3>L'aléatoire et le pseudo-aléatoire</h3>
+    <p>
+        Qui ne s'est ou ne s'était pas posé la question ? Comment une machine pourrait-elle avoir une notion de <strong>hasard</strong> alors qu'elle n'est capable d'effectuer que des opérations logiques qui, <em>a priori</em> n'ont aucun lien avec le hasard.
+    </p>
+    <p>
+        Il faut être conscient qu'aucun algorithme ni expérience pratique ne donne un résultat parfaitement aléatoire. Ainsi il faut plutôt parler de <strong>pseudo-aléatoire</strong> pour désigner une expérience ou une fonction qui s'approche d'un <strong>aléatoire parfait</strong>.
+    </p>
+
+    <h3>Les générateurs congruentiels linéaires</h3>
+    <p>
+        C'est l'algorithme le plus utilisé pour générer des nombres pseudo-aléatoires. Ils ont l'avantage d'être très rapides et peuvent s'avérer être de très bonne qualité.
+        Leur seule contrainte est qu'il faut les initialiser à partir d'un nombre appelé <strong>graine</strong> (<strong>seed</strong> en anglais). Deux graines produiront <strong>toujours</strong> la même séquence de nombres aléatoires, c'est pourquoi il faut s'assurer que la graine de départ soit <strong>différente</strong> à chaque exécution.
+        Généralement c'est l'unité de temps qui est utilisé comme graine (temps en nanosecondes par exemple) mais on pourrait très bien additionner à cela d'autres facteurs de hasard comme les mouvements de la souris, les touches du clavier, etc.
+    </p>
+    <p>
+        Un générateur congruentiel linéaire n'est autre qu'une suite mathématique. Elle est définie par trois paramètres (en plus de la graine de départ qui elle est variable) :
+    </p>
+    <ul>
+        <li>Le multiplicateur <code>a</code></li>
+        <li>L'incrément <code>c</code></li>
+        <li>Le module <code>m</code></li>
+    </ul>
+    <p>
+        En connaissant le terme précédent de la suite (ou le terme initial (la graine) si la suite vient d'être initialisée), le calcul du terme suivant s'effectue de la manière suivante <code>X<sub>n+1</sub> = (a * X<sub>n</sub> + c) mod m</code>.
+    </p>
+    <p>
+        Si les paramètres ont été judicieusement choisis (voir <a href="https://fr.wikipedia.org/wiki/G%C3%A9n%C3%A9rateur_congruentiel_lin%C3%A9aire#Choix_du_multiplicateur_et_de_l.27incr.C3.A9ment">choix du multiplicateur et de l'incrément</a>), les <code>m</code> premiers termes apparaitront chacuns une seule et unique fois.
+        Passé <code>m</code> la suite se mettra à répéter les termes dans le même ordre : c'est sa période.
+    </p>
+    <p>
+        Ce qui est intéressant c'est que chaque terme apparait de manière uniforme et c'est à partir de cette propriété notable qu'on va pouvoir retourner un nombre pseudo-aléatoire.
+        On ne va pas utiliser le nombre directement, mais plutôt le tronquer pour ne conserver que les bits de poids fort car « plus » aléatoires. On répète cette opération autant de fois que nécessaire pour obtenir le nombre de bits attendus.
+    </p>
+    <p>
+        Imaginons maintenant que l'on souhaite retourner un nombre entier compris entre <code>0</code> et <code>2<sup>n</sup></code>. C'est très simple puisqu'il suffit de retourner le nombre représenté par <code>n</code> bits aléatoires.
+    </p>
+    <p>
+        Maintenant qu'en est-il pour un nombre entier quelconque, entre <code>0</code> et <code>k</code> ? On va chercher le plus petit entier <code>n</code> tel que <code>2<sup>n</sup> ≥ k</code>, autrement dit <code>n = ceil(log<sub>2</sub>(k))</code>.
+        On génère <code>2<sup>n</sup></code> bits aléatoires que l'on représente en nombre entier <code>r</code>. Si <code>r < k<sup>2</sup></code>, on s'arrête et on retourne ce nombre modulo <code>k</code>.
+        Dans le cas inverse, on n'a pas le choix : il faut recommencer l'opération jusqu'à ce que l'inégalité soit vérifiée.
+    </p>
+    <p>
+        Cet algorithme retourne des valeurs équiprobables ; la seule chose qui n'est pas garantie c'est le nombre de fois que l'on devra répéter l'opération si la valeur aléatoire ne vérifie pas l'inégalité.
+        Mais c'est le prix à payer pour obtenir un nombre pseudo-aléatoire compris dans intervalle quelconque, à partir de bits pseudo-aléatoires.
+    </p>
+
+    <h3>Limites</h3>
+    <p>
+        Le plus gros danger sur lequel il faut être attentif est la prédiction des termes de la suite. En effet, en connaissant les paramètres utilisés par le générateur ainsi qu'un des termes de la suite il est possible de déduire tous les termes suivants.
+        Aussi, si le module est trop petit les nombres qui vont en découler auront l'air « moins » aléatoires que si le module avait été plus grand. Enfin, si les
+    </p>
+    <p>
+        De ce fait, il ne faut <strong>pas</strong> les utiliser en <strong>cryptographie</strong>. D'autres algorithmes plus lents mais moins biaisés et quasiment imprédictibles sont utilisés pour cela.
+    </p>
+    <p>
+        De la même façon, s'il s'agit d'une plateforme de jeu où le hasard prend une place importante ce n'est probablement pas une bonne idée.
+    </p>
+
+    <hr>
+
+    <h3>Références</h3>
+    <ul>
+        <li><a href="https://fr.wikipedia.org/wiki/G%C3%A9n%C3%A9rateur_congruentiel_lin%C3%A9aire">Page Wikipédia sur les générateurs congruentiels linéaires</a></li>
+        <li><a href="https://fr.wikipedia.org/wiki/Pseudo-al%C3%A9atoire">Page Wikipédia sur le terme pseudo-aléatoire</a></li>
+    </ul>
+
+{% endblock%}
