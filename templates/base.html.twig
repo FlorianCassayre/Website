@@ -55,6 +55,16 @@
                                     <li><a href="{{ url('api') }}#teachers">Professeurs absents</a></li>
                                 </ul>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articles <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Informatique</li>
+                                    <li><a href="{{ url('articles', {'id': 'crypto'}) }}">Pourquoi dit-on « chiffrer » ?</a></li>
+                                    <li><a href="{{ url('articles', {'id': 'js'}) }}">Pourquoi JavaScript & Java sont-ils si différents ?</a></li>
+                                    <li><a href="{{ url('articles', {'id': 'float'}) }}">Pourquoi 0.1 + 0.2 != 0.3 ?</a></li>
+                                    <li><a href="{{ url('articles', {'id': 'random'}) }}">Comment un ordinateur peut-il générer de l'aléatoire ?</a></li>
+                                </ul>
+                            </li>
                             <li><a href="{{ url('projects') }}">Réalisations</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
