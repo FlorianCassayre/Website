@@ -200,7 +200,7 @@ class MCEnchantingController
             'enchantments_data' => $enchantments_data,
             'enchantments_count' => $enchantments_count,
             'combinations' => $combinations,
-            'quote' => self::getRandomQuote()
+            'quote' => $this->getRandomQuote()
         )), $code);
     }
 

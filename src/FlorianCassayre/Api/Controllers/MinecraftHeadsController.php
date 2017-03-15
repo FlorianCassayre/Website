@@ -23,12 +23,12 @@ class MinecraftHeadsController
 
     public function head(Application $app, $input, $size = self::DEFAULT_SIZE)
     {
-        return self::create_response($app, $input, false, $size);
+        return $this->create_response($app, $input, false, $size);
     }
 
     public function head_with_helmet(Application $app, $input, $size = self::DEFAULT_SIZE)
     {
-        return self::create_response($app, $input, true, $size);
+        return $this->create_response($app, $input, true, $size);
     }
 
     public function create_response(Application $app, $input, $with_hat, $size)
@@ -40,7 +40,7 @@ class MinecraftHeadsController
 
         try
         {
-            $input = self::removeSuffix($input);
+            $input = $this->removeSuffix($input);
 
             if(MinecraftUtils::isUUID($input))
                 $uuid_without = MinecraftUtils::normalize($input);
@@ -81,7 +81,7 @@ class MinecraftHeadsController
             else
                 $hex = $array[0];
 
-            return self::responseImage(MinecraftHeads::convertHeadOrHatHexToImage($hex, $size));
+            return $this->responseImage(MinecraftHeads::convertHeadOrHatHexToImage($hex, $size));
         }
         catch(MinecraftUnknownInputException $e)
         {

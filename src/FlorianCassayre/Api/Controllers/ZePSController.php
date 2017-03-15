@@ -11,35 +11,35 @@ class ZePSController
 
     public function list_stations(Application $app)
     {
-        return self::internal_list($app, false);
+        return $this->internal_list($app, false);
     }
 
     public function list_stations_with_network(Application $app)
     {
-        return self::internal_list($app, true);
+        return $this->internal_list($app, true);
     }
 
     private function internal_list(Application $app, $with_network)
     {
-        $bool = self::str_boolean($with_network);
-        return $app->json(json_decode(self::request($app, 'list' . ' ' . $bool)));
+        $bool = $this->str_boolean($with_network);
+        return $app->json(json_decode($this->request($app, 'list' . ' ' . $bool)));
     }
 
     public function colors(Application $app)
     {
-        return $app->json(json_decode(self::request($app, 'colors')));
+        return $app->json(json_decode($this->request($app, 'colors')));
     }
 
     public function path(Application $app, $from, $to)
     {
         $from_int = intval($from);
         $to_int = intval($to);
-        $official_bool = self::str_boolean(isset($_GET['official']));
-        $accessible_bool = self::str_boolean(isset($_GET['accessible']));
+        $official_bool = $this->str_boolean(isset($_GET['official']));
+        $accessible_bool = $this->str_boolean(isset($_GET['accessible']));
 
         if(is_numeric($from) && is_numeric($to) && $from_int >= 0 && $to_int >= 0)
         {
-            return $app->json(json_decode(self::request($app, 'pathfinder' . ' ' . $from_int . ' ' . $to_int . ' ' . $official_bool . ' ' . $accessible_bool)));
+            return $app->json(json_decode($this->request($app, 'pathfinder' . ' ' . $from_int . ' ' . $to_int . ' ' . $official_bool . ' ' . $accessible_bool)));
         }
         else
         {

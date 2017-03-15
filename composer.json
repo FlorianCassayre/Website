@@ -8,10 +8,6 @@
       "name": "Florian Cassayre"
     }
   ],
-  "config": {
-    "disable-tls": true,
-    "secure-http": false
-  },
   "require": {
     "silex/silex": "~2.0",
     "twig/twig": "~1.0",

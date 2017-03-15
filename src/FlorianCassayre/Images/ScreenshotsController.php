@@ -12,7 +12,7 @@ class ScreenshotsController
 
     public function screenshot(Application $app, $id)
     {
-        if(self::imageExist($id))
+        if($this->imageExist($id))
         {
             if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Twitterbot') === 0 || ($app['debug'] && isset($_GET['twitter']))) // Twitter cards
             {
@@ -24,11 +24,11 @@ class ScreenshotsController
             }
             else // Normal client
             {
-                return self::screenshot_raw($app, $id);
+                return $this->screenshot_raw($app, $id);
             }
 
-            $date = date("d/m/Y à H:i:s.", filemtime(Settings::SCREENSHOTS_FOLDER . self::removeSuffix($id) . self::EXTENSION));
-            $id_without = self::removeSuffix($id);
+            $date = date("d/m/Y à H:i:s.", filemtime(Settings::SCREENSHOTS_FOLDER . $this->removeSuffix($id) . self::EXTENSION));
+            $id_without = $this->removeSuffix($id);
 
             return $app['twig']->render('special/image_card.html.twig', array(
                 'id' => $id_without,
@@ -49,7 +49,7 @@ class ScreenshotsController
             if(basename($id) !== $id) // File name not valid
                 throw new \InvalidArgumentException();
 
-            $name_without = self::removeSuffix($id);
+            $name_without = $this->removeSuffix($id);
             $path_without = Settings::SCREENSHOTS_FOLDER . $name_without;
 
             if($id !== $name_without) // {id}.png
@@ -73,7 +73,7 @@ class ScreenshotsController
         }
         catch(\Exception $ex)
         {
-            return self::createDefaultMessage();
+            return $this->createDefaultMessage();
         }
     }
 
@@ -84,7 +84,7 @@ class ScreenshotsController
 
     private function imageExist($id)
     {
-        return basename($id) === $id && file_exists(Settings::SCREENSHOTS_FOLDER . self::removeSuffix($id) . self::EXTENSION);
+        return basename($id) === $id && file_exists(Settings::SCREENSHOTS_FOLDER . $this->removeSuffix($id) . self::EXTENSION);
     }
 
     private function removeSuffix($str)
