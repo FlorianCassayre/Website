@@ -1,6 +1,7 @@
-
 /.idea/
 /vendor/
 /composer.lock
 /composer.phar
 /wamp-server.iml
+
+config.php

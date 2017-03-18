@@ -49,7 +49,7 @@ class ZePSController
 
     public function version(Application $app)
     {
-        $hash = hash_file(self::HASHING_ALGORITHM, Settings::ZEPS_JAR_FILE);
+        $hash = hash_file(self::HASHING_ALGORITHM, $app['config']['zeps_jar']);
 
         return $app->json((object) array('version' => '1.1-SNAPSHOT', self::HASHING_ALGORITHM => $hash));
     }
@@ -67,7 +67,7 @@ class ZePSController
 
         if(preg_match('/^[A-z0-9 ]*$/', $parameters))
         {
-            $cmd = 'java -jar ' . Settings::ZEPS_JAR_FILE . ' ' . $parameters;
+            $cmd = 'java -jar ' . $app['config']['zeps_jar'] . ' ' . $parameters;
 
             if(!$app['debug'])
                 return exec($cmd);

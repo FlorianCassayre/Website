@@ -12,7 +12,7 @@ class ScreenshotsController
 
     public function screenshot(Application $app, $id)
     {
-        if($this->imageExist($id))
+        if($this->imageExist($id, $app['config']['screenshots_folder']))
         {
             if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Twitterbot') === 0 || ($app['debug'] && isset($_GET['twitter']))) // Twitter cards
             {
@@ -27,7 +27,7 @@ class ScreenshotsController
                 return $this->screenshot_raw($app, $id);
             }
 
-            $date = date("d/m/Y à H:i:s.", filemtime(Settings::SCREENSHOTS_FOLDER . $this->removeSuffix($id) . self::EXTENSION));
+            $date = date("d/m/Y à H:i:s.", filemtime($app['config']['screenshots_folder'] . $this->removeSuffix($id) . self::EXTENSION));
             $id_without = $this->removeSuffix($id);
 
             return $app['twig']->render('special/image_card.html.twig', array(
@@ -50,7 +50,7 @@ class ScreenshotsController
                 throw new \InvalidArgumentException();
 
             $name_without = $this->removeSuffix($id);
-            $path_without = Settings::SCREENSHOTS_FOLDER . $name_without;
+            $path_without = $app['config']['screenshots_folder'] . $name_without;
 
             if($id !== $name_without) // {id}.png
             {
@@ -61,9 +61,9 @@ class ScreenshotsController
             }
             else
             {
-                if(file_exists(Settings::SCREENSHOTS_FOLDER . $id . self::EXTENSION))
+                if(file_exists($app['config']['screenshots_folder'] . $id . self::EXTENSION))
                 {
-                    $path = Settings::SCREENSHOTS_FOLDER . $id . self::EXTENSION;
+                    $path = $app['config']['screenshots_folder'] . $id . self::EXTENSION;
 
                     return new Response(file_get_contents($path), Response::HTTP_OK, array('Content-Type' => 'image/png', 'Content-length' => filesize($path)));
                 }
@@ -82,9 +82,9 @@ class ScreenshotsController
         return new Response('Capture introuvable.', Response::HTTP_NOT_FOUND);
     }
 
-    private function imageExist($id)
+    private function imageExist($id, $folder)
     {
-        return basename($id) === $id && file_exists(Settings::SCREENSHOTS_FOLDER . $this->removeSuffix($id) . self::EXTENSION);
+        return basename($id) === $id && file_exists($folder . $this->removeSuffix($id) . self::EXTENSION);
     }
 
     private function removeSuffix($str)

@@ -4,7 +4,7 @@
  Routing file, every access passes by this pages which routes to the correct resource.
  */
 
-use FlorianCassayre\Util\MySQLCredentials;
+use FlorianCassayre\Util\MySQLUtils;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +17,12 @@ date_default_timezone_set('Europe/Paris'); // Timezone
 
 $app = new Silex\Application();
 
+$app['config'] = array();
+if (file_exists(__DIR__ . '/../../config.php'))
+{
+    $app['config'] = include(__DIR__ . '/../../config.php');
+}
+
 $app['website'] = WebsiteType::IMAGES;
 
 $app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
@@ -28,7 +34,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 
 // MySQL PDO
-MySQLCredentials::setup($app);
+MySQLUtils::setup($app);
 
 
 // == Begin routing ==
