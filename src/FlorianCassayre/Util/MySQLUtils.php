@@ -5,16 +5,8 @@ namespace FlorianCassayre\Util;
 use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
 use Silex\Application;
 
-class MySQLCredentials
+class MySQLUtils
 {
-    const MYSQL_USER = 'root';
-    const MYSQL_PASSWORD = '';
-    const MYSQL_DB = 'cassayre';
-
-    const MYSQL_ADDRESS = 'localhost'; // Default address (localhost)
-    const MYSQL_PORT = 3306; // Default port
-
-
     public static function setup(Application $app)
     {
         $app->register(
@@ -22,11 +14,11 @@ class MySQLCredentials
             array(
                 'pdo.server'   => array(
                     'driver'   => 'mysql',
-                    'host'     => MySQLCredentials::MYSQL_ADDRESS,
-                    'dbname'   => MySQLCredentials::MYSQL_DB,
-                    'port'     => MySQLCredentials::MYSQL_PORT,
-                    'user'     => MySQLCredentials::MYSQL_USER,
-                    'password' => MySQLCredentials::MYSQL_PASSWORD,
+                    'host'     => $app['config']['mysql']['host'],
+                    'dbname'   => $app['config']['mysql']['database'],
+                    'port'     => $app['config']['mysql']['port'],
+                    'user'     => $app['config']['mysql']['user'],
+                    'password' => $app['config']['mysql']['password'],
                 ),
                 'pdo.options' => array(
                     \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"

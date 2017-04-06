@@ -4,7 +4,7 @@
  Routing file, every access passes by this pages which routes to the correct resource.
  */
 
-use FlorianCassayre\Util\MySQLCredentials;
+use FlorianCassayre\Util\MySQLUtils;
 use FlorianCassayre\Util\WebsiteType;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,13 +18,19 @@ date_default_timezone_set('Europe/Paris'); // Timezone
 
 $app = new Silex\Application();
 
+$app['config'] = array();
+if (file_exists(__DIR__ . '/../../config.php'))
+{
+    $app['config'] = include(__DIR__ . '/../../config.php');
+}
+
 $app['website'] = WebsiteType::API;
 
 $app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
 
 
 // MySQL PDO
-MySQLCredentials::setup($app);
+MySQLUtils::setup($app);
 
 $app->after(
     function (Request $request, Response $response)
