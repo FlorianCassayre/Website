@@ -11,7 +11,8 @@ class ArticlesController
         'crypto',
         'js',
         'float',
-        'random'
+        'random',
+        'youtube'
     );
 
     public function article(Application $app, $id)
