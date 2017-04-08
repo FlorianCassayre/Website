@@ -3,7 +3,7 @@ cd /home/florian/www/cassayre
 cp version.template.php version.php
 
 commit=$(git log --format="%H" -n 1)
-date=$(git log -1 --format=%cd)
+date=$(git log -1 --format=%ci)
 
 #echo $commit
 #echo $date
