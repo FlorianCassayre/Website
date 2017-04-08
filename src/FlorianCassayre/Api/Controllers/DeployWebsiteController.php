@@ -38,26 +38,6 @@ class DeployWebsiteController
             }
         };
 
-        if(!isset($_SERVER['HTTP_CONTENT_TYPE']))
-        {
-            return $app->json((object) array('error' => 'content_type_header_missing'), 400);
-        } elseif(!isset($_SERVER['HTTP_X_GITHUB_EVENT']))
-        {
-            return $app->json((object) array('error' => 'event_header_missing'), 400);
-        }
-        switch($_SERVER['HTTP_CONTENT_TYPE'])
-        {
-            case 'application/json':
-                $json = $rawPost ?: file_get_contents('php://input');
-                break;
-            case 'application/x-www-form-urlencoded':
-                $json = $_POST['payload'];
-                break;
-            default:
-                return $app->json((object) array('error' => 'unsupported_content_type'), 400);
-        }
-
-        // $payload = json_decode($json);
 
         $commands = array(
             'cd ' . $app['config']['pull_folder'],
