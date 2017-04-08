@@ -48,7 +48,7 @@ class DeployWebsiteController
 
         foreach($commands as $command)
         {
-            array_push($outputs, shell_exec($command));
+            array_push($outputs, exec($command));
         }
 
         return $app->json((object) array('result' => 'ok', 'outputs' => $outputs));
