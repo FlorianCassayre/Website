@@ -17,5 +17,8 @@ return array(
     'screenshots_folder' => 'E:/',
 
     // .jar file for the ZéPS
-    'zeps_jar' => 'E:/NetherRail-1.1-SNAPSHOT-jar-with-dependencies.jar'
+    'zeps_jar' => 'E:/NetherRail-1.1-SNAPSHOT-jar-with-dependencies.jar',
+
+    'pull_secret' => '',
+    'pull_folder' => '/home/florian/www/cassayre'
 );
