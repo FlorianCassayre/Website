@@ -38,7 +38,6 @@ class DeployWebsiteController
             }
         };
 
-
         $commands = array(
             'cd ' . $app['config']['pull_folder'],
             'git pull'
@@ -48,7 +47,9 @@ class DeployWebsiteController
 
         foreach($commands as $command)
         {
-            array_push($outputs, exec($command));
+            $out = [];
+            exec($command . ' 2>&1', $out);
+            array_push($outputs, $out);
         }
 
         return $app->json((object) array('result' => 'ok', 'outputs' => $outputs));
