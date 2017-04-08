@@ -40,7 +40,8 @@ class DeployWebsiteController
 
         $commands = array(
             'cd ' . $app['config']['pull_folder'],
-            'git pull'
+            'git pull',
+            'sh ' . $app['config']['install_script']
         );
 
         $outputs = array();
