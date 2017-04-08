@@ -44,11 +44,13 @@ class DeployWebsiteController
             'git pull'
         );
 
+        $outputs = array();
+
         foreach($commands as $command)
         {
-            shell_exec($command);
+            array_push($outputs, shell_exec($command));
         }
 
-        return $app->json((object) array('result' => 'ok'));
+        return $app->json((object) array('result' => 'ok', 'outputs' => $outputs));
     }
 }
