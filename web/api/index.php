@@ -24,6 +24,12 @@ if (file_exists(__DIR__ . '/../../config.php'))
     $app['config'] = include(__DIR__ . '/../../config.php');
 }
 
+$app['version'] = array();
+if (file_exists(__DIR__ . '/../../version.php'))
+{
+    $app['version'] = include(__DIR__ . '/../../version.php');
+}
+
 $app['website'] = WebsiteType::API;
 
 $app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();

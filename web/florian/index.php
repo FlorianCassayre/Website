@@ -23,6 +23,12 @@ if (file_exists(__DIR__ . '/../../config.php'))
     $app['config'] = include(__DIR__ . '/../../config.php');
 }
 
+$app['version'] = array();
+if (file_exists(__DIR__ . '/../../version.php'))
+{
+    $app['version'] = include(__DIR__ . '/../../version.php');
+}
+
 $app['website'] = WebsiteType::WEBSITE;
 
 $app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
@@ -56,6 +62,8 @@ else
 {
     $app['twig']->addGlobal('basepath', 'http://cassayre'); // Wamp server
 }
+
+$app['twig']->addGlobal('version', $app['version']);
 
 // Redirections
 $app->before('FlorianCassayre\\Florian\\RedirectionMiddleware::handle', Application::EARLY_EVENT);

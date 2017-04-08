@@ -10,8 +10,9 @@ class MainPageController
     {
         return $app->json((object) array(
             'title' => 'Florian Cassayre\'s API',
-            'version' => '1.0',
-            'documentation' => 'http://florian.cassayre.me/api'
+            'version' => $app['version']['commit'],
+            'updated' => $app['version']['date'],
+            'documentation' => 'https://florian.cassayre.me/api'
         ));
     }
 }
