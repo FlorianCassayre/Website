@@ -32,7 +32,11 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting')->bind('tools.minecraft.enchanting.result');
         $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}/{known_enchantment}/{known_enchantment_level}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_conditional')->bind('tools.minecraft.enchanting.result.conditional');
 
+        //$controllers->get('/tools/baccalaureat', 'FlorianCassayre\\Florian\\Controllers\\Tools\\BaccalaureatCalculatorController::baccalaureat')->bind('tools.baccalaureat');
+
         $controllers->get('/tools/minecraft/ping', 'FlorianCassayre\\Florian\\Controllers\\NotYetAvailableController::not_yet')->bind('tools.minecraft.ping'); // TODO
+
+        $controllers->get('/ktz/6', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::ktz6')->bind('ktz.6');
 
         return $controllers;
     }

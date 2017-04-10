@@ -1,0 +1,282 @@
+div.container
+{
+    width: 1000px;
+    margin: 20px auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #8f8f8f;
+    padding: 10px 10px;
+    background-color: #ecf6ef;
+    font-size: 10.5pt;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+span.hearts
+{
+    display: inline-block;
+    height: 11px;
+    background-image: url('/img/ktz/heartbg.png');
+    vertical-align: 2px;
+}
+
+span.hearts::after
+{
+    display: block;
+    height: 11px;
+    content: '';
+    background-image: url('/img/ktz/heartfill.png');
+}
+
+.hearts-0, .hearts-1, .hearts-2 {  width: 11px;  }
+.hearts-0::after {  width: 0;  }
+.hearts-1::after {  width: 6px;  }
+.hearts-2::after {  width: 11px;  }
+.hearts-3, .hearts-4 {  width: 22px;  }
+.hearts-3::after {  width: 17px;  }
+.hearts-4::after {  width: 22px;  }
+.hearts-5, .hearts-6 {  width: 33px;  }
+.hearts-5::after {  width: 28px;  }
+.hearts-6::after {  width: 33px;  }
+.hearts-7, .hearts-8 {  width: 44px;  }
+.hearts-7::after {  width: 39px;  }
+.hearts-8::after {  width: 44px;  }
+.hearts-9, .hearts-10 {  width: 55px;  }
+.hearts-9::after {  width: 50px;  }
+.hearts-10::after {  width: 55px;  }
+.hearts-11, .hearts-12 {  width: 66px;  }
+.hearts-11::after {  width: 61px;  }
+.hearts-12::after {  width: 66px;  }
+.hearts-13, .hearts-14 {  width: 77px;  }
+.hearts-13::after {  width: 72px;  }
+.hearts-14::after {  width: 77px;  }
+.hearts-15, .hearts-16 {  width: 88px;  }
+.hearts-15::after {  width: 83px;  }
+.hearts-16::after {  width: 88px;  }
+.hearts-17, .hearts-18 {  width: 99px;  }
+.hearts-17::after {  width: 94px;  }
+.hearts-18::after {  width: 99px;  }
+.hearts-19, .hearts-20 {  width: 110px;  }
+.hearts-19::after {  width: 105px;  }
+.hearts-20::after {  width: 110px;  }
+
+ul.damages-list
+{
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+
+ul.damages-list li
+{
+    list-style: none;
+    text-align: left;
+    display: block;
+}
+
+.damage-icon
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    margin-right: 2px;
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.damage-icon-big
+{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    image-rendering: pixelated;
+    background-size: 50px;
+    image-rendering:optimizeSpeed;             /* Legal fallback */
+    image-rendering:-moz-crisp-edges;          /* Firefox        */
+    image-rendering:-o-crisp-edges;            /* Opera          */
+    image-rendering:-webkit-optimize-contrast; /* Safari         */
+    image-rendering:optimize-contrast;         /* CSS3 Proposed  */
+    image-rendering:crisp-edges;               /* CSS4 Proposed  */
+    image-rendering:pixelated;                 /* CSS4 Proposed  */
+    -ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
+
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.mob
+{
+    background-image: url('/img/ktz/mobs.png');
+}
+
+.weapon
+{
+    background-image: url('/img/ktz/weapons.png');
+}
+
+.healer
+{
+    background-image: url('/img/ktz/healers.png');
+}
+
+.zombie {  background-position: 0 calc(0 * (100% / 20));  }
+.skeleton {  background-position: 0 calc(1 * (100% / 20));  }
+.pigman {  background-position: 0 calc(2 * (100% / 20));  }
+.spider {  background-position: 0 calc(3 * (100% / 20));  }
+.spider-blue {  background-position: 0 calc(4 * (100% / 20));  }
+.creeper {  background-position: 0 calc(5 * (100% / 20));  }
+.enderman {  background-position: 0 calc(6 * (100% / 20));  }
+.slime {  background-position: 0 calc(7 * (100% / 20));  }
+.ghast {  background-position: 0 calc(8 * (100% / 20));  }
+.magmacube {  background-position: 0 calc(9 * (100% / 20));  }
+.blaze {  background-position: 0 calc(10 * (100% / 20));  }
+.wolf {  background-position: 0 calc(11 * (100% / 20));  }
+.wolf-angry {  background-position: 0 calc(12 * (100% / 20));  }
+.silverfish {  background-position: 0 calc(13 * (100% / 20));  }
+.irongolem {  background-position: 0 calc(14 * (100% / 20));  }
+.zombie-village {  background-position: 0 calc(15 * (100% / 20));  }
+.thunderbolt {  background-position: 0 calc(16 * (100% / 20));  }
+.unknown-blank {  background-position: 0 calc(17 * (100% / 20));  }
+.enderdragon {  background-position: 0 calc(18 * (100% / 20));  }
+.wither {  background-position: 0 calc(19 * (100% / 20));  }
+.wither-skeleton {  background-position: 0 calc(20 * (100% / 20));  }
+
+.sword-wood {  background-position: 0 calc(0 * (100% / 21));  }
+.sword-gold {  background-position: 0 calc(1 * (100% / 21));  }
+.sword-stone {  background-position: 0 calc(2 * (100% / 21));  }
+.sword-iron {  background-position: 0 calc(3 * (100% / 21));  }
+.sword-diamond {  background-position: 0 calc(4 * (100% / 21));  }
+.axe-wood {  background-position: 0 calc(5 * (100% / 21));  }
+.axe-gold {  background-position: 0 calc(6 * (100% / 21));  }
+.axe-stone {  background-position: 0 calc(7 * (100% / 21));  }
+.axe-iron {  background-position: 0 calc(8 * (100% / 21));  }
+.axe-diamond {  background-position: 0 calc(9 * (100% / 21));  }
+.bow {  background-position: 0 calc(10 * (100% / 21));  }
+.flintandsteel {  background-position: 0 calc(11 * (100% / 21));  }
+.lava {  background-position: 0 calc(12 * (100% / 21));  }
+.magic {  background-position: 0 calc(13 * (100% / 21));  }
+.cactus {  background-position: 0 calc(14 * (100% / 21));  }
+.tnt {  background-position: 0 calc(15 * (100% / 21));  }
+.fall {  background-position: 0 calc(16 * (100% / 21));  }
+.suffocation {  background-position: 0 calc(17 * (100% / 21));  }
+.drowning {  background-position: 0 calc(18 * (100% / 21));  }
+.starvation {  background-position: 0 calc(19 * (100% / 21));  }
+.unknown-dark {  background-position: 0 calc(20 * (100% / 21));  }
+.death {  background-position: 0 calc(21 * (100% / 21));  }
+
+.golden-apple {  background-position: 0 calc(0 * (100% / 1));  }
+.healing-potion {  background-position: 0 calc(1 * (100% / 1));  }
+
+/* TODO : nettoyer cette partie */
+
+table
+{
+    width: calc(100% - 30px);
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px 15px;
+}
+
+th {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: #caeaca;
+}
+
+td
+{
+    text-align: center;
+    border: 1px dotted black;
+    padding: 10px;
+}
+
+tr
+{
+    background-color: #eaffe5;
+}
+
+tr:nth-child(even)
+{
+    background-color: #e2fbd8;
+}
+
+body
+{
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+a.name-link
+{
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 5px;
+}
+
+img.head-big
+{
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+span.text-empty
+{
+    font-style: italic;
+    color: gray;
+}
+
+h1, h2, h3
+{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+table.half-row
+{
+    width: calc(50% - 30px);
+    display: inline-table;
+}
+
+.team-green
+{
+    border-color: #3eb23d;
+}
+
+.team-pink
+{
+    border-color: #f638f5;
+}
+
+.team-orange
+{
+    border-color: #e3a246;
+}
+
+img.team-traitor
+{
+    border-style: dashed;
+    /*box-shadow: 10px 0px 10px 10px #cb0000;*/
+}
+
+.team
+{
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 5px;
+}
