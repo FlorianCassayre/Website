@@ -66,6 +66,22 @@
         De la même façon, s'il s'agit d'une plateforme de jeu où le hasard prend une place importante ce n'est probablement pas une bonne idée.
     </p>
 
+    <h3>Petite anecdote</h3>
+    <p>
+        Le jeu PacMan datant de 1980 utilisait déjà un générateur congruentiel linéaire pour diriger les fantômes dans le labyrinthe.
+    </p>
+    <p>
+        Les paramètres utilisés par le développeur Shigeo Funaki (<code>a = 5</code>, <code>c = 1</code> et <code>m = 8192</code>) produisent un générateur qui a une période de "seulement" 1365 ; cela peut tout à fait s'expliquer par les contraintes de l'époque (un Z80 dans ce cas mais les contraintes sont généralisables pour tout type de matériel) :
+    </p>
+    <ul>
+        <li>La multiplication est très coûteuse : alors que l'addition est calculée en quelques cycles d'horloge, la multiplication nécessite environ <code>log<sub>2</sub>(n)</code> fois plus de cycles. Ici elle peut facilement se faire par un enchainement d'additions.</li>
+        <li>L'addition de l'incrément est un cas particulier car une instruction processeur (<code>inc</code>) permet directement d'incrémenter une variable. Cette opération est 2 à 3 fois moins coûteuse qu'une addition quelconque.</li>
+        <li>Le modulo est calculé grâce à un OU logique car 8192 et une puissance de 2 (<code>2<sup>14</sup></code>). Nécessite aussi très peu de cycles.</li>
+    </ul>
+    <p>
+        Le code source en assembleur (commenté et formaté) qui m'a servi à illustrer cet exemple se trouve <a href="http://umlautllama.com/projects/pacdocs/mspac/mspac.asm">ici</a>, en particulier la procédure qui génère des octets pseudo-aléatoires se situe au niveau de l'octet <code>0x2a23</code>.
+    </p>
+
     <hr>
 
     <h3>Références</h3>
