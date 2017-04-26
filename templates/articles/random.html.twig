@@ -50,14 +50,14 @@
         Dans le cas inverse, on n'a pas le choix : il faut recommencer l'opération jusqu'à ce que l'inégalité soit vérifiée.
     </p>
     <p>
-        Cet algorithme retourne des valeurs équiprobables ; la seule chose qui n'est pas garantie c'est le nombre de fois que l'on devra répéter l'opération si la valeur aléatoire ne vérifie pas l'inégalité.
+        Cet algorithme retourne des valeurs pseudo équiprobables ; la seule chose qui n'est pas garantie c'est le nombre de fois que l'on devra répéter l'opération si la valeur aléatoire ne vérifie pas l'inégalité.
         Mais c'est le prix à payer pour obtenir un nombre pseudo-aléatoire compris dans intervalle quelconque, à partir de bits pseudo-aléatoires.
     </p>
 
     <h3>Limites</h3>
     <p>
-        Le plus gros danger sur lequel il faut être attentif est la prédiction des termes de la suite. En effet, en connaissant les paramètres utilisés par le générateur ainsi qu'un des termes de la suite il est possible de déduire tous les termes suivants.
-        Aussi, si le module est trop petit les nombres qui vont en découler auront l'air « moins » aléatoires que si le module avait été plus grand. Enfin, si les
+        Le plus gros danger sur lequel il faut être attentif est la prédiction des termes de la suite. En effet, en connaissant les paramètres utilisés par le générateur ainsi qu'un des termes de la suite il est possible de déduire tous les termes suivants (en utilisant en autres l'inversion modulaire).
+        Aussi, si le module est trop petit les nombres qui vont en découler auront l'air « moins » aléatoires que si le module avait été plus grand.
     </p>
     <p>
         De ce fait, il ne faut <strong>pas</strong> les utiliser en <strong>cryptographie</strong>. D'autres algorithmes plus lents mais moins biaisés et quasiment imprédictibles sont utilisés pour cela.
