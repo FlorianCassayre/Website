@@ -76,7 +76,7 @@
     <ul>
         <li>La multiplication est très coûteuse : alors que l'addition est calculée en quelques cycles d'horloge, la multiplication nécessite environ <code>log<sub>2</sub>(n)</code> fois plus de cycles. Ici elle peut facilement se faire par un enchainement d'additions.</li>
         <li>L'addition de l'incrément est un cas particulier car une instruction processeur (<code>inc</code>) permet directement d'incrémenter une variable. Cette opération est 2 à 3 fois moins coûteuse qu'une addition quelconque.</li>
-        <li>Le modulo est calculé grâce à un OU logique car 8192 et une puissance de 2 (<code>2<sup>14</sup></code>). Nécessite aussi très peu de cycles.</li>
+        <li>Le modulo est calculé grâce à un ET logique car 8192 et une puissance de 2 (<code>2<sup>14</sup></code>). Nécessite aussi très peu de cycles.</li>
     </ul>
     <p>
         Le code source en assembleur (commenté et formaté) qui m'a servi à illustrer cet exemple se trouve <a href="http://umlautllama.com/projects/pacdocs/mspac/mspac.asm">ici</a>, en particulier la procédure qui génère des octets pseudo-aléatoires se situe au niveau de l'octet <code>0x2a23</code>.
