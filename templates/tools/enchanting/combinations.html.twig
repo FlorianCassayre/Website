@@ -17,7 +17,13 @@
 
 {% block content %}
 
-    <h2>Guide d'Enchantement Minecraft</h2>
+    <nav>
+        <ul class="pager">
+            <li class="previous"><a href="{{ url('tools.minecraft.enchanting') }}"><span aria-hidden="true">&larr;</span> Revenir au menu du guide</a></li>
+        </ul>
+    </nav>
+
+    <h2>Combinaisons par Niveau</h2>
     <p>
         Visualisez toutes les combinaisons d'enchantements possibles pour un outil, une arme ou une armure en fonction du nombre de niveaux que vous souhaitez dépenser.
         Si vous connaissez le premier enchantement qui se trouvera sur votre objet, indiquez le dans les options supplémentaires ; nous nous occupons du reste.
@@ -34,7 +40,7 @@
     {% endif %}
 
     <div class="row text-center">
-        <form id="enchanting-form" class="form-inline" action="/tools/minecraft/enchanting">
+        <form id="enchanting-form" class="form-inline" action="{{ url('tools.minecraft.enchanting.combinations') }}">
 
             <div class="form-group">
                 <div class="input-group">
@@ -120,21 +126,6 @@
             </div>
         </form>
     </div>
-
-    {% if is_empty or not is_empty and not success %}
-        <div class="row" style="height: 36px;"></div>
-
-        <div class="row">
-            <div class="col-xs-12 col-md-6 col-md-offset-3">
-                <div class="bs-callout bs-callout-primary">
-                    <h4>Le saviez-vous ?</h4>
-                    <p>
-                        {{ quote }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    {% endif %}
 
     {% if not is_empty and success %}
         {% set max_enchantments = 0 %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Page sans nom{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ basepath }}/css/bs-callout.css">
+{% endblock %}
+
+{% block content %}
+
+    <h2>Guide d'Enchantement Minecraft</h2>
+    <p>
+        Un guide complet qui vous aidera à obtenir les enchantement que vous souhaitez.
+    </p>
+    <hr>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="list-group">
+                <a href="{{ url('tools.minecraft.enchanting.combinations') }}" class="list-group-item">
+                    <h3 class="list-group-item-heading">Combinaisons par Niveau</h3>
+                    <p class="list-group-item-text">Obtenir la liste complète de toutes les combinaisons d'enchantements possibles sur un outil pour un niveau donné.</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="list-group">
+                <a href="{{ url('tools.minecraft.enchanting.constraints') }}" class="list-group-item">
+                    <h3 class="list-group-item-heading">Niveau Optimal par Contrainte</h3>
+                    <p class="list-group-item-text">Trouver le niveau qui maximise la probabilité d'obtenir une combinaison spécifique d'enchantements.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="height: 36px;"></div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="bs-callout bs-callout-primary">
+                <h4>Le saviez-vous ?</h4>
+                <p>
+                    {{ quote }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock%}

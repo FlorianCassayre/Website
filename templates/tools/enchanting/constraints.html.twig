@@ -1,0 +1,283 @@
+{% extends '/base.html.twig' %}
+
+{% import "/tools/macros.html.twig" as macros %}
+
+{% block page_title %}Calculateur d'enchantements{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ basepath }}/css/bs-callout.css">
+
+    <style>
+        .table > tbody > tr > th, .table > thead > tr > th {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .clearfix-margin {
+            margin-bottom: 16px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <nav>
+        <ul class="pager">
+            <li class="previous"><a href="{{ url('tools.minecraft.enchanting') }}"><span aria-hidden="true">&larr;</span> Revenir au menu du guide</a></li>
+        </ul>
+    </nav>
+
+    <h2>Niveau Optimal par Contrainte</h2>
+    <p>
+        Vous souhaitez maximisez vos chances d'obtenir une certaine combinaison d'enchantements. Ajoutez les enchantements désirés puis lancez la recherche.
+    </p>
+    <hr>
+
+    {% if not is_empty and not success %}
+        <div class="alert alert-danger" role="alert">
+            <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+            <strong>{% if error == 'invalid_request' %}Requête invalide : {% elseif error == 'invalid_item' %}Objet inconnu : {% elseif error == 'invalid_constraints' %}Contraintes invalides : {% endif %}</strong>
+            {% if error == 'invalid_request' %}les entrées sont erronées.{% elseif error == 'invalid_item' %}l'objet recherché n'a pas été trouvé.{% elseif error == 'invalid_constraints' %}un ou plusieurs enchantements sont invalides.{% endif %}
+        </div>
+    {% endif %}
+
+
+    <div class="row text-center">
+        <form id="enchanting-form" class="form-inline" action="{{ url('tools.minecraft.enchanting.constraints') }}">
+
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        Enchantement d'un(e)
+                    </div>
+                    <label class="sr-only" for="type">Choix de l'outil</label>
+                    <select class="form-control" id="type" name="type">
+                        {% for item_type in items_select.types %}
+                            <option value="{{ item_type.code }}"{% if not is_empty and success and item_type.code == selected_type %} selected{% endif %}>{{ item_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-addon">
+                        en
+                    </div>
+                    <label class="sr-only" for="material">Choix du matériau</label>
+                    <select class="form-control" id="material" name="material">
+                        {% for item_material in items_select.materials %}
+                            <option value="{{ item_material.code }}" class="{{ item_material.used_by|join(' ') }}"{% if not is_empty and success and item_material.code == selected_material %} selected{% endif %}>{{ item_material.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-addon">
+                        possédant au moins...
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="clearfix clearfix-margin"></div>
+
+
+            <div id="extender" style="text-align: left; display: inline-block">
+                <div class="constraint">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                L'enchantement
+                            </div>
+                            <label class="sr-only" for="enchantment">Choix de l'enchantement</label>
+                            <select class="form-control enchantment" id="enchantment" name="enchantment[]">
+                                {% set no_enchantments = [] %}
+                                {% for item_type in items_select.types %}
+                                    {% set no_enchantments = no_enchantments|merge([item_type.code]) %}
+                                {% endfor %}
+                                {% for enchantment in enchantments_select %}
+                                    <option value="{{ enchantment.code }}" class="{{ enchantment.items|join(' ') }}">{{ enchantment.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="input-group-addon">
+                                de niveau
+                            </div>
+                            <label class="sr-only" for="operator">Choix de la contrainte</label>
+                            <select class="form-control" id="operator" name="operator[]">
+                                <option value="equal">égal</option>
+                                <option value="greater">supérieur ou égal</option>
+                                <option value="less">inférieur ou égal</option>
+                            </select>
+                            <div class="input-group-addon">
+                                à
+                            </div>
+
+                            <label class="sr-only" for="level">Choix du niveau</label>
+                            <select class="form-control level" id="level" name="level[]">
+                                {% set max_level = 1 %}
+                                {% for enchantment in enchantments_select %}
+                                    {% if enchantment.max_level > max_level %}
+                                        {% set max_level = enchantment.max_level %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% for i in 1..max_level %}
+                                    {% set available_enchantments = [] %}
+                                    {% for enchantment in enchantments_select %}
+                                        {% if enchantment.max_level >= i %}
+                                            {% set available_enchantments = available_enchantments|merge([enchantment.code]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <option value="{{ i }}" class="{{ available_enchantments|join(' ') }}">{{ macros.enchantment_level(i) }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-danger remove">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+
+                    <div class="clearfix clearfix-margin"></div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-success" id="add">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une contrainte
+                </button>
+            </div>
+
+            {% if not is_empty and success %}
+                <div class="clearfix clearfix-margin"></div>
+                <div class="text-center">
+                    <em>Veuillez noter que les contraintes sélectionnées ne sont pas encore affichées, bien qu'elles soient correctement prises en compte lors du calcul.</em>
+                    <br />
+                    <em>Merci de votre compréhension.</em>
+                </div>
+            {% endif %}
+
+            <div class="clearfix clearfix-margin"></div>
+            <div class="clearfix clearfix-margin"></div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Calculer</button>
+            </div>
+        </form>
+
+        {% if not is_empty and success %}
+            <div class="clearfix clearfix-margin"></div>
+
+            <div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/js/jquery.chained.min.js"></script>
+    <script>
+        var chainConstraint = function(element) {
+            element.find("#enchantment").chained("#type");
+            element.find("#level").chained(element.find("#enchantment"));
+        };
+
+        $("#material").chained("#type");
+
+
+        $(function() {
+            var unremovable = $("#extender").contents();
+            var constraint = unremovable.clone();
+
+            unremovable.find(".remove").remove();
+            chainConstraint(unremovable);
+
+            $("button#add").click(function() {
+                var c = constraint.clone();
+                c.appendTo('#extender');
+                chainConstraint(c);
+                return false;
+            });
+
+            $("#extender").on("click", ".remove", function() {
+                $(this).parent('div').remove();
+                return false;
+            });
+
+
+        });
+    </script>
+
+    {% if not is_empty and success %}
+        <script src="{{ basepath }}/js/highcharts.js"></script>
+        <script>
+            Highcharts.chart('chart', {
+                chart: {
+                    renderTo: 'container',
+                    type: 'column',
+                    backgroundColor:'rgba(255, 255, 255, 0.0)'
+                },
+                title: {
+                    text: 'Probabilité d\'obtention en fonction du nombre de niveaux'
+                },
+                subtitle: {
+                    text: 'Cliquez sur un élément pour obtenir plus d\'informations.'
+                },
+                xAxis: {
+                    tickInterval: 1,
+                    labels: {
+                        step: 1
+                    },
+                    title: {
+                        text: 'Niveaux'
+                    }
+                },
+                yAxis: {
+                    min: 0.0,
+                    max: 1.0,
+                    title: {
+                        text: 'Probabilité'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return (this.value * 100) + '%';
+                        }
+                    }
+                },
+                tooltip: {
+                    crosshairs: true,
+                    shared: true,
+                    formatter: function () {
+                        var percentage = this.y * 100;
+                        if(percentage != 0)
+                            if(percentage >= 0.1)
+                                percentage = String((percentage).toFixed(1));
+                            else
+                                percentage = "&lt; 0.1";
+
+                        return '<b>' + percentage + '%</b> pour <b>' + this.x + '</b> niveau' + (this.x == 1 ? '' : 'x');
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        shadow:false,
+                        pointPadding:0.1,
+                        groupPadding:0.1,
+                        color: 'rgb(220, 78, 0)',
+                        pointStart: 1
+                    }
+                },
+                series: [{
+                    showInLegend: false,
+                    data: [ // TODO tooltip for best
+                        {{ probabilities|join(',') }}
+                    ],
+                    point: {
+                        events: {
+                            click: function() {
+                                window.open('{{ url('tools.minecraft.enchanting.combinations.result', {'type': selected_type, 'material': selected_material, 'levels': '1'})|trim(1) }}' + this.x, "_self");
+                            }
+                        }
+                    }
+                }],
+                credits: false
+            });
+        </script>
+    {% endif %}
+{% endblock %}

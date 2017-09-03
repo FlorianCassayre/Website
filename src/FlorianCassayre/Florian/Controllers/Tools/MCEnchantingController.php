@@ -15,7 +15,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MCEnchantingController
 {
+    const OPERATOR_EQUAL = 'equal';
+    const OPERATOR_GREATER = 'greater';
+    const OPERATOR_LESS = 'less';
+
     public function enchanting_home(Application $app, Request $request)
+    {
+        return $app['twig']->render('tools/enchanting/homepage.html.twig', array(
+            'quote' => $this->getRandomQuote()
+        ));
+    }
+
+    public function enchanting_combinations_home(Application $app, Request $request)
     {
         if ($request->query->has('type') && $request->query->has('material') && $request->query->has('levels'))
         {
@@ -29,7 +40,7 @@ class MCEnchantingController
 
                 $enchantment_level = $request->query->get('known_enchantment_level');
 
-                return $app->redirect($app['url_generator']->generate('tools.minecraft.enchanting.result.conditional', array(
+                return $app->redirect($app['url_generator']->generate('tools.minecraft.enchanting.combinations.result.conditional', array(
                     'type' => $type,
                     'material' => $material,
                     'levels' => $levels,
@@ -39,7 +50,7 @@ class MCEnchantingController
             }
             else
             {
-                return $app->redirect($app['url_generator']->generate('tools.minecraft.enchanting.result', array(
+                return $app->redirect($app['url_generator']->generate('tools.minecraft.enchanting.combinations.result', array(
                     'type' => $type,
                     'material' => $material,
                     'levels' => $levels
@@ -47,7 +58,7 @@ class MCEnchantingController
             }
         }
 
-        return $app['twig']->render('tools/enchanting.html.twig', array(
+        return $app['twig']->render('tools/enchanting/combinations.html.twig', array(
             'is_empty' => true,
             'items_select' => MinecraftEnchanting::getItemSelect(),
             'enchantments_select' => array_values(MinecraftEnchanting::getEnchantments()),
@@ -55,12 +66,12 @@ class MCEnchantingController
         ));
     }
 
-    public function enchanting(Application $app, Request $request, $type, $material, $levels)
+    public function enchanting_combinations(Application $app, Request $request, $type, $material, $levels)
     {
-        return $this->enchanting_conditional($app, $request, $type, $material, $levels, null, 0);
+        return $this->enchanting_combinations_conditional($app, $request, $type, $material, $levels, null, 0);
     }
 
-    public function enchanting_conditional(Application $app, Request $request, $type, $material, $levels, $known_enchantment, $known_enchantment_level)
+    public function enchanting_combinations_conditional(Application $app, Request $request, $type, $material, $levels, $known_enchantment, $known_enchantment_level)
     {
         $error = null;
         $item_id = -1;
@@ -184,7 +195,7 @@ class MCEnchantingController
             $code = 404;
 
 
-        return new Response($app['twig']->render('tools/enchanting.html.twig', array(
+        return new Response($app['twig']->render('tools/enchanting/combinations.html.twig', array(
             'is_empty' => false,
             'items_select' => MinecraftEnchanting::getItemSelect(),
             'enchantments_select' => array_values(MinecraftEnchanting::getEnchantments()),
@@ -204,6 +215,142 @@ class MCEnchantingController
         )), $code);
     }
 
+    public function enchanting_constraints(Application $app, Request $request)
+    {
+        $error = null;
+        $type = null;
+        $material = null;
+        $item_id = -1;
+        $is_empty = true;
+
+        $constraints = array();
+        $probabilities = array();
+
+        if($request->query->has('type') && $request->query->has('material') && $request->query->has('enchantment') && $request->query->has('operator') && $request->query->has('level'))
+        {
+            $is_empty = false;
+
+            $type = $request->query->get('type');
+            $material = $request->query->get('material');
+            $enchantments = $request->query->get('enchantment');
+            $operators = $request->query->get('operator');
+            $levels = $request->query->get('level');
+
+            if(count($enchantments) == count($operators) && count($operators) == count($levels))
+            {
+                try
+                {
+                    $item_id = MinecraftEnchanting::getItemId($type, $material);
+
+                    try
+                    {
+                        for($i = 0; $i < count($enchantments); $i++)
+                        {
+                            $operator = $operators[$i];
+                            $level = $levels[$i];
+
+                            $enchantment_id = MinecraftEnchanting::getEnchantmentIdByCode($enchantments[$i]);
+                            $enchantment_data = MinecraftEnchanting::getEnchantments()[$enchantment_id];
+
+                            if($level < 1 || $level > $enchantment_data->max_level)
+                                throw new \InvalidArgumentException();
+
+                            if(!($operator === self::OPERATOR_EQUAL || $operator === self::OPERATOR_GREATER || $operator === self::OPERATOR_LESS))
+                                throw new \InvalidArgumentException();
+
+                            array_push($constraints, (object) array('id' => $enchantment_id, 'level' => $level, 'operator' => $operator));
+                        }
+                    }
+                    catch(\InvalidArgumentException $ex)
+                    {
+                        $error = 'invalid_constraints';
+                    }
+                }
+                catch(\InvalidArgumentException $ex)
+                {
+                    $error = 'invalid_item';
+                }
+            }
+            else
+            {
+                $error = 'invalid_request';
+            }
+        }
+
+        if($error == null)
+        {
+            for($i = 1; $i <= 30; $i++)
+            {
+                $combinations = MinecraftEnchanting::getCombinations($app['pdo'], $item_id, $i);
+                $frequency = 0.0;
+
+                foreach($combinations as $combination)
+                {
+                    if($this->isValidEnchantments($constraints, $combination->enchantments))
+                    {
+                        $frequency += $combination->frequency;
+                    }
+                }
+
+                array_push($probabilities, $frequency);
+            }
+        }
+
+        return $app['twig']->render('tools/enchanting/constraints.html.twig', array(
+            'is_empty' => $is_empty,
+            'items_select' => MinecraftEnchanting::getItemSelect(),
+            'enchantments_select' => array_values(MinecraftEnchanting::getEnchantments()),
+            'success' => $error == null,
+            'error' => $error,
+            'selected_type' => $type,
+            'selected_material' => $material,
+            'probabilities' => $probabilities
+        ));
+    }
+
+    private function isValidEnchantments($constraints, $enchantments)
+    {
+        $verified_constraints = array();
+
+        foreach($enchantments as $enchantment)
+        {
+            $i = 0;
+            foreach($constraints as $constraint)
+            {
+                if($constraint->id == $enchantment->id)
+                {
+                    if($constraint->operator === self::OPERATOR_EQUAL)
+                    {
+                        if($constraint->level != $enchantment->level)
+                            return false;
+                    }
+                    elseif($constraint->operator === self::OPERATOR_GREATER)
+                    {
+                        if($constraint->level > $enchantment->level)
+                            return false;
+                    }
+                    elseif($constraint->operator === self::OPERATOR_LESS)
+                    {
+                        if($constraint->level < $enchantment->level)
+                            return false;
+                    }
+
+                    $verified_constraints[$i] = true;
+                }
+
+                $i++;
+            }
+        }
+
+        for($i = 0; $i < sizeof($constraints); $i++)
+        {
+            if(!isset($verified_constraints[$i]))
+                return false;
+        }
+
+        return true;
+    }
+
     private function getRandomQuote()
     {
         $quotes = array(
@@ -213,7 +360,7 @@ class MCEnchantingController
             'Il est impossible de cumuler certains enchantements, comme Silk Touch avec Fortune ou tous les types de Protection entre eux.',
             'Il est possible d\'obtenir Sharpness V ou Efficiency V en fusionnant des enchantements grâce à l\'enclume.',
             'Un outil possédant l\'enchantement Unbreaking III a une durabilité 4 fois plus élevée.',
-            'Le système d\'enchantement a été ajoutée en 1.0.0',
+            'Le système d\'enchantement a été ajouté en 1.0.0',
             'Dans l\'inventaire de la table d\'enchantement, on peut apercevoir des symboles qui seraient issus du "Standard Galactic Alphabet" ; leur rôle est toutefois purement décoratif.',
             'Il existe 27 enchantements différents dans le jeu.',
             'Avant la version 1.3, il était possible de dépenser jusqu\'à 50 niveaux pour enchanter un objet.',

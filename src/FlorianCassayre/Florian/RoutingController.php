@@ -29,8 +29,10 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/tools/minecraft/uuid/{input}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCUUIDController::uuid')->bind('tools.minecraft.uuid.result');
 
         $controllers->get('/tools/minecraft/enchanting', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_home')->bind('tools.minecraft.enchanting');
-        $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting')->bind('tools.minecraft.enchanting.result');
-        $controllers->get('/tools/minecraft/enchanting/{type}/{material}/{levels}/{known_enchantment}/{known_enchantment_level}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_conditional')->bind('tools.minecraft.enchanting.result.conditional');
+        $controllers->get('/tools/minecraft/enchanting/combinations', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_combinations_home')->bind('tools.minecraft.enchanting.combinations');
+        $controllers->get('/tools/minecraft/enchanting/combinations/{type}/{material}/{levels}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_combinations')->bind('tools.minecraft.enchanting.combinations.result');
+        $controllers->get('/tools/minecraft/enchanting/combinations/{type}/{material}/{levels}/{known_enchantment}/{known_enchantment_level}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_combinations_conditional')->bind('tools.minecraft.enchanting.combinations.result.conditional');
+        $controllers->get('/tools/minecraft/enchanting/constraints', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCEnchantingController::enchanting_constraints')->bind('tools.minecraft.enchanting.constraints');
 
         //$controllers->get('/tools/baccalaureat', 'FlorianCassayre\\Florian\\Controllers\\Tools\\BaccalaureatCalculatorController::baccalaureat')->bind('tools.baccalaureat');
 
