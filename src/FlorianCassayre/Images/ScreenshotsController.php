@@ -22,18 +22,24 @@ class ScreenshotsController
             {
                 $network = 'facebook';
             }
+            else if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'WhatsApp/') === 0 || ($app['debug'] && isset($_GET['whatsapp']))) // Whatsapp preview
+            {
+                $network = 'whatsapp';
+            }
             else // Normal client
             {
                 return $this->screenshot_raw($app, $id);
             }
 
-            $date = date("d/m/Y à H:i:s.", filemtime($app['config']['screenshots_folder'] . $this->removeSuffix($id) . self::EXTENSION));
+            $timestamp = filemtime($app['config']['screenshots_folder'] . $this->removeSuffix($id) . self::EXTENSION);
+            $date = date("d/m/Y à H:i:s.", $timestamp);
             $id_without = $this->removeSuffix($id);
 
             return $app['twig']->render('special/image_card.html.twig', array(
                 'id' => $id_without,
                 'network' => $network,
-                'date' => $date
+                'date' => $date,
+                'timestamp' => $timestamp
             ));
         }
         else
