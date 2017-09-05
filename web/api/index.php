@@ -38,23 +38,6 @@ $app['debug'] = \FlorianCassayre\Api\HttpUtils::isLocalhost();
 // MySQL PDO
 MySQLUtils::setup($app);
 
-$app->after(
-    function (Request $request, Response $response)
-    {
-        $response->headers->set(
-            'Content-Type',
-            $response->headers->get('Content-Type') . '; charset=utf-8'
-        );
-
-        if ($response instanceof JsonResponse)
-        {
-            $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
-        }
-
-        return $response;
-    }
-);
-
 $app->register(new Silex\Provider\SwiftmailerServiceProvider());
 
 $app['swiftmailer.options'] = array(
