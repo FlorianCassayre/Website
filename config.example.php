@@ -21,5 +21,7 @@ return array(
 
     'pull_secret' => '',
     'pull_folder' => '/home/florian/www/cassayre',
-    'install_script' => '/home/florian/www/cassayre/install.sh'
+    'install_script' => '/home/florian/www/cassayre/install.sh',
+
+    'mermoz_task_secret' => ''
 );

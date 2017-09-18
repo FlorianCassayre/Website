@@ -16,6 +16,8 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->post('/task/deploy', 'FlorianCassayre\\Api\\Controllers\\DeployWebsiteController::deploy');
 
+        $controllers->post('/task/mermoz', 'FlorianCassayre\\Api\\Controllers\\MissingTeachersController::scrap');
+
         $controllers->get('/minecraft/head/{input}', 'FlorianCassayre\\Api\\Controllers\\MinecraftHeadsController::head');
         $controllers->get('/minecraft/head/{size}/{input}', 'FlorianCassayre\\Api\\Controllers\\MinecraftHeadsController::head');
         $controllers->get('/minecraft/helmet/{input}', 'FlorianCassayre\\Api\\Controllers\\MinecraftHeadsController::head_with_helmet');
@@ -28,6 +30,7 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/minecraft/zeps/version', 'FlorianCassayre\\Api\\Controllers\\ZePSController::version');
 
         $controllers->get('/mermoz/list', 'FlorianCassayre\\Api\\Controllers\\MissingTeachersController::list_teachers');
+        $controllers->get('/mermoz/missing', 'FlorianCassayre\\Api\\Controllers\\MissingTeachersController::list_missing');
 
         return $controllers;
     }
