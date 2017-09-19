@@ -40,7 +40,7 @@ class MissingTeachersController
 
     public function list_missing(Application $app)
     {
-        $sql = 'SELECT * FROM teachers_missing WHERE date >= CURDATE()';
+        $sql = 'SELECT * FROM teachers_missing WHERE date >= CURDATE() ORDER BY date';
         $rows = $app['pdo']->query($sql);
 
         $objects = array();
