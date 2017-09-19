@@ -2,7 +2,6 @@
 
 namespace FlorianCassayre\Api\Controllers;
 
-use DateTime;
 use DOMDocument;
 use PDO;
 use Silex\Application;
@@ -14,7 +13,7 @@ class MissingTeachersController
 
     public function list_teachers(Application $app)
     {
-        $sql = 'SELECT * FROM teachers';
+        $sql = 'SELECT * FROM teachers ORDER BY last_name';
         $rows = $app['pdo']->query($sql);
 
         $objects = array();
@@ -41,7 +40,7 @@ class MissingTeachersController
 
     public function list_missing(Application $app)
     {
-        $sql = 'SELECT * FROM teachers_missing';
+        $sql = 'SELECT * FROM teachers_missing WHERE date >= CURDATE()';
         $rows = $app['pdo']->query($sql);
 
         $objects = array();
@@ -154,7 +153,7 @@ class MissingTeachersController
 
                         // New value
 
-
+                        // mermoz_gcm_key
                     }
                     catch(\PDOException $exception)
                     {
