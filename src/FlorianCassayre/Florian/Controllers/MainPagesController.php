@@ -46,7 +46,7 @@ class MainPagesController
             $sth->execute();
 
             // Email send
-            $mail_to = $email;
+            $mail_to = 'florian.cassayre@gmail.com';
             $mail_subject = 'Nouveau message de ' . $name . ' − Formulaire de contact florian.cassayre.me';
             $mail_message = 'Nom complet : ' . $name . "\r\nAdresse mail : " . $email . "\r\n\r\n" . $message . "\r\n\r\n" . '--' . "\r\n" . 'Cet email a été envoyé à partir du formulaire de contact https://florian.cassayre.me/contact.';
             $mail_headers = 'From: admin@cassayre.me' . "\r\n" .
