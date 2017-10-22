@@ -37,12 +37,23 @@ class MainPagesController
         {
             $success = true;
 
+            // Database insert
             $sql = 'INSERT INTO contact (name, email, message) VALUES (:name, :email, :message)';
             $sth = $app['pdo']->prepare($sql);
             $sth->bindParam(':name', $name);
             $sth->bindParam(':email', $email);
             $sth->bindParam(':message', $message);
             $sth->execute();
+
+            // Email send
+            $mail_to = $email;
+            $mail_subject = 'Nouveau message de ' . $name . ' − Formulaire de contact florian.cassayre.me';
+            $mail_message = 'Nom complet : ' . $name . "\r\nAdresse mail : " . $email . "\r\n\r\n" . $message . "\r\n\r\n" . '--' . "\r\n" . 'Cet email a été envoyé à partir du formulaire de contact https://florian.cassayre.me/contact.';
+            $mail_headers = 'From: admin@cassayre.me' . "\r\n" .
+                'Reply-To: ' . $email . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+            mail($mail_to, $mail_subject, $mail_message, $mail_headers);
         }
 
         return $app['twig']->render('general/contact.html.twig', array(
