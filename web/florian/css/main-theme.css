@@ -19,3 +19,19 @@ body {
     opacity: 0.9;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
 }
+
+.color-twitter {
+    color: #00aced;
+}
+
+.color-github {
+    color: #000000;
+}
+
+.color-youtube {
+    color: #ff0000;
+}
+
+.color-linkedin {
+    color: #0077b5;
+}
