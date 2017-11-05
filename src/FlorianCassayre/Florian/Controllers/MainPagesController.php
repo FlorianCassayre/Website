@@ -69,4 +69,9 @@ class MainPagesController
     {
         return $app['twig']->render('general/api.html.twig');
     }
+
+    public function projects(Application $app)
+    {
+        return $app['twig']->render('general/projects.html.twig');
+    }
 }
