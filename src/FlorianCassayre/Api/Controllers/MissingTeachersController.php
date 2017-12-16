@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MissingTeachersController
 {
-    const URL_SCRAPING = 'https://www.weblycee.fr/mermoz/abs_scroll.php';
+    const URL_SCRAPING = 'https://www.weblycee.fr/mermoz/abs/PHP/abs_scroll.php';
 
     public function list_teachers(Application $app)
     {
