@@ -18,6 +18,8 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->post('/task/mermoz', 'FlorianCassayre\\Api\\Controllers\\MissingTeachersController::scrap');
 
+        $controllers->post('/task/publibike', 'FlorianCassayre\\Api\\Controllers\\PublibikeController::scrap');
+
         $controllers->get('/minecraft/head/{input}', 'FlorianCassayre\\Api\\Controllers\\MinecraftHeadsController::head');
         $controllers->get('/minecraft/head/{size}/{input}', 'FlorianCassayre\\Api\\Controllers\\MinecraftHeadsController::head');
         $controllers->get('/minecraft/helmet/{input}', 'FlorianCassayre\\Api\\Controllers\\MinecraftHeadsController::head_with_helmet');
