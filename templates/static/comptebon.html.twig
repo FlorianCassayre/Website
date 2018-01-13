@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Jeu du Compte est Bon{% endblock %}
+
+{% block content %}
+
+    <h1>Jeu du compte est bon</h1>
+
+    <p>
+        <a href="https://twitter.com/CompteBon">@CompteBon</a> est un bot twitter qui organise des parties du <a href="https://fr.wikipedia.org/wiki/Des_chiffres_et_des_lettres#Le_Compte_est_bon">compte est bon</a>, jeu issu de l'émission télévisée <a href="https://fr.wikipedia.org/wiki/Des_chiffres_et_des_lettres">des chiffres et des lettres</a>.
+    </p>
+
+    <h3>Règles du jeu original</h3>
+
+    <p>
+        À chaque manche est tiré une cible entre <code>101</code> et <code>999</code> ainsi que <code>6</code> plaques ayant des valeurs allant de <code>1</code> à <code>100</code>.
+        Le but est d'égaler (ou d'approcher) la cible par une succession d'opérations élémentaires (l'addition, la soustraction, la multiplication et la division) utilisant les plaques disponibles.
+        Chaque plaque ne peut être utilisée qu'une seule fois. Le calcul peut comporter n'importe quelle combinaison d'opérations élémentaires, du moment que les contraintes suivantes sont respectées,
+    </p>
+    <ul>
+        <li>Il est interdit d'utiliser des opérations menant à des nombres négatifs</li>
+        <li>La division doit toujours donner un résultat entier (la division par zéro est naturellement proscrite)</li>
+    </ul>
+
+    <h3>Exemple</h3>
+
+    <p>
+        Soit la situation suivante ;
+    </p>
+    <p>
+        la cible est <code>372</code> et les plaques sont <code>4, 3, 4, 25, 7, 1</code>.
+    </p>
+    <p>
+        Une solution possible aurait été :
+    </p>
+    <pre>4 + 4 = 8&#010;8 + 7 = 15&#010;15 * 25 = 375&#010;375 - 3 = 372</pre>
+    <p>
+        Que l'on pourrait réécrire de manière plus concise ainsi :
+    </p>
+    <pre>(4 + 4 + 7) * 25 - 3 = 372</pre>
+
+    <h3>Comment jouer ?</h3>
+    <p>
+        La dernière manche en cours correspond au dernier tweet (réponses exclues) posté par le bot. Si le dernier tweet est l'annonce du gagnant alors une nouvelle manche débutera dans la minute qui suit.
+    </p>
+    <p>
+        Si vous estimez avoir une bonne solution (pas forcément un compte exact, un compte approchant sera accepté) alors vous pouvez la soumettre en réponse au tweet.
+    </p>
+    <p>
+        Veuillez respecter ce format : <code>(4 + 4 + 7) * 25 - 3</code>, sans quoi votre réponse ne sera pas comptabilisée (<code>0123456789+-*/()</code> et n'importe quel type d'espacement). Une réponse qui n'est pas interprétable sera <strong>likée</strong>.
+    </p>
+    <p>
+        Vous pouvez soumettre autant de réponses que vous souhaitez mais du moment que la solution est <strong>plus proche</strong> ou utilise <strong>moins de plaques</strong>. Dans le cas contraire vous ne recevrez pas de réponse.
+    </p>
+    <p>
+        Lorsqu'un utilisateur trouve la meilleure solution (par rapport à celles qui avaient été proposées), il sera déclaré gagnant après <code>5</code> minutes si aucun utilisateur ne présente de meilleure solution. Cette durée est étendue à <code>15</code> lorsqu'il s'agit d'une solution approchante.
+    </p>
+    <p>
+
+    </p>
+
+    <h3>FAQ</h3>
+    <h4>Le bot a liké mon tweet ?</h4>
+    <p>Votre solution ne respecte pas le bon format, ou viole une des règles du jeu.</p>
+    <h4>Je n'ai pas reçu de réponse ?</h4>
+    <p>La manche est peut-être déjà terminée ou bien vous avez soumis une solution de meilleure qualité précédemment.</p>
+    <h4>Qu'est ce qui distingue une solution d'une autre ?</h4>
+    <p>Deux solutions sont d'abord comparées par leur distance à la cible, ou, si celles-ci sont égales, par le nombre de plaques utilisées (moins de plaques, mieux).</p>
+    <h4>J'ai trouvé un bug ?</h4>
+    <p>↓ ↓ ↓</p>
+
+    <h3>Contact</h3>
+    <p>
+        Pour toute question, remarque, suggestion etc. n'hésitez pas à me contacter via <a href="https://twitter.com/flomine68">twitter</a> (mention ou message privé) ou par mon <a href="{{ url('contact') }}">formulaire de contact</a>.
+    </p>
+
+    <h3>Crédits</h3>
+    <ul>
+        <li>Jeu par <a href="http://www.francetelevisions.fr/DCDL">des chiffres et des lettres</a></li>
+        <li>Inspiré par <a href="https://twitter.com/BotBotBotus">@BotBotBotus</a> par <a href="https://twitter.com/richie3366">@richie3366</a></li>
+        <li><a href="https://github.com/DanielaSfregola/twitter4s">Bibliothèque Scala</a> de l'API Twitter</li>
+    </ul>
+
+{% endblock%}

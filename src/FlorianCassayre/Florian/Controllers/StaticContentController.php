@@ -11,4 +11,9 @@ class StaticContentController
     {
         return $app['twig']->render('static/ktz6.html.twig', array());
     }
+
+    public function comptebon(Application $app)
+    {
+        return$app['twig']->render('static/comptebon.html.twig', array());
+    }
 }

@@ -40,6 +40,8 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->get('/ktz/6', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::ktz6')->bind('ktz.6');
 
+        $controllers->get('/comptebon', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::comptebon')->bind('comptebon');
+
         return $controllers;
     }
 }
