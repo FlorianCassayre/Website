@@ -36,6 +36,9 @@ class RoutingController implements ControllerProviderInterface
 
         //$controllers->get('/tools/baccalaureat', 'FlorianCassayre\\Florian\\Controllers\\Tools\\BaccalaureatCalculatorController::baccalaureat')->bind('tools.baccalaureat');
 
+        $controllers->get('/tools/minecraft/zcraft/tracker', 'FlorianCassayre\\Florian\\Controllers\\Tools\\ZcraftTrackerController::tracker_home')->bind('tools.minecraft.zcraft.tracker');
+        $controllers->get('/tools/minecraft/zcraft/tracker/image/{name}', 'FlorianCassayre\\Florian\\Controllers\\Tools\\ZcraftTrackerController::tracker_image')->bind('tools.minecraft.zcraft.tracker.image');
+
         $controllers->get('/tools/minecraft/ping', 'FlorianCassayre\\Florian\\Controllers\\NotYetAvailableController::not_yet')->bind('tools.minecraft.ping'); // TODO
 
         $controllers->get('/ktz/6', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::ktz6')->bind('ktz.6');

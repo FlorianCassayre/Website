@@ -25,5 +25,7 @@ return array(
 
     'mermoz_task_secret' => '',
 
-    'publibike_task_secret' => ''
+    'publibike_task_secret' => '',
+
+    'ztracker_folder' => 'E:/Documents/zcraft-tracker/'
 );

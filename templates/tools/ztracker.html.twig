@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Historique des déplacements sur Zcraft{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .image-map {
+            border: 3px solid;
+            margin: 50px auto 10px auto;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Historique des déplacements sur Zcraft</h1>
+
+    <p>Cet outil enregistre la position des joueurs sur <a href="https://zcraft.fr">Zcraft</a> depuis le <strong>4 avril 2018</strong>. Les images se mettent automatiquement à jour toutes les <strong>dix minutes</strong>.</p>
+    <p>Chaque pixel représente un chunk, plus il est foncé plus il a été visité.</p>
+
+    <img src="{{ url('tools.minecraft.zcraft.tracker.image', {'name': 'v6.png'}) }}" alt="V6" class="img-responsive image-map">
+    <p class="text-center"><em><strong>V6</strong></em></p>
+
+    <img src="{{ url('tools.minecraft.zcraft.tracker.image', {'name': 'v6_nether.png'}) }}" alt="V6 Nether" class="img-responsive image-map">
+    <p class="text-center"><em><strong>V6 Nether</strong></em></p>
+
+    <img src="{{ url('tools.minecraft.zcraft.tracker.image', {'name': 'v6_end.png'}) }}" alt="V6 End" class="img-responsive image-map">
+    <p class="text-center"><em><strong>V6 End</strong></em></p>
+
+{% endblock%}
