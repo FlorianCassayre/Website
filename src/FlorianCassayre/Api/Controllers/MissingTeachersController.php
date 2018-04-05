@@ -139,7 +139,15 @@ class MissingTeachersController
 
                     $selectStatement->bindParam(':name_original', $name_original);
                     $selectStatement->execute();
-                    $teacher_id = $selectStatement->fetchColumn();
+                    if($selectStatement->rowCount() == 0) {
+                        // Non existing value
+                        $insertTeacher = $app['pdo']->prepare('INSERT INTO teachers (title, last_name, first_name, subject, name_original) VALUES ("", "", "", "", :name_original)');
+                        $insertTeacher->execute();
+
+                        $teacher_id = $insertTeacher->lastInsertId();
+                    } else {
+                        $teacher_id = $selectStatement->fetchColumn();
+                    }
 
                     $insertStatement->bindParam(':teacher_id', $teacher_id);
                     $insertStatement->bindParam(':date', $timestamp);
