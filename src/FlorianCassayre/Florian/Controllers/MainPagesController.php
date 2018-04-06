@@ -74,4 +74,9 @@ class MainPagesController
     {
         return $app['twig']->render('general/projects.html.twig');
     }
+
+    public function brand(Application $app)
+    {
+        return $app['twig']->render('general/brand.html.twig');
+    }
 }

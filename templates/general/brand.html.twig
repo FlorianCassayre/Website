@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Brand{% endblock %}
+
+{% block content %}
+
+    <h1>Logotypes</h1>
+
+    <div class="alert alert-danger">
+        <strong>Avertissement</strong> : sauf autorisation explicite de <em>ma part</em>, il est interdit de les utiliser.
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding: 40px;">
+                    <img src="{{ basepath }}/img/infinity.svg" class="img-responsive">
+                </div>
+                <div class="panel-footer text-center">Logo avec dégradés</div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding: 40px;">
+                    <img src="{{ basepath }}/img/infinity_mono_gray.svg" class="img-responsive">
+                </div>
+                <div class="panel-footer text-center">Logo noir et gris</div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding: 40px;">
+                    <img src="{{ basepath }}/img/infinity_mono_white.svg" class="img-responsive">
+                </div>
+                <div class="panel-footer text-center">Logo noir et blanc</div>
+            </div>
+        </div>
+    </div>
+
+{% endblock%}
