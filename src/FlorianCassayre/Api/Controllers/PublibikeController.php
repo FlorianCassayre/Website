@@ -33,57 +33,60 @@ class PublibikeController
         {
             $details = json_decode($this->curl($app, self::API_URL . $station->id));
 
-            $station_id = $details->id;
-            $station_name = $details->name;
-            $station_address = $details->address;
-            $station_zip = $details->zip;
-            $station_city = $details->city;
-            $station_latitude = $details->latitude;
-            $station_longitude = $details->longitude;
-
-            $bikes = array();
-            foreach($details->vehicles as $bike)
+            if(isset($details->id)) // Avoid warnings
             {
-                $bike_id = $bike->id;
-                $bike_name = $bike->name;
-                $bike_type_id = $bike->type->id;
-                $bike_type_name = $bike->type->name;
+                $station_id = $details->id;
+                $station_name = $details->name;
+                $station_address = $details->address;
+                $station_zip = $details->zip;
+                $station_city = $details->city;
+                $station_latitude = $details->latitude;
+                $station_longitude = $details->longitude;
 
-                $insertBike->bindParam(':id', $bike_id, PDO::PARAM_INT);
-                $insertBike->bindParam(':name', $bike_name, PDO::PARAM_STR);
-                $insertBike->bindParam(':type_id', $bike_type_id, PDO::PARAM_INT);
-                $insertBike->bindParam(':type_name', $bike_type_name, PDO::PARAM_STR);
+                $bikes = array();
+                foreach($details->vehicles as $bike)
+                {
+                    $bike_id = $bike->id;
+                    $bike_name = $bike->name;
+                    $bike_type_id = $bike->type->id;
+                    $bike_type_name = $bike->type->name;
 
-                $insertBike->execute();
+                    $insertBike->bindParam(':id', $bike_id, PDO::PARAM_INT);
+                    $insertBike->bindParam(':name', $bike_name, PDO::PARAM_STR);
+                    $insertBike->bindParam(':type_id', $bike_type_id, PDO::PARAM_INT);
+                    $insertBike->bindParam(':type_name', $bike_type_name, PDO::PARAM_STR);
 
-                array_push($bikes, $bike_id);
+                    $insertBike->execute();
+
+                    array_push($bikes, $bike_id);
+                }
+
+                sort($bikes);
+                $bikes_str = join(',', $bikes);
+
+                $selectEvent->bindParam(':id', $station_id, PDO::PARAM_INT);
+                $selectEvent->bindParam(':bikes', $bikes_str, PDO::PARAM_STR);
+
+                $selectEvent->execute();
+
+                if($selectEvent->rowCount() == 0)
+                {
+                    $insertEvent->bindParam(':id', $station_id, PDO::PARAM_INT);
+                    $insertEvent->bindParam(':bikes', $bikes_str, PDO::PARAM_STR);
+
+                    $insertEvent->execute();
+                }
+
+                $insertStation->bindParam(':id', $station_id, PDO::PARAM_INT);
+                $insertStation->bindParam(':name', $station_name, PDO::PARAM_STR);
+                $insertStation->bindParam(':address', $station_address, PDO::PARAM_STR);
+                $insertStation->bindParam(':zip', $station_zip, PDO::PARAM_INT);
+                $insertStation->bindParam(':city', $station_city, PDO::PARAM_STR);
+                $insertStation->bindParam(':latitude', $station_latitude, PDO::PARAM_STR);
+                $insertStation->bindParam(':longitude', $station_longitude, PDO::PARAM_STR);
+
+                $insertStation->execute();
             }
-
-            sort($bikes);
-            $bikes_str = join(',', $bikes);
-
-            $selectEvent->bindParam(':id', $station_id, PDO::PARAM_INT);
-            $selectEvent->bindParam(':bikes', $bikes_str, PDO::PARAM_STR);
-
-            $selectEvent->execute();
-
-            if($selectEvent->rowCount() == 0)
-            {
-                $insertEvent->bindParam(':id', $station_id, PDO::PARAM_INT);
-                $insertEvent->bindParam(':bikes', $bikes_str, PDO::PARAM_STR);
-
-                $insertEvent->execute();
-            }
-
-            $insertStation->bindParam(':id', $station_id, PDO::PARAM_INT);
-            $insertStation->bindParam(':name', $station_name, PDO::PARAM_STR);
-            $insertStation->bindParam(':address', $station_address, PDO::PARAM_STR);
-            $insertStation->bindParam(':zip', $station_zip, PDO::PARAM_INT);
-            $insertStation->bindParam(':city', $station_city, PDO::PARAM_STR);
-            $insertStation->bindParam(':latitude', $station_latitude, PDO::PARAM_STR);
-            $insertStation->bindParam(':longitude', $station_longitude, PDO::PARAM_STR);
-
-            $insertStation->execute();
         }
 
         return $app->json((object) array('result' => 'ok'));
