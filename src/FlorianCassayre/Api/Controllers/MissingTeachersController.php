@@ -145,7 +145,7 @@ class MissingTeachersController
                         $insertTeacher->bindParam(":name_original", $name_original);
                         $insertTeacher->execute();
 
-                        $teacher_id = $insertTeacher->lastInsertId();
+                        $teacher_id = $app['pdo']->lastInsertId();
                     } else {
                         $teacher_id = $selectStatement->fetchColumn();
                     }
