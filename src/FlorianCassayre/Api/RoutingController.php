@@ -34,6 +34,8 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/mermoz/list', 'FlorianCassayre\\Api\\Controllers\\MissingTeachersController::list_teachers');
         $controllers->get('/mermoz/missing', 'FlorianCassayre\\Api\\Controllers\\MissingTeachersController::list_missing');
 
+        $controllers->get('/nfc/tts', 'FlorianCassayre\\Api\\Controllers\\NFCController::text_to_speech');
+
         return $controllers;
     }
 }
