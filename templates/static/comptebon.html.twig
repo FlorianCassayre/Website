@@ -2,12 +2,26 @@
 
 {% block page_title %}Jeu du Compte est Bon{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        a#github:link, a#github:visited {
+            color: #000000;
+        }
+        a#github:hover, a#github:active {
+            color: #3c3c3c;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 
     <h1>Jeu du compte est bon</h1>
 
     <p>
         <a href="https://twitter.com/CompteBon">@CompteBon</a> est un bot twitter qui organise des parties du <a href="https://fr.wikipedia.org/wiki/Des_chiffres_et_des_lettres#Le_Compte_est_bon">compte est bon</a>, jeu issu de l'émission télévisée <a href="https://fr.wikipedia.org/wiki/Des_chiffres_et_des_lettres">des chiffres et des lettres</a>.
+    </p>
+    <p>
+        Le code source est <a href="https://github.com/FlorianCassayre/comptebon">disponible sur GitHub</a>.
     </p>
 
     <h3>Règles du jeu original</h3>
@@ -80,5 +94,9 @@
         <li>Inspiré par <a href="https://twitter.com/BotBotBotus">@BotBotBotus</a> par <a href="https://twitter.com/richie3366">@richie3366</a></li>
         <li><a href="https://github.com/DanielaSfregola/twitter4s">Bibliothèque Scala</a> de l'API Twitter</li>
     </ul>
+
+    <p class="text-center">
+        <a href="https://github.com/FlorianCassayre/comptebon" id="github"><i class="fa fa-github fa-5x"></i></a>
+    </p>
 
 {% endblock%}
