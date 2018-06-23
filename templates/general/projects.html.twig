@@ -13,7 +13,6 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            transform: translateY(5px);
         }
 
         .top-right {
@@ -32,18 +31,27 @@
             color: #858585;
         }
 
-        i {
+        i.fa {
             padding-left: 10px;
         }
 
         a.icon-link {
             color: #333 !important;
-            text-decoration:none;
+            text-decoration: none;
         }
 
         a i:hover {
             color: #414141;
         }
+
+        .icons-placeholder {
+            height: 48px;
+        }
+
+        .media-body {
+            position: relative;
+        }
+
     </style>
 {% endblock %}
 
@@ -51,9 +59,9 @@
 
     <h2>Réalisations</h2>
 
-    <p>Comme je n'ai pas <em>encore</em> dédié de page à mes projets, je vous redirige vers mon
-        <a href="https://github.com/FlorianCassayre">profil GitHub</a> qui contient l'essentiel de mes réalisations.</p>
-
+    <p>
+        Une liste non exhaustive des projets majeurs que j'ai mené. Mon <a href="https://github.com/FlorianCassayre">profil GitHub</a> contient bien d'autres dépôts qui ne sont pas cités ici.
+    </p>
 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
@@ -64,15 +72,17 @@
                     <div class="panel-body">
                         <div class="media">
                             <div class="media-left media-middle">
-                                <img class="media-object" src="{{ basepath }}/img/projects/{{ project.thumbnail }}" width="150" height="150"/>
+                                <img class="media-object" src="{{ basepath }}/img/projects/{{ project.thumbnail }}" width="150" height="150" draggable="false" />
                             </div>
-                            <div class="media-body" style="position: relative;">
-                                <div class="col-xs-8">
+                            <div class="media-body">
+                                <div class="col-xs-12 col-lg-7">
                                     <h3 class="media-heading">{{ project.title }}</h3>
                                     {{ project.description }}
                                 </div>
-                                <div class="col-xs-4">
-                                    <table class="pull-right">
+
+                                <div class="col-xs-12 col-lg-5">
+
+                                    <table>
                                         <tr>
                                             <th>Langage</th>
                                             <td>{{ project.gist.language }}</td>
@@ -86,15 +96,17 @@
                                             <td>{{ project.gist.state }}</td>
                                         </tr>
                                         {% if project.gist.license is defined %}
-                                        <tr>
-                                            <th>Licence</th>
-                                            <td>{{ project.gist.license }}</td>
-                                        </tr>
+                                            <tr>
+                                                <th>Licence</th>
+                                                <td>{{ project.gist.license }}</td>
+                                            </tr>
                                         {% endif %}
                                     </table>
+
+                                    <div class="col-xs-12 icons-placeholder"></div>
                                 </div>
 
-                                <div class="bottom-right text-right">
+                                <div class="bottom-right">
                                     {% for link in project.links %}
                                         <a href="{{ link.url }}" title="{{ link.title }}" target="_blank" class="icon-link">
                                             <i class="fa fa-{{ link.icon }} fa-3x"></i>

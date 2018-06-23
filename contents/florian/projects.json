@@ -13,9 +13,9 @@
       },
       "links": [
         {
-          "title": "Dépôt sur GitHub",
-          "icon": "github",
-          "url": "https://github.com/FlorianCassayre/comptebon"
+          "title": "Règles du jeu",
+          "icon": "external-link",
+          "url": "https://florian.cassayre.me/comptebon"
         },
         {
           "title": "Fonctionnement en direct",
@@ -23,9 +23,9 @@
           "url": "https://twitter.com/CompteBon"
         },
         {
-          "title": "Règles du jeu",
-          "icon": "external-link",
-          "url": "https://florian.cassayre.me/comptebon"
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/comptebon"
         }
       ]
     },
@@ -36,7 +36,7 @@
       "thumbnail": "everydaysat.png",
       "gist": {
         "language": "Scala",
-        "date": "Janvier & juin 2018",
+        "date": "Mars 2018",
         "state": "En cours",
         "license": "MIT"
       },
@@ -45,6 +45,25 @@
           "title": "Dépôt sur GitHub",
           "icon": "github",
           "url": "https://github.com/FlorianCassayre/EverydaySat"
+        }
+      ]
+    },
+
+    {
+      "title": "cursorsio-client",
+      "description": "Un client entièrement fonctionnel pour le jeu cursors.io. Permet d'envoyer des vagues de bot pour terminer le jeu :).",
+      "thumbnail": "cursorsioclient.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Mars 2018",
+        "state": "Terminé",
+        "license": "MIT"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/cursorsio-client"
         }
       ]
     },
@@ -61,14 +80,14 @@
       },
       "links": [
         {
-          "title": "Dépôt sur GitHub",
-          "icon": "github",
-          "url": "https://github.com/FlorianCassayre/AdventOfCode-2017"
-        },
-        {
           "title": "Site de l'événement",
           "icon": "external-link",
           "url": "https://adventofcode.com/2017"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/AdventOfCode-2017"
         }
       ]
     },
@@ -103,14 +122,14 @@
       },
       "links": [
         {
-          "title": "Dépôt sur GitHub",
-          "icon": "github",
-          "url": "https://github.com/FlorianCassayre/ProjetAlpano"
-        },
-        {
           "title": "Site du cours",
           "icon": "external-link",
           "url": "https://cs108.epfl.ch/archive/17/"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/ProjetAlpano"
         }
       ]
     },
@@ -134,6 +153,82 @@
     },
 
     {
+      "title": "Afficheur Rotatif",
+      "description": "Projet de sciences de l'ingénieur, présenté au baccalauréat.",
+      "thumbnail": "afficheurrotatif.png",
+      "gist": {
+        "language": "Arduino",
+        "date": "Octobre 2015",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Vidéo",
+          "icon": "youtube",
+          "url": "https://youtu.be/MA9xyF77QI8"
+        }
+      ]
+    },
+
+    {
+      "title": "Absorption",
+      "description": "Jeu de Splatoon dans Minecraft, avec pack de texture.",
+      "thumbnail": "placeholder.png",
+      "gist": {
+        "language": "Java",
+        "date": "Août 2015",
+        "state": "Jamais publié",
+        "license": "GNU-GPL 3.0"
+      },
+      "links": [
+        {
+          "title": "Site",
+          "icon": "external-link",
+          "url": "https://samagames.net"
+        },
+        {
+          "title": "IP du serveur",
+          "icon": "map-pin",
+          "url": "//mc.samagames.net"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/SamaGames/Absorption"
+        }
+      ]
+    },
+
+    {
+      "title": "Camelia",
+      "description": "Jeu de pictonary dans Minecraft également co-réalisé avec Amaury Carrade.",
+      "thumbnail": "camelia.png",
+      "gist": {
+        "language": "Java",
+        "date": "Mai 2015",
+        "state": "Jamais publié",
+        "license": "GNU-GPL 3.0"
+      },
+      "links": [
+        {
+          "title": "Site",
+          "icon": "external-link",
+          "url": "https://samagames.net"
+        },
+        {
+          "title": "IP du serveur",
+          "icon": "map-pin",
+          "url": "//mc.samagames.net"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/SamaGames/Camelia"
+        }
+      ]
+    },
+
+    {
       "title": "HeroBattle",
       "description": "Jeu de mêlée dans Minecraft co-réalisé avec Amaury Carrade.",
       "thumbnail": "herobattle.png",
@@ -145,22 +240,23 @@
       },
       "links": [
         {
-          "title": "Dépôt sur GitHub",
-          "icon": "github",
-          "url": "https://github.com/SamaGames/HeroBattle"
+          "title": "Site",
+          "icon": "external-link",
+          "url": "https://samagames.net"
         },
         {
           "title": "IP du serveur",
           "icon": "map-pin",
-          "url": "mc.samagames.net"
+          "url": "//mc.samagames.net"
         },
         {
-          "title": "Site",
-          "icon": "external-link",
-          "url": "https://samagames.net"
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/SamaGames/HeroBattle"
         }
       ]
     }
+
   ],
   "small_projects": [
   ]
