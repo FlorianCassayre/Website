@@ -2,10 +2,113 @@
 
 {% block page_title %}Réalisations{% endblock %}
 
+{% block stylesheets %}
+    <style>
+
+        .media-object {
+            border-radius: 5px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform: translateY(5px);
+        }
+
+        .top-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+        }
+
+        tr th {
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        tr td {
+            color: #858585;
+        }
+
+        i {
+            padding-left: 10px;
+        }
+
+        a.icon-link {
+            color: #333 !important;
+            text-decoration:none;
+        }
+
+        a i:hover {
+            color: #414141;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 
     <h2>Réalisations</h2>
 
-    <p>Comme je n'ai pas <em>encore</em> dédié de page à mes projets, je vous redirige vers mon <a href="https://github.com/FlorianCassayre">profil GitHub</a> qui contient l'essentiel de mes réalisations.</p>
+    <p>Comme je n'ai pas <em>encore</em> dédié de page à mes projets, je vous redirige vers mon
+        <a href="https://github.com/FlorianCassayre">profil GitHub</a> qui contient l'essentiel de mes réalisations.</p>
 
-{% endblock%}
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+            {% for project in data.projects %}
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left media-middle">
+                                <img class="media-object" src="{{ basepath }}/img/projects/{{ project.thumbnail }}" width="150" height="150"/>
+                            </div>
+                            <div class="media-body" style="position: relative;">
+                                <div class="col-xs-8">
+                                    <h3 class="media-heading">{{ project.title }}</h3>
+                                    {{ project.description }}
+                                </div>
+                                <div class="col-xs-4">
+                                    <table class="pull-right">
+                                        <tr>
+                                            <th>Langage</th>
+                                            <td>{{ project.gist.language }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date</th>
+                                            <td>{{ project.gist.date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>État</th>
+                                            <td>{{ project.gist.state }}</td>
+                                        </tr>
+                                        {% if project.gist.license is defined %}
+                                        <tr>
+                                            <th>Licence</th>
+                                            <td>{{ project.gist.license }}</td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+
+                                <div class="bottom-right text-right">
+                                    {% for link in project.links %}
+                                        <a href="{{ link.url }}" title="{{ link.title }}" target="_blank" class="icon-link">
+                                            <i class="fa fa-{{ link.icon }} fa-3x"></i>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

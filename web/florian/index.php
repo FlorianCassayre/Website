@@ -53,6 +53,9 @@ else
 
 $app['twig']->addGlobal('version', $app['version']);
 
+$app['root_directory'] = __DIR__ . '/../..';
+$app['contents_directory'] = $app['root_directory'] . '/contents/florian';
+
 // Redirections
 $app->before('FlorianCassayre\\Florian\\RedirectionMiddleware::handle', Application::EARLY_EVENT);
 

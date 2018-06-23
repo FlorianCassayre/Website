@@ -72,7 +72,16 @@ class MainPagesController
 
     public function projects(Application $app)
     {
-        return $app['twig']->render('general/projects.html.twig');
+        $filename = $app['contents_directory'] . '/projects.json';
+
+        if(!file_exists($filename)) {
+            return $app->abort(404);
+        }
+        $json = json_decode(file_get_contents($filename));
+
+        return $app['twig']->render('general/projects.html.twig', array(
+            'data' => $json
+        ));
     }
 
     public function brand(Application $app)

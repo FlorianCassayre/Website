@@ -1,0 +1,167 @@
+{
+  "projects": [
+    {
+      "title": "Bot Twitter @CompteBon",
+      "description": "Le célèbre jeu du compte est bon, adapté en jeu interactif sur Twitter.",
+      "thumbnail": "comptebon.jpg",
+      "gist": {
+        "language": "Scala",
+        "date": "Janvier & juin 2018",
+        "version": "1.0",
+        "state": "Terminé",
+        "license": "MIT"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/comptebon"
+        },
+        {
+          "title": "Fonctionnement en direct",
+          "icon": "twitter",
+          "url": "https://twitter.com/CompteBon"
+        },
+        {
+          "title": "Règles du jeu",
+          "icon": "external-link",
+          "url": "https://florian.cassayre.me/comptebon"
+        }
+      ]
+    },
+
+    {
+      "title": "EverydaySat",
+      "description": "Résolution de problèmes de logique classiques (sudoku, nonogramme, ...) en exploitant la puissance (et les limites) d'un SAT-solver.",
+      "thumbnail": "everydaysat.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Janvier & juin 2018",
+        "state": "En cours",
+        "license": "MIT"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/EverydaySat"
+        }
+      ]
+    },
+
+    {
+      "title": "Advent of Code 2017",
+      "description": "Mes solutions pour la 3ème édition de Advent of Code. Elles ne sont pas toujours optimales mais cela m'a permis de progresser en Scala.",
+      "thumbnail": "adventofcode2017.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Décembre 2017",
+        "state": "Terminé",
+        "license": "MIT"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/AdventOfCode-2017"
+        },
+        {
+          "title": "Site de l'événement",
+          "icon": "external-link",
+          "url": "https://adventofcode.com/2017"
+        }
+      ]
+    },
+
+    {
+      "title": "DeepLearningUtil",
+      "description": "Une librairie Java sans prétention permettant la construction et l'entrainement de réseaux de neurones artificiels.",
+      "thumbnail": "deeplearningutil.png",
+      "gist": {
+        "language": "Java",
+        "date": "Juillet 2017",
+        "version": "1.1",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/DeepLearningUtil"
+        }
+      ]
+    },
+
+    {
+      "title": "Projet Alpano",
+      "description": "Générateur de panorama réalisé dans le cadre d'un cours à l'EPFL. Le projet dans l'ensemble était très guidé mais j'y ai ajouté des extensions pour le personnaliser.",
+      "thumbnail": "projetalpano.png",
+      "gist": {
+        "language": "Java",
+        "date": "Janvier à juin 2017",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/ProjetAlpano"
+        },
+        {
+          "title": "Site du cours",
+          "icon": "external-link",
+          "url": "https://cs108.epfl.ch/archive/17/"
+        }
+      ]
+    },
+
+    {
+      "title": "Site",
+      "description": "Ce site même. Pour l'instant le code n'est pas disponible publiquement.",
+      "thumbnail": "website.png",
+      "gist": {
+        "language": "PHP",
+        "date": "Décembre 2016",
+        "state": "En cours"
+      },
+      "links": [
+        {
+          "title": "Site",
+          "icon": "external-link",
+          "url": "https://florian.cassayre.me"
+        }
+      ]
+    },
+
+    {
+      "title": "HeroBattle",
+      "description": "Jeu de mêlée dans Minecraft co-réalisé avec Amaury Carrade.",
+      "thumbnail": "herobattle.png",
+      "gist": {
+        "language": "Java",
+        "date": "Janvier 2015",
+        "state": "Terminé",
+        "license": "GNU-GPL 3.0"
+      },
+      "links": [
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/SamaGames/HeroBattle"
+        },
+        {
+          "title": "IP du serveur",
+          "icon": "map-pin",
+          "url": "mc.samagames.net"
+        },
+        {
+          "title": "Site",
+          "icon": "external-link",
+          "url": "https://samagames.net"
+        }
+      ]
+    }
+  ],
+  "small_projects": [
+  ]
+}
