@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Business Card{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ basepath }}/js/prism.js"></script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ basepath }}/css/prism.css">
+
+{% endblock %}
+
+{% block content %}
+
+    <h2>Business Card</h2>
+
+    <div class="row">
+        <div class="text-center">
+            <pre style="width: 365px;display: inline-block;text-align: left;">
+                <code class="language-java">
+                    #include &lt;stdio.h&gt; // ./card &gt; scala.ppm
+                    #include &lt;math.h&gt;  // https://cassayre.me/card
+                    int main(){printf("P6 512 512 255 ");for(int k=
+                    0,w=512;k&lt;w*w;k++){int x=k%w,y=k/w,j=234,r=(x+y
+                    )/8|1,g=61+y/15,b=83;for(double e=6.28,h=150,d,
+                    i,n=w-1,l=(x/n-.5)*h,c=35,f=h*(y/n-.5)+22;j&gt;1;j
+                    --)c&gt;(d=sqrt(l*l+(n=c-.3*j)*n))&d&gt;30?x=c-d&gt;.3,y
+                    =c-d&lt;4.7,d=fmod(atan2(n,l)+e,e),(i=floor(f/c+d/
+                    e)-d/e)&lt;1.5&fmod(-f*e/c-d+3*e,e)&gt;1.5&i&gt;-1?g=y*r
+                    /10+12,r=(int)(y*86+20+h*fabs((y^x)*n/c)),b=x*r
+                    /5|1,j=0:0:0;printf("%c%c%c",r,g,b);}return 0;}
+                </code>
+            </pre>
+            <hr>
+            <div class="col-xs-12" style="margin-bottom: 30px">
+                <p class="text-left">
+                    This C snippet which you may have found on the back of my business card implements a <a href="https://en.wikipedia.org/wiki/Volume_ray_casting">ray marching algorithm</a> that produces the following 512x512 Scala logo:
+                </p>
+            </div>
+
+            <div class="img-fluid">
+                <img src="{{ basepath }}/img/scala.ppm.png" width="256" height="256">
+            </div>
+
+            <div class="col-xs-12 text-left" style="margin-top: 30px">
+                <p>
+                    Pretty cool, I hope.
+                </p>
+                <h3>Context</h3>
+                <p>
+                    The idea of creating a <em>ray tracer on a business card</em> is not new.
+                    <a href="http://www.cs.cmu.edu/~ph/">Paul Heckbert</a> first introduced the concept in 1984 as some sort of challenge.
+
+                </p>
+                <p>
+                    Later on Andrew Kensler created <a href="http://www.cs.utah.edu/~aek/code/card.cpp">his own version</a> in 2009 and is today one of the most famous example.
+                    He manages to pack a bunch of features such as reflections, shadings, or even distance blur.
+                </p>
+                <p>
+                    Finally, the most recent creation to my knowledge is <a href="https://mzucker.github.io/2016/08/03/miniray.html">Mark Zucker's miniray</a> who won the IOCCC-2011 contest.
+                </p>
+                <p>
+                    My work is not quite a ray tracer although it was carefully crafted to look like it (explanations below).
+                </p>
+                <h3>Features</h3>
+                <ul>
+                    <li>Prints a PPM image to the standard output</li>
+                    <li>Orthographic projection of a bounded helix</li>
+                    <li>Some basic shadows</li>
+                    <li>A fancy gradient in the background</li>
+                    <li>The code is cross-platform compatible aswell as the image itself (windows can have issues rendering some images in this format)</li>
+                    <li>Fits in a perfect rectangle: this was a <em>sine qua non</em> condition in order to fit on a card</li>
+                </ul>
+                <h3>How it works</h3>
+                <p>
+                    The 'virtual' scene contains an infinite vertical cylinder that is truncated in its center.
+                    Rays are casted orthographically from every pixel of the image towards, potentially hitting the cylinder.
+                    If it is the case, a sub-procedure performs additional checking to carve the helix shape.
+                    The shaders are done with a dot product.
+                    If the ray misses the object, a gradient is computed according to the position of the pixel on the image.
+                </p>
+                <p>
+                    The code does not contain any additional functions (aside to the main), nor does it contain any if-else statements.
+                    In fact, they were taking too much space and thus were replaced by ternary operators (two of them in here).
+                    Thorough inspection enabled me to considerably reduce the size of the code.
+                    Variables reallocation and other tricks shaved the final few bytes off.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

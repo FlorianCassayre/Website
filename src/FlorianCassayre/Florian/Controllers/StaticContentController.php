@@ -14,6 +14,11 @@ class StaticContentController
 
     public function comptebon(Application $app)
     {
-        return$app['twig']->render('static/comptebon.html.twig', array());
+        return $app['twig']->render('static/comptebon.html.twig', array());
+    }
+
+    public function card(Application $app)
+    {
+        return $app['twig']->render('static/card.html.twig', array());
     }
 }
