@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Comparaison syntaxique : Java & Scala{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ basepath }}/js/prism.js"></script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ basepath }}/css/prism.css">
+
+{% endblock %}
+
+{% block content %}
+
+    <h2>Comparaison syntaxique : Java & Scala</h2>
+
+    <p>
+        Le but de cet article est de fournir des fragments de code fréquemment utilisés en Java puis de proposer une traduction concise en Scala.
+    </p>
+
+    <h3>Classes</h3>
+
+    <p>
+        Pour ce premier extrait la différence est flagrante. Scala intègre directement les arguments du constructeur par défaut en tant que valeurs privées; ensuite on peut modifier leur portée et/ou les transformer en variables modifiables.
+    </p>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h4>Java</h4>
+            <pre>
+                <code class="language-java">
+                    public class Person {
+                        private final String name;
+                        private int age;
+
+                        public Person(String name, int age) {
+                            this.name = name;
+                            this.age = age;
+                        }
+
+                        public String getName() {
+                            return name;
+                        }
+
+                        public int getAge() {
+                            return age;
+                        }
+
+                        public void incrementAge() {
+                            age++;
+                        }
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h4>Scala</h4>
+            <pre>
+                <code class="language-scala">
+                    class Person(val name: String, private var _age: Int) {
+
+                        def incrementAge(): Unit = age += 1
+
+                        def age: Int = _age
+
+                    }
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <p>
+        Mais si par chance votre classe est immuable (spoil : c'est souvent le cas), un <em>one-liner</em> s'offre à vous :
+    </p>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h4>Java</h4>
+            <pre>
+                <code class="language-java">
+                    public class Human {
+                        private final String name;
+                        private final long birthdate;
+
+                        public Human(String name, long birthdate) {
+                            this.name = name;
+                            this.birthdate = birthdate;
+                        }
+
+                        public String getName() {
+                            return name;
+                        }
+
+                        public long getBirthdate() {
+                            return birthdate;
+                        }
+
+                        @Override
+                        public int hashCode() {
+                            return java.util.Objects.hash(name, birthdate);
+                        }
+
+                        @Override
+                        public boolean equals(Object o) {
+                            if(!(o instanceof Human))
+                                return false;
+                            Human that = (Human) o;
+                            return this.name.equals(that.name) && this.birthdate == that.birthdate;
+                        }
+                    }
+                </code>
+            </pre>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h4>Scala</h4>
+            <pre>
+                <code class="language-scala">
+                    case class Human(name: String, birthdate: Long)
+                </code>
+            </pre>
+        </div>
+    </div>
+
+
+
+    <h3>Regex</h3>
+
+    <p>
+        Les expressions régulières sont assez désagréables à utiliser en Java.
+        Scala introduit un opérateur implicite qui convertit une chaîne de caractères en pattern, et mieux encore, le résultat peut être <em>pattern-matché</em> :
+        Notons qu'aucun import n'est nécessaire en Scala.
+        Par ailleurs, une vérification des données aurait été nécessaire en Java alors qu'en Scala le comportement par défaut lancerait une <a href="https://www.scala-lang.org/api/current/scala/MatchError.html">erreur</a>.
+    </p>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h4>Java</h4>
+            <pre>
+                <code class="language-java">
+                    Pattern pattern = Pattern.compile("[0-9]+,[0-9]+");
+
+                    Matcher matcher = pattern.matcher("42,69");
+
+                    double x = Integer.parseInt(matcher.group(1))
+                            + (double) Integer.parseInt(matcher.group(2)) / matcher.group(2).length();
+                </code>
+            </pre>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h4>Scala</h4>
+            <pre>
+                <code class="language-scala">
+                    val pattern = "[0-9]+,[0-9]+".r
+
+                    val x = "42,69" match {
+                        case pattern(int, dec) => int.toInt + dec.toInt / dec.length.toDouble
+                    }
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <h3>Pour en savoir plus</h3>
+
+    <ul>
+        <li><a href="https://www.scala-lang.org/">Site officiel du langage Scala</a></li>
+        <li><a href="https://fr.coursera.org/learn/progfun1">Un excellent MOOC (gratuit) pour apprendre Scala présenté par M. Odersky, le créateur de Scala</a></li>
+    </ul>
+
+{% endblock %}

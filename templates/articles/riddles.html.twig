@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Énigmes{% endblock %}
+
+{% block content %}
+
+    <h2>Compilation d'énigmes</h2>
+
+    <p>
+        Toutes les énigmes présentées ici ont été inventées.
+    </p>
+
+    <hr>
+
+    <h3>Monnaie <span class="label label-success">Facile</span></h3>
+
+    <p>
+        Une certaine devise se présente sous la forme de pièces de valeurs 1, 2, 5, 10, 20 et 50 unités (analogue aux centimes de l'euro).
+    </p>
+    <p>
+        <strong>Question : </strong>Combien de pièces <em>au minimum</em> sont nécessaires pour pouvoir former toutes les combinaisons de montants compris entre 1 et 99 unités ?
+    </p>
+
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapse-currency" aria-expanded="false" aria-controls="collapse-currency">
+            Solution
+        </a>
+    </p>
+
+    <div class="panel panel-default collapse" id="collapse-currency">
+        <div class="panel-body">
+            <p>
+                Il existe plusieurs méthodes pour résoudre ce problème. Si on remarque que les pièces 1, 2 et 5 ont leur équivalents 10, 20 et 50 lorsqu'on multiplie leur valeur par 10.
+                Résoudre ce problème pour les sommes de 1 à 9 donne également accès à la solution pour les sommes de 10, 20, ... 90 et donc par superposition la solution des sommes de 1 à 99 (ce qu'on cherche).
+            </p>
+            <p>
+                Les sommes de 1 à 9 se trouvent aisément par déduction logique :
+            </p>
+            <ul>
+                <li>La pièce 1 est nécessaire pour réaliser la somme 1.</li>
+                <li>Pour les sommes 2 et 3 on ajoute les pièces 1 et 2. Cela permet aussi de réaliser 4.</li>
+                <li>Enfin il suffit d'ajouter la pièce de 5 pour clore le sous-problème.</li>
+            </ul>
+            <p>
+                Pour réaliser les sommes de 1 à 9, il nous a fallu 4 pièces. La solution au problème initial est donc 2 fois 4, soit <strong>8 pièces</strong> : <code>{1, 1, 2, 5, 10, 10, 20, 50}</code>.
+            </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>SHA-256 <span class="label label-success">Facile</span></h3>
+
+    <p>
+        Le SHA-256, noté <code>sha</code>, est une fonction de hachage cryptographique qui prend en entrée une chaîne d'octets de taille variable et qui retourne 256 octets.
+        On supposera cette fonction "parfaite" (l'entrée est indépendante de la sortie).
+    </p>
+    <p>
+        <strong>Question : </strong>Quelle est la probabilité qu'il existe un <code>x</code> tel que <code>sha(x) = x</code> ?
+    </p>
+
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapse-sha" aria-expanded="false" aria-controls="collapse-sha">
+            Solution
+        </a>
+    </p>
+
+    <div class="panel panel-default collapse" id="collapse-sha">
+        <div class="panel-body">
+            <p>
+                La probabilité qu'il existe une telle succession d'octets est d'environ <code>1-1/e ≈ 63.2120559...%</code>.
+            </p>
+            <p>
+                La valeur exacte de cette probabilité est exprimée par <code>1 - (1 - 2^-256)^(2^256)</code>.
+            </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>Topologie <span class="label label-warning">Moyen</span></h3>
+
+    <p>
+        Soit P un <em>sous ensemble convexe ouvert du plan</em>.
+        Pour cette ensemble on définit la fonction <code>f</code> qui prend en argument un point de la frontière et qui retourne la distance <em>maximale</em> entre ce point et un autre point de la frontière.
+        Enfin on définit la fonction <code>g</code> qui prend en argument un tel ensemble et qui retourne le périmètre de cet ensemble <em>divisé par</em> la valeur <em>minimale</em> de la fonction <code>f</code>.
+    </p>
+    <p>
+        <strong>Question : </strong>Quel ensemble <em>maximise</em> la fonction <code>g</code> ?
+    </p>
+
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapse-geometry" aria-expanded="false" aria-controls="collapse-geometry">
+            Solution
+        </a>
+    </p>
+
+    <div class="panel panel-default collapse" id="collapse-geometry">
+        <div class="panel-body">
+            <p>
+                Il se trouve que c'est le <strong>demi-disque</strong> qui maximise cette fonction, avec une valeur de <code>2 + π</code>.
+            </p>
+        </div>
+    </div>
+
+    <hr>
+
+
+{% endblock%}

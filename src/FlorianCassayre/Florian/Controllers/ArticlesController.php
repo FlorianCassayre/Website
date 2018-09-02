@@ -12,7 +12,9 @@ class ArticlesController
         'js',
         'float',
         'random',
-        'youtube'
+        'youtube'/*,
+        'riddles',
+        'scala-java'*/
     );
 
     public function article(Application $app, $id)
