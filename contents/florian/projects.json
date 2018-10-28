@@ -1,6 +1,66 @@
 {
   "projects": [
     {
+      "title": "Advent of Code 2018",
+      "description": "Mes solutions pour la 4ème édition de Advent of Code. Il s'agit de ma deuxième participation où je publie quotidiennement mes solutions.",
+      "thumbnail": "placeholder.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Décembre 2018",
+        "state": "En cours",
+        "license": "MIT"
+      },
+      "links": [
+        {
+          "title": "Site de l'événement",
+          "icon": "external-link",
+          "url": "https://adventofcode.com/2018"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/AdventOfCode-2018"
+        }
+      ]
+    },
+
+    {
+      "title": "Netwit",
+      "description": "Outil en ligne qui analyse vos connexions Twitter par l'intermédiaire de vos abonnements et établit votre réseau.",
+      "thumbnail": "netwit.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Septembre à octobre 2018",
+        "state": "Fonctionnel, en cours"
+      },
+      "links": [
+        {
+          "title": "Fonctionnement en direct",
+          "icon": "external-link",
+          "url": "https://netwit.cassayre.me"
+        }
+      ]
+    },
+
+    {
+      "title": "Ray Tracer on a Business Card",
+      "description": "Défi dont le but est d'écrire un moteur de rendu 3D à partir de zéro, avec la contrainte supplémentaire que le code doit rentrer sur une carte de visite.",
+      "thumbnail": "card.png",
+      "gist": {
+        "language": "C",
+        "date": "Juin 2018",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Article et code (anglais)",
+          "icon": "external-link",
+          "url": "https://florian.cassayre.me/card"
+        }
+      ]
+    },
+
+    {
       "title": "Bot Twitter @CompteBon",
       "description": "Le célèbre jeu du compte est bon, adapté en jeu interactif sur Twitter.",
       "thumbnail": "comptebon.jpg",
@@ -153,6 +213,31 @@
     },
 
     {
+      "title": "ZéPS-Core",
+      "description": "Un outil de calcul d'itinéraire pour le serveur Zcraft. Un module web sera développé un plus tard par Amaury Carrade.",
+      "thumbnail": "zeps.png",
+      "gist": {
+        "language": "Java",
+        "date": "Mars à avril 2016",
+        "version": "1.1.1",
+        "state": "Terminé",
+        "license": "CeCILL-B"
+      },
+      "links": [
+        {
+          "title": "Fonctionnement en direct",
+          "icon": "external-link",
+          "url": "https://zeps.zcraft.fr"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/zDevelopers/ZePS-Core"
+        }
+      ]
+    },
+
+    {
       "title": "Afficheur Rotatif",
       "description": "Projet de sciences de l'ingénieur, présenté au baccalauréat.",
       "thumbnail": "afficheurrotatif.png",
@@ -253,6 +338,30 @@
           "title": "Dépôt sur GitHub",
           "icon": "github",
           "url": "https://github.com/SamaGames/HeroBattle"
+        }
+      ]
+    },
+
+    {
+      "title": "BelovedBlocks",
+      "description": "Plugin Bukkit donnant la possibilité de placer des blocs secrets. Co-réalisé avec Amaury Carrade, et m'a permis de me familiariser avec git.",
+      "thumbnail": "belovedblocks.png",
+      "gist": {
+        "language": "Java",
+        "date": "Décembre 2014",
+        "state": "Terminé",
+        "license": "GNU-GPL 3.0"
+      },
+      "links": [
+        {
+          "title": "Page Bukkit",
+          "icon": "external-link",
+          "url": "https://dev.bukkit.org/projects/beloved-blocks"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/zDevelopers/BelovedBlocks"
         }
       ]
     }
