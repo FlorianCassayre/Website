@@ -88,4 +88,9 @@ class MainPagesController
     {
         return $app['twig']->render('general/brand.html.twig');
     }
+
+    public function pgp(Application $app)
+    {
+        return $app['twig']->render('general/pgp.html.twig');
+    }
 }
