@@ -25,6 +25,8 @@ class RoutingController implements ControllerProviderInterface
 
         $controllers->get('/brand', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::brand')->bind('brand');
 
+        $controllers->get('/pgp', 'FlorianCassayre\\Florian\\Controllers\\MainPagesController::pgp')->bind('pgp');
+
         $controllers->get('/articles/{id}', 'FlorianCassayre\\Florian\\Controllers\\ArticlesController::article')->bind('articles');
 
         $controllers->get('/tools/minecraft/uuid', 'FlorianCassayre\\Florian\\Controllers\\Tools\\MCUUIDController::uuid_home')->bind('tools.minecraft.uuid');
