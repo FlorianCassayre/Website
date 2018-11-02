@@ -78,7 +78,7 @@
                 <h3>How it works</h3>
                 <p>
                     The 'virtual' scene contains an infinite vertical cylinder that is truncated in its center.
-                    Rays are casted orthographically from every pixel of the image towards, potentially hitting the cylinder.
+                    Rays are casted orthographically from every pixel of the image towards the scene, potentially hitting the cylinder.
                     If it is the case, a sub-procedure performs additional checking to carve the helix shape.
                     The shaders are done with a dot product.
                     If the ray misses the object, a gradient is computed according to the position of the pixel on the image.
