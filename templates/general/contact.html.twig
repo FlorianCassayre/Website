@@ -2,6 +2,17 @@
 
 {% block page_title %}Contact{% endblock %}
 
+{% block scripts %}
+
+<script>
+    (function () {
+        var e = document.getElementsByTagName("fieldset")[2];
+        e.parentNode.removeChild(e);
+    })();
+</script>
+
+{% endblock scripts %}
+
 {% block content %}
 
     <h2>Contact</h2>
@@ -20,7 +31,12 @@
                 <div class="alert alert-danger" role="alert">
                     <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
                     <span class="sr-only"></span>
-                    <strong>Erreur : </strong>vous devez remplir tous les champs !
+                    <strong>Erreur : </strong>
+                    {% if not is_bot %}
+                    vous devez remplir tous les champs !
+                    {% else %}
+                    veuillez <strong>ne pas</strong> remplir le dernier champ ! (ceci sert à filtrer les robots)
+                    {% endif %}
                 </div>
             {% endif %}
         {% endif %}
@@ -32,6 +48,11 @@
             <fieldset class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" required="required" class="form-control" id="email" name="email" placeholder="Votre adresse mail..." value="{% if submit and not success %}{{ email }}{% endif %}">
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="reason">Ne pas remplir ce champ</label>
+                <textarea required="required" class="form-control" id="reason" name="reason" rows="20" placeholder="Raison...">{% if submit and not success %}{{ reason }}{% endif %}</textarea>
             </fieldset>
 
             <fieldset class="form-group">

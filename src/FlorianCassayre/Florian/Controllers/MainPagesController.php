@@ -28,8 +28,10 @@ class MainPagesController
         $name = isset($_POST['name']) ? $_POST['name'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $message = isset($_POST['message']) ? $_POST['message'] : '';
+        $reason = isset($_POST['reason']) ? $_POST['reason'] : '';
+        $is_bot = !empty($reason);
 
-        if(empty($name) || empty($email) || empty($message))
+        if(empty($name) || empty($email) || empty($message) || $is_bot)
         {
             $success = false;
         }
@@ -59,9 +61,11 @@ class MainPagesController
         return $app['twig']->render('general/contact.html.twig', array(
             'submit' => true,
             'success' => $success,
+            'is_bot' => $is_bot,
             'name' => $name,
             'email' => $email,
-            'message' => $message
+            'message' => $message,
+            'reason' => $reason
         ));
     }
 
