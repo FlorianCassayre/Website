@@ -14,6 +14,8 @@ class RedirectionMiddleware
         '/enchanting' => '/tools/minecraft/enchanting',
         '/ping' => '/tools/minecraft/ping',
         '/projects' => '/realisations',
+        '/gpg' => '/pgp',
+        '/pub' => '/pgp',
 
         // Old URLs
         '/netherrail' => 'https://zeps.carrade.eu',
