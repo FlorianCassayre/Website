@@ -1,13 +1,31 @@
 {
   "projects": [
     {
+      "title": "Business Card 2",
+      "description": "Deuxième tentative en ayant appris de mes erreurs, cette fois avec un thème plus difficile : mon propre logo.",
+      "thumbnail": "card2.png",
+      "gist": {
+        "language": "C",
+        "date": "Novembre 2018 & Février 2019",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Code",
+          "icon": "external-link",
+          "url": "https://florian.cassayre.me/card2"
+        }
+      ]
+    },
+
+    {
       "title": "Advent of Code 2018",
       "description": "Mes solutions pour la 4ème édition de Advent of Code. Il s'agit de ma deuxième participation où je publie quotidiennement mes solutions.",
       "thumbnail": "placeholder.png",
       "gist": {
         "language": "Scala",
         "date": "Décembre 2018",
-        "state": "En cours",
+        "state": "Terminé, solutions manquantes",
         "license": "MIT"
       },
       "links": [
@@ -214,7 +232,7 @@
 
     {
       "title": "ZéPS-Core",
-      "description": "Un outil de calcul d'itinéraire pour le serveur Zcraft. Un module web sera développé un plus tard par Amaury Carrade.",
+      "description": "Un outil de calcul d'itinéraire pour le serveur Zcraft. Un module web sera développé un peu plus tard par Amaury Carrade.",
       "thumbnail": "zeps.png",
       "gist": {
         "language": "Java",
@@ -239,7 +257,7 @@
 
     {
       "title": "Afficheur Rotatif",
-      "description": "Projet de sciences de l'ingénieur, présenté au baccalauréat.",
+      "description": "Projet de sciences de l'ingénieur présenté au baccalauréat qui m'a rapporté une excellente note.",
       "thumbnail": "afficheurrotatif.png",
       "gist": {
         "language": "Arduino",
