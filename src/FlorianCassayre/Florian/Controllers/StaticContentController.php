@@ -21,4 +21,9 @@ class StaticContentController
     {
         return $app['twig']->render('static/card.html.twig', array());
     }
+
+    public function card2(Application $app)
+    {
+        return $app['twig']->render('static/card2.html.twig', array());
+    }
 }

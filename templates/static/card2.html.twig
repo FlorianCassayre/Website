@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Business Card 2{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ basepath }}/js/prism.js"></script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ basepath }}/css/prism.css">
+
+{% endblock %}
+
+{% block content %}
+
+    <h2></h2>
+
+    <div class="row">
+        <div class="text-center">
+            <pre style="width: 365px;display: inline-block;text-align: left;">
+                <code class="language-java">
+                    #include &lt;stdlib.h&gt; // ./card2 &gt; cassayre.ppm
+                    #include &lt;stdio.h&gt; // https://cassayre.me/card2
+                    int main(){puts("P5 512 512 2");double a,b,c,d,
+                    e,r,p,u,q;for(int w=512,n=0,i,o,g;n++&lt;w*w;putc(
+                    g,stdout))for(i=40,g=2;i--;i&1?q&lt;600?g=q&lt;455&o/
+                    8:0,e&lt;q?d=c:(a=b):(e=q))i%20||(a=0,d=1),r=d-a,b
+                    =c=r/3+a,q=i&1?c+=r/3:b,r=1-q,p=r*q,u=r*p*190+(
+                    3*r+q)*q*168*q-abs((o=i/20*11-262)+n%w),q=340*r
+                    *p+230*p*q-abs(o+n/w),q=u*u+q*q;}
+                </code>
+            </pre>
+
+            <div class="img-fluid">
+                <img src="{{ basepath }}/img/cassayre.ppm.png" width="256" height="256">
+            </div>
+            <hr>
+            <div class="col-xs-12" style="margin-bottom: 30px">
+                <p>Description à venir... En attendant, vous pouvez consulter <a href="{{ url('card') }}">une création similaire</a> (anglais).</p>
+
+                <p><em>Remarque : l'ASCII-art utilise une version légèrement modifiée du code ci-dessus, mais totalement équivalente.</em></p>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock%}

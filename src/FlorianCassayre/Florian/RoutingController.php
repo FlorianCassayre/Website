@@ -50,6 +50,7 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/comptebon', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::comptebon')->bind('comptebon');
 
         $controllers->get('/card', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::card')->bind('card');
+        $controllers->get('/card2', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::card2')->bind('card2');
 
         return $controllers;
     }
