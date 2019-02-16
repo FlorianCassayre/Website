@@ -12,7 +12,9 @@ class ArticlesController
         'js',
         'float',
         'random',
-        'youtube'/*,
+        'youtube',
+        'pins'
+        /*'genealogy',
         'riddles',
         'scala-java'*/
     );

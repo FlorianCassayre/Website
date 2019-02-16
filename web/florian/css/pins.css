@@ -1,0 +1,22 @@
+#pins {
+    margin: 0 auto;
+    display: table;
+    font-family: "Helvetica Neue", sans-serif;
+}
+button {
+    margin: auto;
+    display: table;
+    margin-bottom: 10px;
+}
+rect.selected {
+    opacity: 0.5;
+}
+rect.bw {
+    filter: grayscale(100%);
+}
+.tip {
+    position: fixed;
+    font-size: 1.2em;
+    text-align: center;
+    text-shadow: -1px -1px 1px #ffffff, -1px 0px 1px #ffffff, -1px 1px 1px #ffffff, 0px -1px 1px #ffffff, 0px 1px 1px #ffffff, 1px -1px 1px #ffffff, 1px 0px 1px #ffffff, 1px 1px 1px #ffffff;
+}

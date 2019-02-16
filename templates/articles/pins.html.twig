@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Visualisation de la popularité des codes PIN{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ basepath }}/css/pins.css">
+
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- Props to https://bl.ocks.org/HarryStevens/81e7699d43b2373ba805e23c5eafa21e -->
+    <script src="{{ basepath }}/js/d3.v4.min.js"></script>
+    <script src="{{ basepath }}/js/data2grid.min.js"></script>
+    <script src="{{ basepath }}/js/pins.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Visualisation de la popularité des codes PIN<sup>*</sup></h1>
+
+    <p>
+        <em>Cet article fait suite <a href="http://www.datagenetics.com/blog/september32012/" target="_blank">à une analyse de DataGenetics</a>.</em>
+    </p>
+    <p>
+
+        Les mots de passe que nous utilisons révèlent beaucoup de choses sur nous.
+        Il existe plusieurs catégories de mots de passe, qui dépendent du contexte d'utilisation.
+        Ici nous nous intéressons aux codes PIN, un ensemble de mots de passe à longueur fixe qui sont constitués de chiffres.
+        Ces codes sont très répandus (digicodes, téléphones portables), leurs atouts majeurs étant la rapidité de l'interaction, la simplicité de mémorisation et l'impersonnalité.
+        Ils ne sont à proprement parler que peu sécurisés car le nombre de combinaisons est petit (<code>10 000</code> pour les codes à quatre chiffres), toutefois ils peuvent s'avérer être suffisants dans certains cas (notamment lorsque les tentatives sont limitées).
+        Un code PIN doit normalement être choisi de manière aléatoire afin de garantir le meilleur niveau de sécurité ; mais ce n'est pas toujours le cas, ce qui nous amène au sujet de cet article.
+    </p>
+    <p>
+        Suite à la lecture de cet article j'ai souhaité en apprendre davantage sur les tendances pour certains types de codes.
+        J'ai alors reproduit l'expérience sous la forme d'une visualisation interactive. Les boutons ci-dessous servent à mettre en évidence les différents motifs que j'ai identifiés.
+    </p>
+    <p>
+        Une <strong>note importante</strong> concernant les données :
+        les données présentées ici proviennent d'une (grande) liste de mots de passe sur laquelle je n'ai gardé que les chaînes de caractères constituées 4 chiffres.
+        Une des conséquence de cette approximation implique que les fréquences des codes <code>0000..0009</code>, <code>0010..0099</code>, <code>0100..0999</code> et <code>1000..9999</code> ne sont pas comparables entre elles, il faut les traiter séparément.
+        On aurait pu normaliser les quatre groupes afin de se rapprocher de la réalité mais j'ai préféré ne pas le faire.
+    </p>
+
+    <div id="pins"></div>
+
+    <div class="text-center">
+        <small>Matrice d'intensité des codes PIN en fonction de leur fréquence d'utilisation</small>
+    </div>
+
+    <div class="row" style="height: 20px;"></div>
+
+    <div class="row text-center">
+        <strong>Sélection</strong>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="all" checked><em>Tous les codes</em></label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="double">Doubles répétitions</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="year">Années</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="date">Dates</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="sequence">Séquences</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="repetition">Répétition de chiffres</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="radio-highlight" value="palindrome">Palindromes</label>
+        </div>
+
+
+    </div>
+
+
+    <hr>
+
+    <p>
+        <strong><sup>*</sup></strong> : on considère qu'un <em>code PIN</em> est composé de quatre chiffres.
+    </p>
+
+{% endblock%}
