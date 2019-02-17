@@ -1,7 +1,23 @@
-#pins {
+#pins, #scale, #labels, #selection {
     margin: 0 auto;
     display: table;
     font-family: "Helvetica Neue", sans-serif;
+}
+#labels {
+    margin-top: 5px;
+}
+.label {
+    float: left;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+#selection-tip {
+    position: relative;
+    color: black;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
 }
 button {
     margin: auto;

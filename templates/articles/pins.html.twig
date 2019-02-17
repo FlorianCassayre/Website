@@ -38,16 +38,31 @@
         J'ai alors reproduit l'expérience sous la forme d'une visualisation interactive. Les boutons ci-dessous servent à mettre en évidence les différents motifs que j'ai identifiés.
     </p>
     <p>
-        Une <strong>note importante</strong> concernant les données :
+        Sur ce partitionnement, les milliers et les centaines varient sur l'axes des abscisses, tandis que les unités et les dizaines varient sur l'axes des ordonnées.
+    </p>
+    <p>
+        Une <strong>note importante</strong> (mise à jour) :
         les données présentées ici proviennent d'une (grande) liste de mots de passe sur laquelle je n'ai gardé que les chaînes de caractères constituées 4 chiffres.
-        Une des conséquence de cette approximation implique que les fréquences des codes <code>0000..0009</code>, <code>0010..0099</code>, <code>0100..0999</code> et <code>1000..9999</code> ne sont pas comparables entre elles, il faut les traiter séparément.
-        On aurait pu normaliser les quatre groupes afin de se rapprocher de la réalité mais j'ai préféré ne pas le faire.
+        Cette approximation génère un biais pour les codes précédés de zéros.
+        Afin de pouvoir afficher une pondération qui ait du sens, j'ai normalisé les trois classes problématiques (codes qui commencent par un, deux et trois zéros) en utlisant la distribution de la classe principale.
     </p>
 
     <div id="pins"></div>
 
+    <div id="selection">
+        <span id="selection-tip"></span>
+    </div>
+
+    <canvas id="scale" width="1" height="1"></canvas>
+
+    <div id="labels"></div>
+
     <div class="text-center">
+
         <small>Matrice d'intensité des codes PIN en fonction de leur fréquence d'utilisation</small>
+        <br />
+        <small>(un point de pourcentage correspond à 50 000 valeurs de l'échantillon)</small>
+
     </div>
 
     <div class="row" style="height: 20px;"></div>
@@ -75,10 +90,7 @@
         <div class="radio">
             <label><input type="radio" name="radio-highlight" value="palindrome">Palindromes</label>
         </div>
-
-
     </div>
-
 
     <hr>
 
