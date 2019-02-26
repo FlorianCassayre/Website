@@ -19,8 +19,8 @@
     <h3>Les générateurs congruentiels linéaires</h3>
     <p>
         C'est l'algorithme le plus utilisé pour générer des nombres pseudo-aléatoires. Ils ont l'avantage d'être très rapides et peuvent s'avérer être de très bonne qualité.
-        Leur seule contrainte est qu'il faut les initialiser à partir d'un nombre appelé <strong>graine</strong> (<strong>seed</strong> en anglais). Deux graines produiront <strong>toujours</strong> la même séquence de nombres aléatoires, c'est pourquoi il faut s'assurer que la graine de départ soit <strong>différente</strong> à chaque exécution.
-        Généralement c'est l'unité de temps qui est utilisé comme graine (temps en nanosecondes par exemple) mais on pourrait très bien additionner à cela d'autres facteurs de hasard comme les mouvements de la souris, les touches du clavier, etc.
+        Leur seule contrainte est qu'il faut les initialiser à partir d'un nombre appelé <strong>graine</strong> (<strong>seed</strong> en anglais). Deux graines identiques produiront <strong>toujours</strong> la même séquence de nombres aléatoires, c'est pourquoi il faut s'assurer que la graine de départ soit <strong>différente</strong> à chaque exécution.
+        Généralement c'est l'unité de temps qui est utilisé comme graine (heure courante exprimée en nanosecondes par exemple) mais on pourrait très bien additionner à cela d'autres facteurs de hasard comme les mouvements de la souris, les touches du clavier, etc.
     </p>
     <p>
         Un générateur congruentiel linéaire n'est autre qu'une suite mathématique. Elle est définie par trois paramètres (en plus de la graine de départ qui elle est variable) :
@@ -56,14 +56,14 @@
 
     <h3>Limites</h3>
     <p>
-        Le plus gros danger sur lequel il faut être attentif est la prédiction des termes de la suite. En effet, en connaissant les paramètres utilisés par le générateur ainsi qu'un des termes de la suite il est possible de déduire tous les termes suivants (en utilisant en autres l'inversion modulaire).
+        Le plus gros danger sur lequel il faut être attentif est la prédiction des termes de la suite. En effet, en connaissant les paramètres utilisés par le générateur ainsi qu'un des termes de la suite il est possible de déduire tous les termes suivants (en appliquant l'inversion modulaire).
         Aussi, si le module est trop petit les nombres qui vont en découler auront l'air « moins » aléatoires que si le module avait été plus grand.
     </p>
     <p>
-        De ce fait, il ne faut <strong>pas</strong> les utiliser en <strong>cryptographie</strong>. D'autres algorithmes plus lents mais moins biaisés et quasiment imprédictibles sont utilisés pour cela.
+        De ce fait, il ne faut <strong>pas</strong> les utiliser en <strong>cryptographie</strong>. D'autres algorithmes plus coûteux mais moins biaisés et surtout pratiquement imprédictibles sont utilisés pour cela.
     </p>
     <p>
-        De la même façon, s'il s'agit d'une plateforme de jeu où le hasard prend une place importante ce n'est probablement pas une bonne idée.
+        De la même façon, s'il s'agit d'une plateforme en ligne où le hasard prend une place importante (casino virtuel, MMO), il peut être judicieux de bien choisir son générateur aléatoire.
     </p>
 
     <h3>Petite anecdote</h3>
@@ -71,15 +71,15 @@
         Le jeu PacMan datant de 1980 utilisait déjà un générateur congruentiel linéaire pour diriger les fantômes dans le labyrinthe.
     </p>
     <p>
-        Les paramètres utilisés par le développeur Shigeo Funaki (<code>a = 5</code>, <code>c = 1</code> et <code>m = 8192</code>) produisent un générateur qui a une période de "seulement" 1365 ; cela peut tout à fait s'expliquer par les contraintes de l'époque (un Z80 dans ce cas mais les contraintes sont généralisables pour tout type de matériel) :
+        Les paramètres utilisés par le développeur Shigeo Funaki (<code>a = 5</code>, <code>c = 1</code> et <code>m = 8192</code>) forment un générateur qui a une période de "seulement" 1365 ; cela peut tout à fait s'expliquer par les contraintes de l'époque (un microprocesseur Z80 8-bit cadencé à quelques mégahertz tout au plus) :
     </p>
     <ul>
-        <li>La multiplication est très coûteuse : alors que l'addition est calculée en quelques cycles d'horloge, la multiplication nécessite environ <code>log<sub>2</sub>(n)</code> fois plus de cycles. Ici elle peut facilement se faire par un enchainement d'additions.</li>
-        <li>L'addition de l'incrément est un cas particulier car une instruction processeur (<code>inc</code>) permet directement d'incrémenter une variable. Cette opération est 2 à 3 fois moins coûteuse qu'une addition quelconque.</li>
+        <li>La multiplication est très coûteuse. Alors que l'addition est calculée en quelques cycles d'horloge, la multiplication nécessite environ <code>log<sub>2</sub>(n)</code> fois plus de cycles. Ici elle peut facilement se faire par un enchainement d'additions, ce qui est bénéfique.</li>
+        <li>L'addition de l'incrément est un cas particulier car une instruction processeur (<code>inc</code>) permet directement d'incrémenter une variable. Cette opération est moins coûteuse qu'une addition de deux registres.</li>
         <li>Le modulo est calculé grâce à un ET logique car 8192 et une puissance de 2 (<code>2<sup>14</sup></code>). Nécessite aussi très peu de cycles.</li>
     </ul>
     <p>
-        Le code source en assembleur (commenté et formaté) qui m'a servi à illustrer cet exemple se trouve <a href="http://umlautllama.com/projects/pacdocs/mspac/mspac.asm">ici</a>, en particulier la procédure qui génère des octets pseudo-aléatoires se situe au niveau de l'octet <code>0x2a23</code>.
+        Le code source en assembleur (commenté et formaté) qui m'a servi à illustrer cet exemple se trouve <a href="http://umlautllama.com/projects/pacdocs/mspac/mspac.asm">ici</a>, en particulier la procédure qui génère des octets pseudo-aléatoires se situe au niveau de l'adresse <code>0x2a23</code>.
     </p>
 
     <hr>
