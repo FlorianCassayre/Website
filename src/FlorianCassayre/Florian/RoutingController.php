@@ -52,6 +52,8 @@ class RoutingController implements ControllerProviderInterface
         $controllers->get('/card', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::card')->bind('card');
         $controllers->get('/card2', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::card2')->bind('card2');
 
+        $controllers->get('/genealogy', 'FlorianCassayre\\Florian\\Controllers\\StaticContentController::genealogy')->bind('genealogy');
+
         return $controllers;
     }
 }

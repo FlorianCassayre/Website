@@ -26,4 +26,9 @@ class StaticContentController
     {
         return $app['twig']->render('static/card2.html.twig', array());
     }
+
+    public function genealogy(Application $app)
+    {
+        return $app['twig']->render('static/genealogy.html.twig', array());
+    }
 }
