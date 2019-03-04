@@ -4,120 +4,14 @@
 
 {% block stylesheets %}
 
-    <style>
-        #wheel {
-            margin: 0 auto;
-            display: table;
-            font-family: "Helvetica Neue", sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ basepath }}/css/genealogy.css">
 
 {% endblock %}
 
 {% block scripts %}
 
     <script src="{{ basepath }}/js/d3.v4.min.js"></script>
-    <script>
-
-        var nodeData = {"name":"F. Cassayre",sex:"M",area:"92","children":[{"name":"S. Richaud",sex:"F",area:"13","children":[{"name":"C. Cesbron",sex:"F",area:"75","children":[{"name":"M. A. J. L. Barré",sex:"F",area:"49","children":[{"name":"J. E. Houdet",sex:"F",area:"49","children":[{"name":"E. C. Devy",sex:"F",area:"49","children":[{"name":"J. Humeau",sex:"F",area:"49","children":[{"name":"M. Ménard",sex:"F",area:"?","children":[]},{"name":"J. Humeau",sex:"M",area:"?","children":[]}]},{"name":"R. Davy",sex:"M",area:"49","children":[{"name":"J. Gazeau",sex:"F",area:"?","children":[]},{"name":"R. Davy",sex:"M",area:"?","children":[]}]}]},{"name":"J. Houdet",sex:"M",area:"49","children":[{"name":"V. M. Body",sex:"F",area:"?","children":[{"name":"M. Fonteneau",sex:"F",area:"49","children":[{"name":"J. A. Massé",sex:"F",area:"?","children":[]},{"name":"M. Fonteneau",sex:"M",area:"?","children":[]}]},{"name":"L. Bodi",sex:"M",area:"49","children":[{"name":"J. Traineau",sex:"F",area:"?","children":[]},{"name":"F. Bodi",sex:"M",area:"?","children":[]}]}]},{"name":"J. R. Houdet",sex:"M",area:"49","children":[{"name":"L. V. Buffard",sex:"F",area:"?","children":[]},{"name":"L. Houdet",sex:"M",area:"49","children":[]}]}]}]},{"name":"A. M. J. Barré",sex:"M",area:"49","children":[{"name":"M. R. Mousseau",sex:"F",area:"49","children":[{"name":"R. J. Bondu",sex:"F",area:"49","children":[{"name":"R. J. Loupiot",sex:"F",area:"?","children":[]},{"name":"F. J. Bondu",sex:"M",area:"?","children":[{"name":"A. Barreault",sex:"F",area:"?","children":[]},{"name":"F. Bondu",sex:"M",area:"?","children":[]}]}]},{"name":"P. Mousseau",sex:"M",area:"49","children":[{"name":"R. Boumard",sex:"F",area:"?","children":[]},{"name":"P. Mousseau",sex:"M",area:"?","children":[]}]}]},{"name":"L. Barré",sex:"M",area:"49","children":[{"name":"M. M. Piou",sex:"F",area:"49","children":[{"name":"M. Durand",sex:"F",area:"49","children":[]},{"name":"F. Piou",sex:"M",area:"49","children":[]}]},{"name":"J. J. Barré",sex:"M",area:"49","children":[{"name":"A. Richard",sex:"F",area:"?","children":[]},{"name":"J. Barré",sex:"M",area:"?","children":[]}]}]}]}]},{"name":"J. F. Cesbron",sex:"M",area:"75","children":[{"name":"B. Beffort",sex:"F",area:"lu","children":[{"name":"E. Wagener",sex:"F",area:"lu","children":[{"name":"M. Regenwetter",sex:"F",area:"lu","children":[{"name":"C. Binsfeld",sex:"F",area:"lu","children":[{"name":"M. Sehuit",sex:"F",area:"?","children":[]},{"name":"J. Binsfeld",sex:"M",area:"?","children":[]}]},{"name":"P. Regenwetter",sex:"M",area:"lu","children":[{"name":"B. Fehuit",sex:"F",area:"?","children":[]},{"name":"J. Regenwetter",sex:"M",area:"?","children":[]}]}]},{"name":"M. Wagener",sex:"M",area:"lu","children":[{"name":"A. M. Frisch",sex:"F",area:"lu","children":[{"name":"A. ",sex:"F",area:"?","children":[]},{"name":"N. Frisch",sex:"M",area:"?","children":[]}]},{"name":"N. Wagener",sex:"M",area:"?","children":[{"name":"E. Kandel",sex:"F",area:"?","children":[]},{"name":" Wagener",sex:"M",area:"?","children":[]}]}]}]},{"name":"J. Beffort",sex:"M",area:"lu","children":[{"name":"A. Meyer",sex:"F",area:"lu","children":[{"name":"M. Jung",sex:"F",area:"lu","children":[]},{"name":"J. Meyer",sex:"M",area:"?","children":[]}]},{"name":"C. Beffort",sex:"M",area:"lu","children":[{"name":"A. Ellinger",sex:"F",area:"?","children":[]},{"name":"F. Beffort",sex:"M",area:"lu","children":[]}]}]}]},{"name":"J. J. Cesbron",sex:"M",area:"49","children":[{"name":"V. Launay",sex:"F",area:"49","children":[{"name":"V. Hacault",sex:"F",area:"?","children":[{"name":"A. Gouzé",sex:"F",area:"?","children":[]},{"name":"R. Hacault",sex:"M",area:"49","children":[]}]},{"name":"F. R. Launay",sex:"M",area:"?","children":[{"name":"R. Siger",sex:"F",area:"49","children":[]},{"name":"F. Launay",sex:"M",area:"?","children":[]}]}]},{"name":"J. V. Cesbron",sex:"M",area:"?","children":[{"name":"J. Coiffard",sex:"F",area:"49","children":[{"name":"M. Boutin",sex:"F",area:"49","children":[]},{"name":"J. Coiffard",sex:"M",area:"?","children":[]}]},{"name":"J. Cesbron",sex:"M",area:"49","children":[{"name":"R. Foulonneau",sex:"F",area:"?","children":[{"name":"J. Chupin",sex:"F",area:"?","children":[]},{"name":"J. Foulonneau",sex:"M",area:"?","children":[]}]},{"name":"L. M. Cesbron",sex:"M",area:"49","children":[{"name":"M. J. Garnier",sex:"F",area:"49","children":[]},{"name":"L. P. Cesbron",sex:"M",area:"49","children":[]}]}]}]}]}]}]},{"name":"J. P. Richaud",sex:"M",area:"13","children":[{"name":"F. G. Pastre",sex:"F",area:"13","children":[{"name":"V. M. J. C. Bourrelier",sex:"F",area:"13","children":[{"name":"M. M. L. Chabaud",sex:"F",area:"13","children":[{"name":"G. Agnès",sex:"F",area:"13","children":[]},{"name":"J. Chabaud",sex:"M",area:"?","children":[]}]},{"name":"C. R. Bourrelier",sex:"M",area:"13","children":[{"name":"H. Thérèse",sex:"F",area:"?","children":[]},{"name":"J. B. F. Bourrelier",sex:"M",area:"13","children":[]}]}]},{"name":"J. A. Pastre",sex:"M",area:"34","children":[{"name":"M. E. Tressaud",sex:"F",area:"?","children":[{"name":"E. Roux",sex:"F",area:"?","children":[]},{"name":"J. Tressaud",sex:"M",area:"?","children":[]}]},{"name":"F. Pastre",sex:"M",area:"?","children":[{"name":"V. V. Boissezon",sex:"F",area:"?","children":[]},{"name":"J. Pastre",sex:"M",area:"?","children":[]}]}]}]},{"name":"L. Richaud",sex:"M",area:"13","children":[{"name":"M. A. L. Folitot",sex:"F",area:"13","children":[{"name":"F. R. Jean",sex:"F",area:"13","children":[{"name":"R. J. Brun",sex:"F",area:"13","children":[]},{"name":"F. B. Jean",sex:"M",area:"?","children":[]}]},{"name":"P. P. Folitot",sex:"M",area:"13","children":[{"name":"B. M. Hermitte",sex:"F",area:"13","children":[]},{"name":"F. J. V. J. R. Folitot",sex:"M",area:"?","children":[]}]}]},{"name":"J. P. M. Richaud",sex:"M",area:"34","children":[{"name":"A. Chabaud?",sex:"F",area:"?","children":[]},{"name":"F. L. Richaud",sex:"M",area:"?","children":[]}]}]}]}]},{"name":"J. Cassayre",sex:"M",area:"54","children":[{"name":"N. Bidot",sex:"F",area:"54","children":[{"name":"O. Poline",sex:"F",area:"54","children":[]},{"name":"A. Bidot",sex:"M",area:"?","children":[]}]},{"name":"G. Cassayre",sex:"M",area:"54","children":[{"name":"J. S. Gabriel",sex:"F",area:"54","children":[{"name":"L. M. Bouvier",sex:"F",area:"75","children":[{"name":"A. L. Allière",sex:"F",area:"75","children":[{"name":"E. L. L. Gautier",sex:"F",area:"28","children":[{"name":"M. M. V. A. Prévost",sex:"F",area:"28","children":[{"name":"M. A. Lodier",sex:"F",area:"?","children":[]},{"name":"G. Prévost",sex:"M",area:"45","children":[]}]},{"name":"F. S. Gautier",sex:"M",area:"28","children":[{"name":"M. R. Huet",sex:"F",area:"?","children":[]},{"name":"J. S. Gautier",sex:"M",area:"?","children":[]}]}]},{"name":"A. Allière",sex:"M",area:"45","children":[{"name":"A. E. Allaire",sex:"F",area:"89","children":[{"name":"M. A. Billaud",sex:"F",area:"89","children":[]},{"name":"P. N. Allaire",sex:"M",area:"89","children":[]}]}]}]},{"name":"V. X. Bouvier",sex:"M",area:"94","children":[{"name":"M. F. Pacilly",sex:"F",area:"50","children":[{"name":"R. L. D. Berthelot",sex:"F",area:"?","children":[{"name":"L. G. Herbert",sex:"F",area:"?","children":[]},{"name":"N. F. Berthelot",sex:"M",area:"?","children":[]}]},{"name":"J. Pacilly",sex:"M",area:"?","children":[{"name":"M. M. Coquelin",sex:"F",area:"?","children":[]},{"name":"J. Pacilly",sex:"M",area:"?","children":[]}]}]},{"name":"J. Bouvier",sex:"M",area:"39","children":[{"name":"C. Bourguignon",sex:"F",area:"39","children":[{"name":"J. B. Ladoix",sex:"F",area:"?","children":[]},{"name":"C. E. Bourguignon",sex:"M",area:"?","children":[]}]},{"name":"J. C. Bouvier",sex:"M",area:"39","children":[{"name":"J. Michel",sex:"F",area:"?","children":[]},{"name":"J. B. Bouvier",sex:"M",area:"39","children":[]}]}]}]}]},{"name":"J. M. Gabriel",sex:"M",area:"54","children":[{"name":"M. L. Fristo",sex:"F",area:"57","children":[{"name":"M. A. Bello",sex:"F",area:"57","children":[{"name":"M. Delacour",sex:"F",area:"57","children":[{"name":"M. A. Didelon",sex:"F",area:"?","children":[]},{"name":"C. Delacour",sex:"M",area:"?","children":[]}]},{"name":"J. Bello",sex:"M",area:"57","children":[{"name":"M. Langard",sex:"F",area:"?","children":[]},{"name":"J. Bello",sex:"M",area:"?","children":[]}]}]},{"name":"L. B. Fristo",sex:"M",area:"57","children":[{"name":"A. Watrin",sex:"F",area:"?","children":[{"name":"E. Benoit",sex:"F",area:"?","children":[]},{"name":"F. Watrin",sex:"M",area:"?","children":[]}]},{"name":"L. Fristo",sex:"M",area:"57","children":[{"name":"A. Poinsignon",sex:"F",area:"57","children":[]},{"name":"J. J. Fristo",sex:"M",area:"?","children":[]}]}]}]},{"name":"J. B. N. Gabriel",sex:"M",area:"54","children":[{"name":"M. Oudenot",sex:"F",area:"54","children":[{"name":"M. M. Salonne",sex:"F",area:"54","children":[{"name":"C. Jacques",sex:"F",area:"54","children":[]},{"name":"N. Salonne",sex:"M",area:"?","children":[]}]},{"name":"S. Oudenot",sex:"M",area:"54","children":[{"name":"M. Meline",sex:"F",area:"54","children":[]},{"name":"C. Oudenot",sex:"M",area:"54","children":[]}]}]},{"name":"N. Gabriel",sex:"M",area:"54","children":[{"name":"S. M. Boulay",sex:"F",area:"54","children":[{"name":"M. C. Harotte",sex:"F",area:"54","children":[]},{"name":"N. Boulay",sex:"M",area:"54","children":[]}]},{"name":"C. Gabriel",sex:"M",area:"54","children":[{"name":"C. F. Lemboulé",sex:"F",area:"54","children":[]},{"name":"L. Gabriel",sex:"M",area:"54","children":[]}]}]}]}]}]},{"name":"M. H. Cassayre",sex:"M",area:"15","children":[{"name":"N. Teulier",sex:"F",area:"12","children":[{"name":"M. A. Grès",sex:"F",area:"12","children":[{"name":"M. A. Constans",sex:"F",area:"12","children":[{"name":"J. Carley",sex:"F",area:"12","children":[{"name":"J. Fualdes",sex:"F",area:"?","children":[]},{"name":"J. Carles",sex:"M",area:"?","children":[]}]},{"name":"J. Constans",sex:"M",area:"?","children":[{"name":"T. Chabbert",sex:"F",area:"12","children":[]},{"name":"A. Constans",sex:"M",area:"12","children":[]}]}]},{"name":"P. J. Grès",sex:"M",area:"12","children":[{"name":"C. Mirabel",sex:"F",area:"12","children":[{"name":"M. A. Vaissade",sex:"F",area:"?","children":[]},{"name":"F. Mirabel",sex:"M",area:"?","children":[]}]},{"name":"J. Grès",sex:"M",area:"12","children":[{"name":"M. Rous",sex:"F",area:"12","children":[]},{"name":"A. Grès",sex:"M",area:"?","children":[]}]}]}]},{"name":"J. Teulier",sex:"M",area:"?","children":[{"name":"M. Bonet",sex:"F",area:"12","children":[{"name":"C. Marly",sex:"F",area:"?","children":[]},{"name":"A. Bonet",sex:"M",area:"?","children":[]}]},{"name":"P. Teulier",sex:"M",area:"?","children":[{"name":"M. Lortal",sex:"F",area:"?","children":[]},{"name":"P. Teulier",sex:"M",area:"?","children":[]}]}]}]},{"name":"J. Cassayre",sex:"M",area:"15","children":[{"name":"F. Lafon",sex:"F",area:"46","children":[{"name":"F. Couderc",sex:"F",area:"46","children":[{"name":"M. Alibert",sex:"F",area:"?","children":[]},{"name":"A. Couderc",sex:"M",area:"46","children":[]}]},{"name":"J. Lafon",sex:"M",area:"46","children":[{"name":"M. Masbou",sex:"F",area:"?","children":[]},{"name":"J. Lafon",sex:"M",area:"?","children":[]}]}]},{"name":"J. L. Cassayre",sex:"M",area:"46","children":[{"name":"M. Masbou",sex:"F",area:"?","children":[{"name":"P. Lafferayrie",sex:"F",area:"?","children":[{"name":"I. Védrune",sex:"F",area:"?","children":[]},{"name":"A. Lafferayrie",sex:"M",area:"?","children":[]}]},{"name":"P. Masbou",sex:"M",area:"?","children":[]}]},{"name":"J. L. Cassayre",sex:"M",area:"?","children":[{"name":"M. Pezet",sex:"F",area:"46","children":[{"name":"G. Bousquet",sex:"F",area:"46","children":[]},{"name":"P. Pezet",sex:"M",area:"?","children":[]}]},{"name":"G. Cassayre",sex:"M",area:"?","children":[{"name":"D. Soulié",sex:"F",area:"46","children":[]},{"name":"F. Cassayre",sex:"M",area:"46","children":[]}]}]}]}]}]}]}]}]};
-
-
-
-        var getMaxDepth = function(node) {
-            var explore = [node];
-            var i = 0;
-            while(explore.length > 0) {
-                var next = [];
-                for(var j = 0; j < explore.length; j++)
-                    if(explore[j].children)
-                        for(var k = 0; k < explore[j].children.length; k++)
-                            next.push(explore[j].children[k])
-                explore = next;
-                i++;
-            }
-            return i;
-        };
-        var maxDepth = getMaxDepth(nodeData);
-
-        // Variables
-        var size = 800;
-        var width = size;
-        var height = size;
-        var radius = Math.min(width, height) / 2;
-        var color = d3.scaleOrdinal(d3.schemeCategory20b);
-
-        var colorMap = {
-            "12": "#56f107", // Aveyron
-            "13": "#ff9514", // Marseille
-            "15": "#47f564", // Cantal
-            "28": "#d8e1e3", // Eure-et-Loir
-            "34": "#ffc532", // Hérault
-            "39": "#d1fd02", // Jura
-            "45": "#bdbc54", // Loiret
-            "46": "#2ad010", // Lot
-            "49": "#373dff", // Maine-et-Loire
-            "50": "#c9ffe3", // Manche
-            "54": "#f8f400", // Meurthe-et-Moselle
-            "57": "#ffe80d", // Moselle
-            "75": "#49deff", // Paris
-            "89": "#c86363", // Yonne
-
-            "lu": "#ff28cb", // Luxembourg
-
-            "unknown": "#f4f5f7" // Other
-        };
-
-        var getColor = function (code) {
-            if(colorMap[code])
-                return colorMap[code];
-            else
-                return colorMap.unknown;
-        };
-
-        // Create primary <g> element
-        var g = d3.select('#wheel')
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height)
-            .append('g')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-
-        // Data strucure
-        var partition = d3.partition()
-            .size([2 * Math.PI, radius]);
-
-
-        // Find data root
-        nodeData.sosa = 1;
-        var root = d3.hierarchy(nodeData)
-            .each(function (d) { d.value = 1 << (maxDepth - d.depth); })
-            .sort(function (a, b) {
-                return a.data.sex === "M" ? -1 : 1;
-            })
-            .each(function(d) { if(!d.data.sosa) d.data.sosa = d.parent.data.sosa * 2; });
-
-        partition(root);
-
-        // Size arcs
-        var arc = d3.arc()
-            .startAngle(function (d) { return d.x0 + Math.PI })
-            .endAngle(function (d) { return d.x1 + Math.PI })
-            .innerRadius(function (d) { return d.y0 })
-            .outerRadius(function (d) { return d.y1 });
-
-        // Put it all together
-        g.selectAll('path')
-            .data(root.descendants())
-            .enter().append('path')
-            .attr("display", function (d) { return d.depth ? null : "none"; })
-            .attr("d", arc)
-            .style('stroke', '#fff')
-            .style("fill", function (d) { return getColor((d.children ? d : d.parent).data.area); })
-            /*.style("opacity", function (d) {
-                return !d.data.hasOwnProperty("visible") ? 1 : 0;
-            })*/;
-
-    </script>
+    <script src="{{ basepath }}/js/genealogy.js"></script>
 
 {% endblock %}
 

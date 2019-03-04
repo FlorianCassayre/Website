@@ -1,0 +1,15 @@
+#wheel {
+    margin: 0 auto;
+    display: table;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.unselected {
+    opacity: 0.2;
+    transition: opacity 0.2s ease;
+}
+
+.selected {
+    opacity: 1.0;
+    transition: opacity 0.2s ease;
+}
