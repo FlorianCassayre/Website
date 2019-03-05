@@ -1,3 +1,5 @@
+Math.seedrandom(42); // "A delicate pinch of determinism"
+
 var getCanvasSize = function (scale) {
     var div = $('div.content')[0];
     var computedStyle = getComputedStyle(div);
