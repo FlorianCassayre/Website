@@ -1,4 +1,4 @@
-#wheel {
+#wheel, #bubbles {
     margin: 0 auto;
     display: table;
     font-family: "Helvetica Neue", sans-serif;
@@ -11,5 +11,43 @@
 
 .selected {
     opacity: 1.0;
+    transition: opacity 0.2s ease;
+}
+
+.areatip, #nametip {
+    position: fixed;
+    font-size: 1.2em;
+    text-align: center;
+    text-shadow: -1px -1px 1px #ffffff, -1px 0px 1px #ffffff, -1px 1px 1px #ffffff, 0px -1px 1px #ffffff, 0px 1px 1px #ffffff, 1px -1px 1px #ffffff, 1px 0px 1px #ffffff, 1px 1px 1px #ffffff;
+}
+
+.tooltip-visible {
+    opacity: 1.0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.tooltip-hidden {
+    opacity: 0.0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.bubble-normal {
+    opacity: 1.0;
+    stroke-width: 0;
+    transition: opacity 0.2s ease;
+}
+
+.bubble-selected {
+    opacity: 1.0;
+    stroke: black;
+    stroke-width: 3;
+    transition: opacity 0.2s ease;
+}
+
+.bubble-unselected {
+    opacity: 0.4;
+    stroke-width: 0;
     transition: opacity 0.2s ease;
 }
