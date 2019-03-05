@@ -1,3 +1,9 @@
+var getCanvasSize = function (scale) {
+    var div = $('div.content')[0];
+    var computedStyle = getComputedStyle(div);
+    return Math.min(div.clientWidth - parseFloat(computedStyle.paddingLeft) - parseFloat(computedStyle.paddingRight), window.innerHeight) * scale;
+};
+
 var generateHierarchy = function (data) {
     var getMaxDepth = function(node) {
         var explore = [node];
@@ -15,9 +21,9 @@ var generateHierarchy = function (data) {
     };
     var maxDepth = getMaxDepth(data);
 
-    var size = 800;
-    var width = size;
-    var height = size;
+    var scale = 0.8;
+    var size = getCanvasSize(scale);
+    var width = size, height = size;
     var radius = Math.min(width, height) / 2;
 
     var localityData = {
@@ -95,7 +101,7 @@ var generateHierarchy = function (data) {
             g.selectAll('path').attr("class", function (d1) {
                 return d1.data.area === d.data.area || d.data.area === "?" ? "selected" : "unselected";
             });
-            sosatip.text("Sosa n°" + d.data.sosa);
+            sosatip.text("Sosa " + d.data.sosa);
             areatip.text(getLocalityData(d.data.area).name);
         })
         .on("mouseout", function () {
@@ -131,9 +137,9 @@ var generateHierarchy = function (data) {
 
 var generateBubbles = function(data) {
 
-    var size = 800;
-    var width = size;
-    var height = size;
+    var scale = 0.8;
+    var size = getCanvasSize(scale);
+    var width = size, height = size;
 
     var colorByRank = function (rank) {
         var c = Math.max(Math.min(Math.floor(Math.log(rank + 1) * 20 - 30), 255), 0);
