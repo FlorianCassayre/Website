@@ -18,9 +18,14 @@
 
 {% block content %}
 
-    <h2>Ma généalogie</h2>
+    <div class="alert alert-warning" role="alert">
+        <span class="fa fa-info-circle" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+        <strong>Information :</strong>
+        Cette page est une ébauche d'un travail en cours ; le contenu peut être inachevé, partiellement fonctionnel et/ou susceptible de contenir des erreurs.
+    </div>
 
-    <em>Cette page est une ébauche d'un travail en cours.</em>
+    <h2>Ma généalogie</h2>
 
     <h3>Par localités</h3>
     <p>
@@ -29,6 +34,7 @@
     </p>
     <p>
         L'abre est représenté sous la forme d'un disque découpé en secteurs, chaque anneau représente une génération, et chaque couleur correspond à un département Français ou bien un pays étranger.
+        Seules les huit premières (ou dernières) générations sont affichées.
         Survolez le diagramme avec la souris pour faire apparaître les informations ; cliquez pour activer/désactiver la grille.
     </p>
 
@@ -43,14 +49,22 @@
 
     <div id="bubbles"></div>
 
+    {#
     <h3>En anecdotes</h3>
 
     <ul>
         <li>Une rue en France porte le nom de mon patronyme - c'est d'ailleurs la seule - et se trouve dans la commune de Grenade-sur-l'Adour (40), elle-même jumelée avec Hésingue (68), village dans lequel j'ai passé la majeure partie de mon enfance. Jolie coïncidence.</li>
         <li>Un de mes arrières-arrières-grands-pères paternel et un arrière-grand-père maternel ont tous les deux combattu dans le 46ème Régiment d'Infanterie durant la Première Guerre Mondiale (mais dans des divisions différentes).</li>
         <li>L'orthographe de mon patronyme est incertaine ; certains actes anciens font mention d'un accent aigu sur le "e" et d'autre remplacent le "y" par un "i".</li>
-        <li>Mon cousin "célèbre" le plus proche dans ma généalogie est Marcel Lehoux, un pilote automobile français. La "distance génétique" est de 0.1% (2<sup>-10</sup>).</li>
+        <li>Mon cousin "célèbre" le plus proche dans ma généalogie est Marcel Lehoux, un pilote automobile français. Au total, 10 degrés nous séparent.</li>
         <li>Un de mes arrières-arrières-arrières-grands-pères paternel a travaillé aux usines Pompey (Meurthe-et-Moselle) et aurait peut-être contribué à la fabrication des matériaux utilisés lors de la construction de la Tour Eiffel.</li>
+        <li>
+            Aux alentours des IXème et Xème siècles, un Viking aurait fait le tour de la Bretagne, remonté la Loire et se serait installé en Anjou, devenu plus tard le Seigneur de Chemillé...
+            Son nom ? Sigisbrand (ou Sigebrand) de Chemillé - qui signifie littéralement "les feux de la victoire".
+            Il serait l'ancêtre d'un grand nombre d'Anjevins, dont certainement ma grand-mère maternelle qui hérita d'une francisation : Cesbron.
+        </li>
+        <li>L'individu au sosa 157, et toute son ascendance, sont d'identités inconnues.</li>
+        <li>L'implexe le plus proche dans mon ascendance se situe à la quinzième génération.</li>
     </ul>
 
     <p class="text-center" style="margin-top: 50px">
@@ -58,5 +72,6 @@
         <br />
         <em>Si vous pensez partager un ancêtre commun, <a href="{{ url('contact') }}">contactez moi</a> et je vous enverrai un extrait de mon arbre.</em>
     </p>
+    #}
 
 {% endblock%}

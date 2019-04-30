@@ -32,15 +32,17 @@ var generateHierarchy = function (data) {
         "12": {"name": "Aveyron", "color": "#56f107"},
         "13": {"name": "Bouches-du-Rhône", "color": "#ff9514"},
         "15": {"name": "Cantal", "color": "#47f564"},
+        "26": {"name": "Drôme", "color": "#e69747"},
         "28": {"name": "Eure-et-Loir", "color": "#d8e1e3"},
-        "34": {"name": "Hérault", "color": "#ffc532"},
+        "30": {"name": "Gard", "color": "#ffc532"},
+        "34": {"name": "Hérault", "color": "#ffa63c"},
         "39": {"name": "Jura", "color": "#d1fd02"},
         "45": {"name": "Loiret", "color": "#bdbc54"},
         "46": {"name": "Lot", "color": "#2ad010"},
         "49": {"name": "Maine-et-Loire", "color": "#373dff"},
         "50": {"name": "Manche", "color": "#c9ffe3"},
         "54": {"name": "Meurthe-et-Moselle", "color": "#f8f400"},
-        "57": {"name": "Moselle", "color": "#ffe80d"},
+        "57": {"name": "Moselle", "color": "#ffde09"},
         "75": {"name": "Paris", "color": "#49deff"},
         "89": {"name": "Yonne", "color": "#c86363"},
         "94": {"name": "Val-de-Marne", "color": "#24c2e5"},
@@ -81,9 +83,16 @@ var generateHierarchy = function (data) {
 
     partition(root);
 
+    var fixAngle = function(d) {
+        if(d.parent && d.parent.children.length === 1 && d.data.sex === "F")
+            return 2 * Math.PI / (1 << d.depth);
+        else
+            return 0.0; // Already correct
+    };
+
     var arc = d3.arc()
-        .startAngle(function (d) { return d.x0 + Math.PI })
-        .endAngle(function (d) { return d.x1 + Math.PI })
+        .startAngle(function (d) { return d.x0 + Math.PI + fixAngle(d) })
+        .endAngle(function (d) { return d.x1 + Math.PI + fixAngle(d) })
         .innerRadius(function (d) { return d.y0 })
         .outerRadius(function (d) { return d.y1 });
 
