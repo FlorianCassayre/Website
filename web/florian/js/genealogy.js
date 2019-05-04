@@ -26,7 +26,7 @@ var generateHierarchy = function (data) {
     var scale = 0.8;
     var size = getCanvasSize(scale);
     var width = size, height = size;
-    var radius = Math.min(width, height) / 2;
+    var radius = 0.9 * Math.min(width, height) / 2;
 
     var localityData = {
         "12": {"name": "Aveyron", "color": "#56f107"},
@@ -68,6 +68,8 @@ var generateHierarchy = function (data) {
         .style('overflow', 'visible')
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+    var m = d3.select('#map');
 
     var partition = d3.partition()
         .size([2 * Math.PI, radius]);
@@ -112,11 +114,25 @@ var generateHierarchy = function (data) {
             g.selectAll('path').attr("class", function (d1) {
                 return d1.data.area === d.data.area || d.data.area === "?" ? "selected" : "unselected";
             });
-            sosatip.text("Sosa " + d.data.sosa);
+            var s = d.data.sosa;
+            var sosa;
+            if(s === 2)
+                sosa = "Père";
+            else if(s === 3)
+                sosa = "Mère";
+            else if(s < 8) {
+                sosa = "G. " + (s % 2 === 0 ? "Père" : "Mère") + " " + (s < 6 ? "P." : "M.");
+            } else
+                sosa = "Sosa " + d.data.sosa;
+            sosatip.text(sosa);
             areatip.text(getLocalityData(d.data.area).name);
+
+            m.selectAll("path").attr("class", "unselected");
+            m.selectAll("path#departement" + d.data.area).attr("class", "selected");
         })
         .on("mouseout", function () {
             g.selectAll('path').attr("class", "selected");
+            m.selectAll('path').attr("class", "selected");
             sosatip.text("");
             areatip.text("");
         })
@@ -144,6 +160,24 @@ var generateHierarchy = function (data) {
         .attr("dominant-baseline", "central")
         .attr("text-anchor", "middle")
         .style("pointer-events", "none");
+
+    // Map
+
+    d3.xml('../img/genealogy/departements.svg', function (error, data) {
+
+        $('#map').append(data.documentElement);
+        m.select("svg").attr("width", width).attr("height", width * 0.3);
+
+        for(key in localityData) {
+            if(key !== "?") {
+                m.selectAll("path#departement" + key)
+                    .attr("fill", localityData[key].color);
+            }
+        }
+    });
+
+
+
 };
 
 var generateBubbles = function(data) {
@@ -234,13 +268,122 @@ var generateBubbles = function(data) {
 
 };
 
+var generateCelebrities = function(data) {
+    var scale = 0.8;
+    var size = getCanvasSize(scale);
+    var width = size, height = size;
+
+    var maxDistance = 0;
+    for(var i = 0; i < data.children.length; i++) {
+        maxDistance = Math.max(data.children[i].distance, maxDistance);
+    }
+    maxDistance++;
+
+    var g = d3.select('#celebrities')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .style('overflow', 'visible');
+
+    var bubble = d3.pack(data)
+        .size([width, height])
+        .padding(1.5);
+
+    var nodes = d3.hierarchy(data)
+        .sum(function (d) {
+            return maxDistance - d.distance;
+        });
+
+    var node = g.selectAll(".node")
+        .data(bubble(nodes).descendants())
+        .enter()
+        .filter(function (d) {
+            return !d.children
+        })
+        .append("g")
+        .attr("class", "node")
+        .attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+    var getId = function(name) {
+        return name.trim().replace(/\s/g, "-").toLowerCase();
+    };
+
+    node.append("circle")
+        .attr("r", function (d) {
+            return d.r;
+        })
+        // Add image
+        .on("mouseover", function (d) {
+            tip.attr("class", "tooltip-visible")
+                .text(d.data.display_name + ", " + d.data.description.toLowerCase())
+                .attr("transform", function () {
+                    return "translate(" + (d.x - tip.attr("width") / 2) + "," + (d.y - tip.attr("height") - d.r - 20) + ")";
+                });
+            node.attr("class", function (d1) {
+                return d1 === d ? "bubble-selected" : "bubble-unselected";
+            });
+        })
+        .on("mouseout", function () {
+            tip.attr("class", "tooltip-hidden");
+            node.attr("class", "bubble-normal");
+        })
+        .style("fill", function(d) { return d.data.image_url ? ("url(#" + getId(d.data.name) + "-icon)") : "#aaaaaa";})
+        .on("mousedown", function(d) {
+            if(d.data.url)
+                window.open(d.data.url, '_blank');
+        });
+
+    node.filter(function (d) { return d.data.image_url; })
+        .append('defs')
+        .append('pattern')
+        .attr('id', function(d) { return (getId(d.data.name) + "-icon");})
+        .attr('width', 1)
+        .attr('height', 1)
+        .attr('patternContentUnits', 'objectBoundingBox')
+        .append("svg:image")
+        .attr("xlink:xlink:href", function(d) { return (d.data.image_url);})
+        .attr("height", 1)
+        .attr("width", 1)
+        .attr("preserveAspectRatio", "xMinYMin slice");
+
+    node.filter(function (d) { return !d.data.image_url; })
+        .append("text")
+        .attr("dy", ".2em")
+        .style("text-anchor", "middle")
+        .text(function (d) {
+            return d.data.display_name;
+        })
+        .attr("font-family", "sans-serif")
+        .attr("font-size", function (d) {
+            return d.r / 6;
+        })
+        .attr("fill", "white")
+        .style("stroke-width", 0)
+        .style("pointer-events", "none")
+        .attr("font-weight", "bold");
+
+    var tip = g.append("text")
+        .attr("id", "nametip")
+        .attr("dy", ".2em")
+        .style("text-anchor", "middle")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 30)
+        .attr("fill", "black")
+        .style("pointer-events", "none");
+};
+
 $.getJSON("../data/genealogy_data.json", function(data) {
 
-    var hierarchyData = data.hierarchy, surnamesData = data.surnames;
+    var hierarchyData = data.hierarchy, surnamesData = data.surnames, celebritiesData = data.celebrities;
 
     generateHierarchy(hierarchyData);
     generateBubbles({"children": surnamesData});
+    generateCelebrities({"children": celebritiesData});
 
 });
+
+
 
 

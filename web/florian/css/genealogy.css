@@ -1,4 +1,4 @@
-#wheel, #bubbles {
+#wheel, #bubbles, #map, #celebrities {
     margin: 0 auto;
     display: table;
     font-family: "Helvetica Neue", sans-serif;
@@ -50,4 +50,11 @@
     opacity: 0.4;
     stroke-width: 0;
     transition: opacity 0.2s ease;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
 }
