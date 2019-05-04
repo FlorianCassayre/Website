@@ -144,8 +144,8 @@ var generateHierarchy = function (data) {
                 .attr("y", pos[1] + offsetY);
         })
         .on("mousedown", function() {
-            showGrid = !showGrid;
-            updateStroke();
+            //showGrid = !showGrid;
+            //updateStroke();
         });
 
     updateStroke();
