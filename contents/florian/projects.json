@@ -1,6 +1,24 @@
 {
   "projects": [
     {
+      "title": "Projet en Computer Graphics",
+      "description": "Un petit projet réalisé en binôme, nous avons développé un ray tracer avec les librairies GLM et SDL.",
+      "thumbnail": "dragoncg.png",
+      "gist": {
+        "language": "C++",
+        "date": "Avril & Mai 2019",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Blog",
+          "icon": "external-link",
+          "url": "https://cg.cassayre.me"
+        }
+      ]
+    },
+
+    {
       "title": "Business Card 2",
       "description": "Deuxième tentative en ayant appris de mes erreurs, cette fois avec un thème plus difficile : mon propre logo.",
       "thumbnail": "card2.png",
