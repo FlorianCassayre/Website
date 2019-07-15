@@ -1,6 +1,24 @@
 {
   "projects": [
     {
+      "title": "Arbre-o-matic",
+      "description": "Puissant outil de génération d'éventails généalogiques à partir d'un fichier Gedcom.",
+      "thumbnail": "arbreomatic.png",
+      "gist": {
+        "language": "Javascript",
+        "date": "Juillet 2019",
+        "state": "En cours"
+      },
+      "links": [
+        {
+          "title": "Outil en ligne",
+          "icon": "external-link",
+          "url": "https://arbre.cassayre.me"
+        }
+      ]
+    },
+
+    {
       "title": "Projet en Computer Graphics",
       "description": "Un petit projet réalisé en binôme, nous avons développé un ray tracer avec les librairies GLM et SDL.",
       "thumbnail": "dragoncg.png",
