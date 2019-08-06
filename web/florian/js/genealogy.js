@@ -29,6 +29,7 @@ var generateHierarchy = function (data) {
     var radius = 0.9 * Math.min(width, height) / 2;
 
     var localityData = {
+        "04": {"name": "Alpes-de-Haute-Provence", "color": "#ff4252"},
         "12": {"name": "Aveyron", "color": "#56f107"},
         "13": {"name": "Bouches-du-Rhône", "color": "#ff9514"},
         "15": {"name": "Cantal", "color": "#47f564"},
@@ -36,14 +37,16 @@ var generateHierarchy = function (data) {
         "28": {"name": "Eure-et-Loir", "color": "#d8e1e3"},
         "30": {"name": "Gard", "color": "#ffc532"},
         "34": {"name": "Hérault", "color": "#ffa63c"},
-        "39": {"name": "Jura", "color": "#d1fd02"},
+        "39": {"name": "Jura", "color": "#2bffb5"},
         "45": {"name": "Loiret", "color": "#bdbc54"},
         "46": {"name": "Lot", "color": "#2ad010"},
         "49": {"name": "Maine-et-Loire", "color": "#373dff"},
         "50": {"name": "Manche", "color": "#c9ffe3"},
         "54": {"name": "Meurthe-et-Moselle", "color": "#f8f400"},
         "57": {"name": "Moselle", "color": "#ffde09"},
+        "70": {"name": "Haute-Saône", "color": "#21ffb5"},
         "75": {"name": "Paris", "color": "#49deff"},
+        "88": {"name": "Vosges", "color": "#d1fd02"},
         "89": {"name": "Yonne", "color": "#c86363"},
         "94": {"name": "Val-de-Marne", "color": "#24c2e5"},
 
