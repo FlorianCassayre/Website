@@ -30,7 +30,7 @@ var generateHierarchy = function (data) {
 
     var localityData = {
         "04": {"name": "Alpes-de-Haute-Provence", "color": "#ff4252"},
-        "08": {"name": "Ardennes", "color": "#ed74cb"},
+        "08": {"name": "Ardennes", "color": "#edadd5"},
         "12": {"name": "Aveyron", "color": "#56f107"},
         "13": {"name": "Bouches-du-Rhône", "color": "#ff9514"},
         "15": {"name": "Cantal", "color": "#47f564"},

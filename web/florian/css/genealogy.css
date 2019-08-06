@@ -56,5 +56,17 @@
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display:         flex;
+    display: flex;
+}
+
+.signature {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
