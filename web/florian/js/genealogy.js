@@ -153,7 +153,13 @@ var generateHierarchy = function (data) {
         .on("mousedown", function() {
             //showGrid = !showGrid;
             //updateStroke();
+            // ^- this was delegated to another event
         });
+
+    $('#showgrid').change(function() {
+        showGrid = this.checked; // Checkbox value
+        updateStroke();
+    });
 
     updateStroke();
 
@@ -182,7 +188,6 @@ var generateHierarchy = function (data) {
             }
         }
     });
-
 
 
 };
@@ -324,7 +329,7 @@ var generateCelebrities = function(data) {
         // Add image
         .on("mouseover", function (d) {
             tip.attr("class", "tooltip-visible")
-                .text(d.data.display_name + ", " + d.data.description.toLowerCase())
+                .text(d.data.display_name + ", " + d.data.description.toLowerCase() + " (" + d.data.distance + " degrés)")
                 .attr("transform", function () {
                     return "translate(" + (d.x - tip.attr("width") / 2) + "," + (d.y - tip.attr("height") - d.r - 20) + ")";
                 });

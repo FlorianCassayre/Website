@@ -20,50 +20,78 @@
 
     <h2>Ma généalogie</h2>
 
+    <p>
+        Débuté en <em>août 2018</em>, ce projet vise à reconstituer ma généalogie et à mieux comprendre comment vivaient mes ancêtres.
+        À ce jour mon arbre généalogique compte près de <strong>800</strong> individus dont <strong>500</strong> ascendants directs et il ne cesse de se ramifier.
+        Mon arbre est consultable sur <a href="https://gw.geneanet.org/fcassayre_w">Geneanet</a> (ne sont visibles que les personnes nées il y a moins de 120 ans).
+    </p>
+
     <h3>Localités</h3>
     <p>
-        L'origine des mes ancêtres est variée mais elle reste exclusivement francophone ou franco-germanophone.
-        94% sont de nationalité Française et 6% sont Luxembourgeois.
-    </p>
-    <p>
-        L'abre est représenté sous la forme d'un disque découpé en secteurs, chaque anneau représente une génération, et chaque couleur correspond à un département Français ou bien un pays étranger.
-        Seules les huit premières (ou dernières) générations sont affichées.
-        Survolez le diagramme avec la souris pour faire apparaître les informations. {#; cliquez pour activer/désactiver la grille.#}
+        L'origine des mes ancêtres est variée mais en ce qui concerne mes proches aïeuls (10 premières générations), celle-ci reste exclusivement francophone ou franco-germanophone.
+        <strong>94%</strong> sont de nationalité Française et <strong>6%</strong> sont Luxembourgeois.
     </p>
 
     <div id="wheel"></div>
     <div id="map"></div>
 
+    <div class="form-check text-center" style="margin-top: 20px; margin-bottom: 20px">
+        <input type="checkbox" class="form-check-input" id="showgrid">
+        <label class="form-check-label" for="showgrid" style="font-weight: 400;">Afficher la grille</label>
+    </div>
+
+    <p>
+        <span class="fa fa-info-circle" aria-hidden="true"></span>
+        L'abre est représenté sous la forme d'un disque découpé en secteurs, chaque anneau représente une génération, et chaque couleur correspond à un département Français ou bien un pays étranger.
+        Seules les huit premières (ou dernières) générations sont affichées.
+        Survolez le diagramme avec la souris pour faire apparaître les informations.
+    </p>
+
     <h3>Patronymes</h3>
 
     <p>
-        La taille des disques est proportionnelle au nombre d'ancêtres qui portaient ce nom dans ma généalogie.
-        La couleur quant à elle représente le rang du nom en France (nombre de porteurs) déterminé grâce au nombre de naissances, selon <a href="https://www.filae.com/nom-de-famille/">Filae</a>.
+        Les noms de familles seraient apparus en France vers le XIV<sup>ème</sup> siècle.
+        Historiquement en France et comme la plupart des autres pays, le nom de famille est hérité du père.
     </p>
 
     <div id="bubbles"></div>
 
+    <p>
+        <span class="fa fa-info-circle" aria-hidden="true"></span>
+        Ici la taille des disques est proportionnelle au nombre d'ancêtres qui portaient ce nom dans ma généalogie.
+        La couleur quant à elle représente le rang du nom en France (nombre de porteurs) déterminé grâce au nombre de naissances, selon <a href="https://www.filae.com/nom-de-famille/">Filae</a>.
+    </p>
+
+    <p>
+        Ce diagramme peut être utile aussi bien pour étudier les origines géographiques des individus que pour retrouver des liens de cousinage.
+    </p>
+
     <h3>Cousins éloignés</h3>
 
     <p>
-        Un sous-ensemble des personnalités avec lesquelle je partage un ancêtre commun.
-        La taille du disque est logarithmiquement proportionnelle à l'éloignement génétique de cet individu.
-        Cliquez sur un individu pour être redirigé vers sa page encyclopédique.
+        Grâce aux plateformes de partage comme <a href="https://geneanet.org">Geneanet</a> il est possible de s'amuser à retrouver des liens entre sa généalogie et celles de personnalités plus ou moins célèbres.
     </p>
 
     <div id="celebrities"></div>
 
+    <p>
+        <span class="fa fa-info-circle" aria-hidden="true"></span>
+        Je présente ici quelques liens que j'ai pu trouver.
+        La taille du disque est logarithmiquement proportionnelle à l'éloignement génétique de cet individu par rapport à moi-même.
+        La degré d'éloignement est défini comme étant la somme du nombre de générations qui sépare le plus proche ancêtre commun de nous deux, moins un.
+        Cliquez sur un individu pour être redirigé vers sa page encyclopédique.
+    </p>
 
     <h3>Quelques anecdotes</h3>
 
     <ul>
         <li>Une rue en France porte le nom de mon patronyme - c'est d'ailleurs la seule - et se trouve dans la commune de Grenade-sur-l'Adour (40), elle-même jumelée avec Hésingue (68), village dans lequel j'ai passé la majeure partie de mon enfance. Jolie coïncidence.</li>
-        <li>Un de mes arrières-arrières-grands-pères paternel et un arrière-grand-père maternel ont tous les deux combattu dans le 46ème Régiment d'Infanterie durant la Première Guerre Mondiale (mais dans des divisions différentes).</li>
+        <li>Un de mes arrières-arrières-grands-pères paternel et un arrière-grand-père maternel ont tous les deux combattu dans le 46<sup>ème</sup> Régiment d'Infanterie durant la Première Guerre Mondiale (mais dans des divisions différentes).</li>
         <li>L'orthographe de mon patronyme est incertaine ; certains actes anciens font mention d'un accent aigu sur le "e" et d'autre remplacent le "y" par un "i".</li>
-        <li>Mon cousin "célèbre" le plus proche dans ma généalogie est Marcel Lehoux, un pilote automobile français. Au total, 10 degrés nous séparent.</li>
+        <li>Mon "cousin célèbre" le plus proche dans ma généalogie est Marcel Lehoux, un pilote automobile français. Au total, seulement 9 degrés nous séparent.</li>
         <li>Un de mes arrières-arrières-arrières-grands-pères paternel a travaillé aux usines Pompey (Meurthe-et-Moselle) et aurait peut-être contribué à la fabrication des matériaux utilisés lors de la construction de la Tour Eiffel.</li>
         <li>
-            Aux alentours des IXème et Xème siècles, un Viking aurait fait le tour de la Bretagne, remonté la Loire et se serait installé en Anjou, devenu plus tard le Seigneur de Chemillé...
+            Aux alentours des IX<sup>ème</sup> et X<sup>ème</sup> siècles, un Viking aurait fait le tour de la Bretagne, remonté la Loire et se serait installé en Anjou, devenu plus tard le Seigneur de Chemillé...
             Son nom ? Sigisbrand (ou Sigebrand) de Chemillé - qui signifie littéralement "les feux de la victoire".
             Il serait l'ancêtre d'un grand nombre d'Anjevins, dont certainement ma grand-mère maternelle qui hérita d'une francisation : Cesbron.
         </li>
@@ -75,8 +103,6 @@
 
     <p class="text-center" style="margin: 50px 0;">
         <em>Les données sont actualisées régulièrement au fil de mes recherches.</em>
-        <br />
-        <em>Ma généalogie est consultable sur <a href="https://gw.geneanet.org/fcassayre_w">Geneanet</a>.</em>
         <br />
         <em>Si vous pensez partager un ancêtre commun, <a href="{{ url('contact') }}">contactez moi</a>.</em>
     </p>
