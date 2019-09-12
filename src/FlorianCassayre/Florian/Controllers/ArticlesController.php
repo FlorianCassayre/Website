@@ -13,7 +13,8 @@ class ArticlesController
         'float',
         'random',
         'youtube',
-        'pins'
+        'pins',
+        'genealogy'
         /*'genealogy',
         'riddles',
         'scala-java'*/

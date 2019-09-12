@@ -16,9 +16,14 @@ class RedirectionMiddleware
         '/projects' => '/realisations',
         '/gpg' => '/pgp',
         '/pub' => '/pgp',
+        '/genealogy' => '/articles/genealogy',
+        '/about' => '/',
 
         // Old URLs
         '/netherrail' => 'https://zeps.carrade.eu',
+        '/files/uhc-model.html' => '/ktz/6',
+        '/api/minecraft/netherrail' => 'https://api.cassayre.me/minecraft/zeps/path',
+        '/api/minecraft/netherrail-list' => 'https://api.cassayre.me/minecraft/zeps/list',
 
     );
 
