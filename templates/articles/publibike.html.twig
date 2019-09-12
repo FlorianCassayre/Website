@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Publibike{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ basepath }}/css/publibike.css">
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ basepath }}/js/d3.v4.min.js"></script>
+    <script src="{{ basepath }}/js/publibike.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <h1>Suivi des vélos en libre-service</h1>
+
+    <h3>Données</h3>
+
+    <p>
+        Dans la période du 17/12/2017 au 19/04/2018 j'ai entrepris une collecte de données concernant les vélos en libre-service présents sur le campus de l'EPFL/UNIL afin d'étudier les flux de mobilité.
+        Ces vélos sont gérés par la société suisse "<a href="https://www.publibike.ch/fr/publibike/">Publibike</a>".
+        Chaque vélo possède un numéro d'immatriculation ; dès lors qu'un usager en emprunte un, celui-ci disparait de la liste sur l'application avant de réapparaître dans une autre station à la fin de l'utilisation.
+        Il n'existe pas d'API documentée et encore moins de webhook qui indique l'état d'une station.
+        La seule méthode reste donc de scraper l'API de l'application à une fréquence suffisamment élevée<a href="#1"><sup>1</sup></a> pour pouvoir déduire sans trop d'erreurs tous les trajets qui ont été effectués.
+    </p>
+    <p>
+        Les campus de l'EPFL et de l'UNIL comptèrent 10 stations au moment où la collecte a été faite. Depuis, une nouvelle station a été ajoutée à l'est de l'EPFL.
+        Il serait intéressant de réitérer l'expérience pour observer des éventuels changements d'usage.
+    </p>
+
+    <div id="graph"></div>
+
+    <p>
+        <span class="fa fa-info-circle" aria-hidden="true"></span>
+        La valeur indiquée à chaque station est la somme du nombre de départs <strong>et</strong> arrivées à cette station, divisée par le nombre de trajets impliquant au moins une station du campus.
+        La valeur indiquée à chaque liaison est la somme de tous les trajets, divisée par la même quantité.
+    </p>
+
+    <div id="matrix"></div>
+
+    <p>
+        <span class="fa fa-info-circle" aria-hidden="true"></span>
+        Représentation des fréquences de trajets sous forme de matrice.
+        La matrice a été repliée sur elle-même de telle manière qu'il soit aisé de comparer les deux sens d'un même trajet.
+        Les rectangle latéraux à gauche correspondent aux trajets "fixes".
+    </p>
+
+    <h3>Interprétations</h3>
+
+    <ul>
+        <li>La station Quartier nord est la plus populaire du campus englobant presque la moitié des trajets. Aucune surprise ici, l'arrêt est situé à un endroit stratégique à côté de la station de métro et à l'entrée de l'EPFL.</li>
+        <li>Le trajet le plus populaire est incontestablement la liaison Rivier / Quartier nord. C'est aussi le plus court de tout le réseau : 75 mètres seulement séparent les deux stations.</li>
+        <li>
+            Parmi les trajets impliquant une station hors campus, Rivier enregistre 8% plus de départs que d'arrivées.
+            À l'inverse, Quartier nord comptabilise 6% plus d'arrivées que de départs.
+            On peut supposer que les utilisateurs auraient tendance à emprunter ou à déposer leur vélo dès que l'occasion se présente, c'est-à-dire à la première station qu'ils rencontrent.
+        </li>
+        <li>Très peu de trajets (voire aucun) sont effectués entre l'UNIL et le quartier de l'innovation.</li>
+        <li>
+            Le centre sportif dessert de manière plus ou moins homogène toutes les stations du campus.
+            De plus il s'agit de la station qui a la plus haute fréquence de trajets "fixes" (le vélo est emprunté puis retourné au même endroit).
+        </li>
+
+    </ul>
+
+
+    <hr>
+
+    <sup id="1">1</sup> : ce qui m'a d'ailleurs valu de recevoir un petit message du responsable de la plateforme qui se demandait d'où venaient toutes ces requêtes
+
+{% endblock%}

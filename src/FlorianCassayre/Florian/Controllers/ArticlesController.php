@@ -14,7 +14,8 @@ class ArticlesController
         'random',
         'youtube',
         'pins',
-        'genealogy'
+        'genealogy',
+        'publibike'
         /*'genealogy',
         'riddles',
         'scala-java'*/
