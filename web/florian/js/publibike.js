@@ -45,6 +45,22 @@ for(i = 0; i < stations.length; i++) {
     }
 }
 
+var totalDepartures = [0], totalArrivals = [0];
+for(i = 0; i < stations.length; i++) {
+    totalDepartures[0] += stations[i].other_incomings;
+    totalArrivals[0] += stations[i].other_outgoings;
+}
+for(i = 0; i < stations.length; i++) {
+    var sumDepartures = stations[i].other_outgoings, sumArrivals = stations[i].other_incomings;
+    for (j = 0; j < stations.length; j++) {
+        sumDepartures += stations[i].trips[j];
+        sumArrivals += stations[j].trips[i];
+    }
+    totalDepartures.push(sumDepartures);
+    totalArrivals.push(sumArrivals);
+}
+
+
 function colorGradient(value, min, max) {
     var norm = Math.log(value - min + 1) / Math.log(max - min + 1);
     return "rgb(" + Math.round(255 * (1 - 0.6 * norm)) + "," + 0 + "," + 50 + ")";
@@ -118,8 +134,8 @@ function drawGraph() {
                         $(".edge").addClass("unselected").removeClass("selected");
                         $(this).addClass("selected").removeClass("unselected");
                         $("#tip").addClass("tooltip-visible").removeClass("tooltip-hidden");
-                        $("#tip-line1").text("Liaison " + from.name + " ↔ " + to.name);
-                        $("#tip-line2").text(percentageFormat(ratio) + " d'utilisation");
+                        $("#tip-line1").text(from.name + " ↔ " + to.name);
+                        $("#tip-line2").text(percentageFormat(ratio) + " des trajets");
                     })
                     .on("mouseout", function() {
                         $(".edge").addClass("selected").removeClass("unselected");
@@ -201,22 +217,24 @@ function drawMatrix() {
         return str;
     }
 
-    function generateTriangle(array, value, from, to) {
+    function generateTriangle(array, value, totalFrom, totalTo, from, to) {
         var color = colorGradient(value, minGlobal, maxGlobal);
-        let val = value / totalTrips;
+        let val = value / totalTrips, vFrom = value / totalFrom, vTo = value / totalTo;
         svg.append("polygon")
             .attr("points", polygonPath(array))
             .attr("stroke", color)
             .attr("stroke-width", 0.85) // Same trick over and over again
-            .attr("data-from", from)
-            .attr("data-to", to)
             .attr("fill", color)
+            .attr("class", "station-" + from.id + " station-" + to.id)
             .on("mouseover", function(d) {
                 var that = $(this);
                 $("polygon").addClass("triangle-unselected").removeClass("triangle-selected");
                 that.addClass("triangle-selected").removeClass("triangle-unselected");
-                $("#tip2").addClass("tooltip-visible").removeClass("tooltip-hidden")
-                    .text(that.data("from") + " → " + that.data("to") + " : " + percentageFormat(val));
+                $("#tip2").addClass("tooltip-visible").removeClass("tooltip-hidden");
+                $("#tip2-line1").text(from.name + " → " + to.name);
+                $("#tip2-line2").text(percentageFormat(val) + " des trajets");
+                $("#tip2-line3").text(percentageFormat(vFrom) + " des départs");
+                $("#tip2-line4").text(percentageFormat(vTo) + " des arrivées");
             })
             .on("mouseout", function() {
                 $("polygon").addClass("triangle-selected").removeClass("triangle-unselected");
@@ -225,8 +243,7 @@ function drawMatrix() {
             .on("mousemove", function() {
                 var pos = d3.mouse(svg.node());
                 $("#tip2")
-                    .attr("x", pos[0])
-                    .attr("y", pos[1] - 30);
+                    .attr("transform", "translate(" + pos[0] + "," + (pos[1] + -100) + ")");
             });
     }
 
@@ -236,31 +253,37 @@ function drawMatrix() {
         if(i !== 0) {
             var index = stations.length - i;
             station = stations[index];
-            generateTriangle([{x: 0, y: i * step}, {x: step / 2, y: i * step}, {x: step / 2, y: (i + 1) * step}, {x: 0, y: (i + 1) * step}], station.trips[index], station.name, station.name)
+            var trips = station.trips[index];
+            generateTriangle([{x: 0, y: i * step}, {x: step / 2, y: i * step}, {x: step / 2, y: (i + 1) * step}, {x: 0, y: (i + 1) * step}], trips, totalDepartures[index + 1], totalDepartures[index + 1], station, station) // Purposefully did not use `totalArrivals`
         }
         for (let j = 0; j < stations.length - i; j++) {
             let top, bottom;
+            let totalD, totalA;
             let a, b;
             if(i === 0) {
                 top = stations[j].other_incomings;
                 bottom = stations[j].other_outgoings;
-                a = stations[j].name;
-                b = textOut;
+                totalD = totalArrivals[0];
+                totalA = totalDepartures[j + 1];
+                a = {id: "out", name: textOut};
+                b = stations[j];
             } else {
                 top = stations[stations.length - i].trips[j];
                 bottom = stations[j].trips[stations.length - i];
-                a = stations[j].name;
-                b = stations[stations.length - i].name;
+                totalD = totalDepartures[stations.length - i + 1];
+                totalA = totalArrivals[j + 1];
+                a = stations[stations.length - i];
+                b = stations[j];
             }
 
             var array = [{x: step / 2 + j * step, y: i * step}, {x: step / 2 + (j + 1) * step, y: (i + 1) * step}];
 
             var a1 = array.slice(0), a2 = array.slice(0);
-            a1.push({x: step / 2 + j * step, y: (i + 1) * step});
-            a2.push({x: step / 2 + (j + 1) * step, y: i * step});
+            a1.push({x: step / 2 + (j + 1) * step, y: i * step}); // Top
+            a2.push({x: step / 2 + j * step, y: (i + 1) * step}); // Bottom
 
-            generateTriangle(a1, top, a, b); // Top
-            generateTriangle(a2, bottom, b, a); // Bottom
+            generateTriangle(a1, top, totalD, totalA, a, b); // Top
+            generateTriangle(a2, bottom, totalA, totalD, b, a); // Bottom
         }
 
         var name = i === 0 ? textOut : stations[stations.length - i].name;
@@ -269,16 +292,27 @@ function drawMatrix() {
             .attr("y", i * step + step / 2)
             .attr("dominant-baseline", "middle")
             .attr("font-size", step / 3)
-            .text(name);
+            .text(name)
+            .on("mouseover", function(d) {
+                $("polygon").addClass("unselected").removeClass("selected");
+                $(".station-" + (i === 0 ? "out" : (stations.length - i))).addClass("selected").removeClass("unselected");
+            })
+            .on("mouseout", function() {
+                $("polygon").removeClass("unselected").addClass("selected");
+            });
     }
 
-    var tip = svg.append("text")
+    var tip = svg.append("g")
         .attr("id", "tip2")
         .attr("class", "tip tooltip-hidden")
         .attr("dominant-baseline", "central")
         .attr("text-anchor", "middle")
-        .style("pointer-events", "none")
-        .text("test");
+        .style("pointer-events", "none");
+
+    tip.append("text").attr("id", "tip2-line1");
+    tip.append("text").attr("id", "tip2-line2").attr("y", 25);
+    tip.append("text").attr("id", "tip2-line3").attr("y", 50);
+    tip.append("text").attr("id", "tip2-line4").attr("y", 75);
 }
 
 drawGraph();
