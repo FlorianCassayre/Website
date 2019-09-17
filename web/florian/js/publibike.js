@@ -254,7 +254,9 @@ function drawMatrix() {
             var index = stations.length - i;
             station = stations[index];
             var trips = station.trips[index];
-            generateTriangle([{x: 0, y: i * step}, {x: step / 2, y: i * step}, {x: step / 2, y: (i + 1) * step}, {x: 0, y: (i + 1) * step}], trips, totalDepartures[index + 1], totalDepartures[index + 1], station, station) // Purposefully did not use `totalArrivals`
+            generateTriangle(
+                [{x: (stations.length - i) * step, y: i * step}, {x: (stations.length - i + 1) * step, y: i * step}, {x: (stations.length - i) * step, y: (i + 1) * step}],
+                trips, totalDepartures[index + 1], totalDepartures[index + 1], station, station) // Purposefully did not use `totalArrivals`
         }
         for (let j = 0; j < stations.length - i; j++) {
             let top, bottom;
@@ -276,11 +278,11 @@ function drawMatrix() {
                 b = stations[j];
             }
 
-            var array = [{x: step / 2 + j * step, y: i * step}, {x: step / 2 + (j + 1) * step, y: (i + 1) * step}];
+            var array = [{x: j * step, y: i * step}, {x: (j + 1) * step, y: (i + 1) * step}];
 
             var a1 = array.slice(0), a2 = array.slice(0);
-            a1.push({x: step / 2 + (j + 1) * step, y: i * step}); // Top
-            a2.push({x: step / 2 + j * step, y: (i + 1) * step}); // Bottom
+            a1.push({x: (j + 1) * step, y: i * step}); // Top
+            a2.push({x: j * step, y: (i + 1) * step}); // Bottom
 
             generateTriangle(a1, top, totalD, totalA, a, b); // Top
             generateTriangle(a2, bottom, totalA, totalD, b, a); // Bottom
@@ -288,11 +290,11 @@ function drawMatrix() {
 
         var name = i === 0 ? textOut : stations[stations.length - i].name;
         svg.append("text")
-            .attr("x", step / 2 + (stations.length - i + 0.2) * step)
+            .attr("x", ( i > 0 ? step / 2 : 0) + (stations.length - i + 0.2) * step)
             .attr("y", i * step + step / 2)
-            .attr("dominant-baseline", "middle")
+            .attr("dominant-baseline", i === 0 ? "middle" : "hanging")
             .attr("font-size", step / 3)
-            .text(name)
+            .text((i === 0 ? "" : "┚") + name)
             .on("mouseover", function(d) {
                 $("polygon").addClass("unselected").removeClass("selected");
                 $(".station-" + (i === 0 ? "out" : (stations.length - i))).addClass("selected").removeClass("unselected");
