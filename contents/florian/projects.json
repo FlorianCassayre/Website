@@ -24,13 +24,61 @@
     },
 
     {
+      "title": "Advent of Code 2019",
+      "description": "Mes solutions pour la 5ème édition de Advent of Code. Il s'agit de ma troisième participation où je publie quotidiennement mes solutions.",
+      "thumbnail": "placeholder.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Décembre 2019",
+        "state": "À venir",
+        "license": "MIT"
+      },
+      "links": [
+        {
+          "title": "Site de l'événement",
+          "icon": "external-link",
+          "url": "https://adventofcode.com/2019"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/AdventOfCode-2019"
+        }
+      ]
+    },
+
+    {
+      "title": "Sentiment-U",
+      "description": "Projet réalisé durant le hackathon LauzHack 2019 mélangeant IoT et analyse de sentiments. Le projet a été récompensé dans deux catégories différentes.",
+      "thumbnail": "sentiment-u.png",
+      "gist": {
+        "language": "Python, Javascript",
+        "date": "16-17 novembre 2019",
+        "state": "En cours"
+      },
+      "links": [
+        {
+          "title": "Page Devpost",
+          "icon": "external-link",
+          "url": "https://devpost.com/software/sentiment-u"
+        },
+        {
+          "title": "Dépôts sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/infiniteam-lh19"
+        }
+      ]
+    },
+
+    {
       "title": "Arbre-o-matic",
       "description": "Puissant outil de génération d'éventails généalogiques à partir d'un fichier Gedcom.",
       "thumbnail": "arbreomatic.png",
       "gist": {
         "language": "Javascript",
         "date": "Juillet 2019",
-        "state": "Terminé"
+        "state": "Terminé",
+        "license": "MIT"
       },
       "links": [
         {
