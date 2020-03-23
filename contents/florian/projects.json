@@ -1,19 +1,47 @@
 {
   "projects": [
     {
+      "title": "INSEE-db",
+      "description": "Base de données des personnes décédées en France depuis 1970.",
+      "thumbnail": "placeholder.png",
+      "gist": {
+        "language": "Scala",
+        "date": "Janvier & février 2020",
+        "state": "Terminé"
+      },
+      "links": [
+        {
+          "title": "Outil en ligne",
+          "icon": "external-link",
+          "url": "https://arbre.app/insee"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/insee-db"
+        }
+      ]
+    },
+
+    {
       "title": "Arbre-o-matic",
       "description": "Puissant outil de génération d'éventails généalogiques à partir d'un fichier Gedcom.",
       "thumbnail": "arbreomatic.png",
       "gist": {
         "language": "Javascript",
         "date": "Juillet 2019",
-        "state": "En cours"
+        "state": "Terminé"
       },
       "links": [
         {
           "title": "Outil en ligne",
           "icon": "external-link",
-          "url": "https://arbre.cassayre.me"
+          "url": "https://arbre.app/arbreomatic"
+        },
+        {
+          "title": "Dépôt sur GitHub",
+          "icon": "github",
+          "url": "https://github.com/FlorianCassayre/Arbre-o-matic"
         }
       ]
     },
