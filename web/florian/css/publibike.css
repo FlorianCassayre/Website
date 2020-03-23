@@ -1,0 +1,53 @@
+#graph, #matrix {
+    margin: 0 auto;
+    display: table;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+#graph svg, #matrix svg {
+    overflow: visible;
+}
+
+#matrix {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.unselected {
+    opacity: 0.1;
+    transition: opacity 0.2s ease;
+}
+
+.selected {
+    opacity: 1.0;
+    transition: opacity 0.2s ease;
+}
+
+/*.triangle-unselected {
+    opacity: 0.1;
+    transition: opacity 0.2s ease;
+}
+
+.triangle-selected {
+    opacity: 1.0;
+    transition: opacity 0.2s ease;
+}*/
+
+.tip {
+    position: fixed;
+    font-size: 1.2em;
+    text-align: center;
+    text-shadow: -1px -1px 1px #ffffff, -1px 0px 1px #ffffff, -1px 1px 1px #ffffff, 0px -1px 1px #ffffff, 0px 1px 1px #ffffff, 1px -1px 1px #ffffff, 1px 0px 1px #ffffff, 1px 1px 1px #ffffff;
+}
+
+.tooltip-visible {
+    opacity: 1.0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.tooltip-hidden {
+    opacity: 0.0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}

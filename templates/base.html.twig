@@ -19,15 +19,15 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@flomine68">
         <meta name="twitter:title" content="{{ block('page_title') }} &sdot; Florian Cassayre">
-        <meta name="twitter:description" content="Site personnel.">
-        <meta name="twitter:image" content="{{ basepath }}/img/preview.png">
+        <meta name="twitter:description" content="Site personnel de Florian Cassayre">
+        <meta name="twitter:image" content="{{ basepath }}/img/infinity512.png">
         <meta name="twitter:creator" content="@flomine68">
 
         <meta property="og:title" content="{{ block('page_title') }} &sdot; Florian Cassayre">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ basepath }}">
-        <meta property="og:image" content="{{ basepath }}/img/preview.png">
-        <meta property="og:description" content="Site personnel.">
+        <meta property="og:image" content="{{ basepath }}/img/infinity512.png">
+        <meta property="og:description" content="Site personnel de Florian Cassayre">
         <meta property="og:site_name" content="Florian Cassayre">
 
         <link rel="stylesheet" href="{{ basepath }}/css/bootstrap.min.css">
@@ -50,7 +50,7 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown">
+                            {# <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Minecraft</li>
@@ -69,24 +69,26 @@
                                     <li class="dropdown-header">Autre</li>
                                     <li><a href="{{ url('api') }}#teachers">Professeurs absents</a></li>
                                 </ul>
-                            </li>
+                            </li> #}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articles <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Informatique</li>
                                     <li><a href="{{ url('articles', {'id': 'crypto'}) }}">Pourquoi dit-on « chiffrer » ?</a></li>
-                                    <li><a href="{{ url('articles', {'id': 'js'}) }}">Pourquoi JavaScript & Java sont-ils si différents ?</a></li>
+                                    {#<li><a href="{{ url('articles', {'id': 'js'}) }}">Pourquoi JavaScript & Java sont-ils si différents ?</a></li>#}
                                     <li><a href="{{ url('articles', {'id': 'float'}) }}">Pourquoi 0.1 + 0.2 != 0.3 ?</a></li>
                                     <li><a href="{{ url('articles', {'id': 'random'}) }}">Comment un ordinateur peut-il générer de l'aléatoire ?</a></li>
                                     {#<li><a href="{{ url('articles', {'id': 'scala-java'}) }}">Comparaison syntaxique : Java & Scala</a></li>#}
                                     <li class="dropdown-header">Visualisations</li>
+                                    <li><a href="{{ url('articles', {'id': 'genealogy'}) }}">Ma généalogie</a></li>
                                     <li><a href="{{ url('articles', {'id': 'pins'}) }}">Popularité des codes PIN</a></li>
+                                    {#<li><a href="{{ url('articles', {'id': 'publibike'}) }}">Suivi des vélos en libre-service</a></li>#}
                                 </ul>
                             </li>
                             <li><a href="{{ url('projects') }}">Réalisations</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ url('homepage') }}">À propos</a></li>
+                            {# <li><a href="{{ url('homepage') }}">À propos</a></li> #}
                             <li><a href="{{ url('contact') }}">Contact</a></li>
                         </ul>
                     </div>
